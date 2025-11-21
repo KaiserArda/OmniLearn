@@ -13,15 +13,15 @@ Most medical question apps available today suffer from excessive ads, poor UI/UX
 - Navigation Component with basic screen structure  
 
 ## Planned Core Features
-- Organized categories (Anatomy, Physiology, Pathology, Pharmacology, etc.)  
+- Organized categories (Medical course topics)  
 - Thousands of high-quality questions with detailed explanations  
 - Instant feedback and answer rationales  
 - User-contributed questions (with moderation)  
 - Powerful search and filter system  
 - Bookmark & mistake tracking  
 - Light / Dark theme + Material You support  
-- Completely offline-first  
-
+- Completely offline-first 
+  
 ## Technical Stack
 - 100% Kotlin  
 - Jetpack Compose  
@@ -82,7 +82,7 @@ app/
 - [ ] Complete quiz flow and UI screens  
 - [ ] Populate initial question bank (500–1000 questions)  
 - [ ] Implement contribution & moderation system  
-- [ ] Closed beta with medical students  
+- [ ] Closed beta with fellow medical students  
 - [ ] Public release on Google Play (target: late 2025)  
 
 Feedback, bug reports, and especially medical question submissions are very welcome. This project is a work in progress, and I’m happy to collaborate with fellow developers to make this a tool that actual medical students and residents use every day!
