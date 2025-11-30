@@ -64,7 +64,7 @@ class Prepopulate(private val scope: CoroutineScope) : RoomDatabase.Callback() {
             // Question place
             qDao.insert(
                 QuestionEntity(
-                    categoryId = brainId, // Beyin kategorisine bağlıyoruz
+                    categoryId = brainId,
                     questionText = "Beyindeki nöronların ana iletimi hangi iyon akışına bağlıdır?",
                     option1 = "Sodyum (Na+)",
                     option2 = "Kalsiyum (Ca2+)",

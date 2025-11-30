@@ -9,12 +9,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 
 class CategoryViewModel(repository: MedicalRepository) : ViewModel() {
-    // Ekrana gönderilecek kategori listesi (Canlı veri)
+
     val categories: StateFlow<List<CategoryEntity>> =
         repository.getAllCategories()
             .stateIn(
                 scope = viewModelScope,
-                started = SharingStarted.Lazily, // UI ekrana gelince veriyi çekmeye başla
-                initialValue = emptyList() // İlk başta boş liste göster
+                started = SharingStarted.Lazily,
+                initialValue = emptyList()
             )
 }
