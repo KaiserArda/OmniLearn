@@ -18,12 +18,14 @@ import kotlinx.coroutines.launch
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
-    // DAO'ları dışarıya açıyorum
+    // I make DAOs public
     abstract fun categoryDao(): CategoryDao
     abstract fun questionDao(): QuestionDao
 
     companion object {
-        @Volatile private var INSTANCE: AppDatabase? = null
+
+        @Volatile
+        var INSTANCE: AppDatabase? = null
 
         fun getDatabase(context: Context, scope: CoroutineScope): AppDatabase {
             return INSTANCE ?: synchronized(this) {
@@ -32,7 +34,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "medquiz_db"
                 )
-                    // Veritabanı ilk oluştuğunda çalışacak callback (Soru yükleme işlemi)
+
                     .addCallback(Prepopulate(scope))
                     .build()
                 INSTANCE = instance
@@ -42,9 +44,38 @@ abstract class AppDatabase : RoomDatabase() {
     }
 }
 
+
 class Prepopulate(private val scope: CoroutineScope) : RoomDatabase.Callback() {
     override fun onCreate(db: SupportSQLiteDatabase) {
         super.onCreate(db)
 
+
+        val database = AppDatabase.INSTANCE ?: return
+        val catDao = database.categoryDao()
+        val qDao = database.questionDao()
+
+        scope.launch {
+            // Category place
+            val brainId = catDao.insert(CategoryEntity(name = "Beyin"))
+            val muscleId = catDao.insert(CategoryEntity(name = "Kas"))
+            val kidneyId = catDao.insert(CategoryEntity(name = "Böbrek"))
+            val fibersId = catDao.insert(CategoryEntity(name = "Lifler"))
+
+            // Question place
+            qDao.insert(
+                QuestionEntity(
+                    categoryId = brainId, // Beyin kategorisine bağlıyoruz
+                    questionText = "Beyindeki nöronların ana iletimi hangi iyon akışına bağlıdır?",
+                    option1 = "Sodyum (Na+)",
+                    option2 = "Kalsiyum (Ca2+)",
+                    option3 = "Potasyum (K+)",
+                    option4 = "Klor (Cl-)",
+                    correctIndex = 0, // 0 -> A şıkkı
+                    explanation = "Aksiyon potansiyelleri nöronlarda Na+ girişine bağlı olarak başlatılır."
+                )
+            )
+
+           // When you find some question ,put here
+        }
     }
 }

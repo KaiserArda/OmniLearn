@@ -1,4 +1,20 @@
 package com.example.medquiz.vm
 
-class CategoryViewModel {
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.medquiz.data.local.entity.CategoryEntity
+import com.example.medquiz.data.repository.MedicalRepository
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
+
+class CategoryViewModel(repository: MedicalRepository) : ViewModel() {
+    // Ekrana gönderilecek kategori listesi (Canlı veri)
+    val categories: StateFlow<List<CategoryEntity>> =
+        repository.getAllCategories()
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.Lazily, // UI ekrana gelince veriyi çekmeye başla
+                initialValue = emptyList() // İlk başta boş liste göster
+            )
 }
