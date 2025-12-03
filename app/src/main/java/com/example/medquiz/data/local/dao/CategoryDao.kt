@@ -10,10 +10,16 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CategoryDao {
 
-    @Query("SELECT * FROM categories ORDER BY name ASC")
-    fun getAllCategories(): Flow<List<CategoryEntity>>
+    @Query("SELECT * FROM categories WHERE parentId IS NULL")
+    fun getMainCategories(): Flow<List<CategoryEntity>>
 
-    // Add new categories
+
+    @Query("SELECT * FROM categories WHERE parentId = :parentId")
+    fun getSubCategories(parentId: Long): Flow<List<CategoryEntity>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(category: CategoryEntity): Long
+
+    @Query("DELETE FROM categories")
+    suspend fun deleteAllCategories()
 }

@@ -11,18 +11,20 @@ class MedicalRepository(
     private val questionDao: QuestionDao
 ) {
 
-    fun getAllCategories(): Flow<List<CategoryEntity>> = categoryDao.getAllCategories()
 
+    fun getMainCategories(): Flow<List<CategoryEntity>> = categoryDao.getMainCategories()
 
-    fun getQuestionsForCategory(categoryId: Long): Flow<List<QuestionEntity>> =
-        questionDao.getQuestionsForCategory(categoryId)
-
+    fun getSubCategories(parentId: Long): Flow<List<CategoryEntity>> = categoryDao.getSubCategories(parentId)
 
     suspend fun insertCategory(category: CategoryEntity): Long = categoryDao.insert(category)
+
+    
+    fun getQuestionsForCategory(categoryId: Long): Flow<List<QuestionEntity>> =
+        questionDao.getQuestionsByCategory(categoryId)
 
 
     suspend fun insertQuestion(question: QuestionEntity): Long = questionDao.insert(question)
 
 
-    suspend fun getQuestionById(id: Long): QuestionEntity? = questionDao.getById(id)
+    suspend fun getQuestionById(id: Long): QuestionEntity? = questionDao.getQuestion(id)
 }

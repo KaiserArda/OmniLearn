@@ -49,7 +49,6 @@ class MainActivity : ComponentActivity() {
 
         Log.e("MEDQUIZ_TEST", "✅ Tüm ViewModel'ler başarıyla kuruldu!")
 
-        // --- ŞİMDİLİK TEST ARAYÜZÜ ---
         setContent {
             MaterialTheme {
                 Surface(
