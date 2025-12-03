@@ -1,3 +1,5 @@
+# English Version
+
 # MedQuiz – Medical Quiz App for Students
 
 Hi!  
@@ -90,3 +92,100 @@ Thanks for checking out the project!
 
 ~ Arda  
 Computer Engineering – Osmaniye Korkut Ata University
+
+# 日本語版
+
+MedQuiz – 医学生のための医学クイズアプリ
+
+こんにちは！  
+コンピュータ工学科3年のArdaです。  
+2025年末のGoogle Play公開を目指して、医学生向けの本格的なクイズアプリ「MedQuiz」を開発しています。
+
+■ 作った理由
+既存の医学クイズアプリには、
+・広告が多すぎる
+・動作が重い
+・オフラインで使えない
+・解説が薄い or 古い
+といった不満が多くあります。
+
+MedQuizは「本当に医学生が毎日使いたくなるアプリ」をコンセプトに、ゼロから作り直しています。  
+広告ゼロ、完全オフライン、軽快な動作、丁寧な解説に徹底的にこだわっています。
+
+■ 現在の進捗（まだ開発初期です）
+- Kotlin + Jetpack Compose
+- クリーンなMVVMアーキテクチャ
+- Roomデータベース構築済み
+- Navigation Componentで画面遷移完成
+
+■ これから実装予定の主な機能
+- 講義科目ごとの体系的なカテゴリ分け
+- 数千問の高品質問題＋詳しい解説＆根拠
+- 間違えた問題の自動記録・復習機能
+- ブックマーク＆強力な検索・フィルター
+- ユーザー投稿機能（医学生による審査付き）
+- ライト/ダークテーマ + Material You対応
+- 完全オフラインファースト
+
+■ 使っている技術
+Kotlin 100% / Jetpack Compose / Room / Hilt / Coroutines+Flow  
+Google推奨のモダンアーキテクチャで開発中
+
+### プロジェクトの構造
+```
+app/
+ ├─ src/main/
+ │      ├─ AndroidManifest.xml       // ID card for my app
+ │      │
+ │      ├─ java/com/example/medquiz/
+ │      │      │
+ │      │      ├─ MainActivity.kt
+ │      │      │
+ │      │      ├─ data/              // Data Layer
+ │      │      │      ├─ local/
+ │      │      │      │      ├─ AppDatabase.kt
+ │      │      │      │      ├─ PrePopulate.kt
+ │      │      │      │      ├─ dao/
+ │      │      │      │      │      ├─ CategoryDao.kt
+ │      │      │      │      │      └─ QuestionDao.kt
+ │      │      │      │      └─ entity/
+ │      │      │      │             ├─ CategoryEntity.kt
+ │      │      │      │             └─ QuestionEntity.kt
+ │      │      │      │
+ │      │      │      └─ repository/
+ │      │      │             └─ MedicalRepository.kt
+ │      │      │
+ │      │      ├─ ui/                // UI Layer
+ │      │      │      ├─ theme/
+ │      │      │      ├─ navigation/
+ │      │      │      │      └─ NavGraphs.kt
+ │      │      │      └─ screens/
+ │      │      │             ├─ CategoryListScreen.kt
+ │      │      │             ├─ QuestionListScreen.kt
+ │      │      │             ├─ QuestionDetailScreen.kt
+ │      │      │             └─ AddQuestionScreen.kt
+ │      │      │
+ │      │      └─ vm/                // ViewModels
+ │      │             ├─ CategoryViewModel.kt
+ │      │             ├─ QuestionListViewModel.kt
+ │      │             └─ AddQuestionViewModel.kt
+ │
+ └─ build.gradle (project)
+```
+■ ビルド方法（すぐ試せます）
+1. リポジトリをクローン
+2. Android Studio Ladybug以降で開く
+3. Gradle同期 → 実機/エミュでそのまま実行OK！
+
+■ ロードマップ
+- [ ] クイズ画面・フローの完成
+- [ ] 初期500～1000問の投入
+- [ ] 投稿・審査システム
+- [ ] 医学生向けクローズドβテスト
+- [ ] 2025年末 Google Play公開
+
+医学の問題提供、バグ報告、デザインや機能のフィードバック…なんでも大歓迎です！  
+まだまだ未完成ですが、みなさんと一緒に「医学生の毎日の相棒」になるアプリに育てていきたいです。
+
+見てくれてありがとうございました！  
+～Arda（オスマニエ・コルクト・アタ大学 コンピュータ工学科）
