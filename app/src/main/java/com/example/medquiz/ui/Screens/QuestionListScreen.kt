@@ -19,6 +19,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import com.example.medquiz.data.local.AppDatabase
 import com.example.medquiz.data.repository.MedicalRepository
+import com.example.medquiz.R
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -46,7 +48,7 @@ fun QuestionListScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Sorular") },
+                title = { Text(stringResource(R.string.questions_title)) },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.primary
@@ -55,13 +57,13 @@ fun QuestionListScreen(
         },
         floatingActionButton = {
             FloatingActionButton(onClick = onAddQuestion) {
-                Icon(Icons.Default.Add, contentDescription = "Soru Ekle")
+                Icon(Icons.Default.Add, contentDescription = stringResource(R.string.add_question_btn))
             }
         }
     ) { padding ->
         if (questions.isEmpty()) {
             Box(modifier = Modifier.fillMaxSize().padding(padding), contentAlignment = androidx.compose.ui.Alignment.Center) {
-                Text("Bu kategoride henüz soru yok.")
+                Text(stringResource(R.string.no_questions))
             }
         } else {
             LazyColumn(modifier = Modifier.padding(padding).padding(16.dp)) {

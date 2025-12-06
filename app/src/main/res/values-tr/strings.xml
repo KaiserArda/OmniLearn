@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MedQuiz</string>
+    <string name="welcome_message">Hoşgeldiniz</string>
+    <string name="category_list_title">Bölümler</string>
+    <string name="faculty_medicine">Tıp</string>
+    <string name="questions_title">Sorular</string>
+    <string name="no_questions">Bu kategoride henüz soru yok.</string>
+    <string name="add_question_btn">Soru Ekle</string>
+    <string name="question_a">A)</string>
+    <string name="question_b">B)</string>
+    <string name="loading">Yükleniyor...</string>
+    <string name="error">Bir hata oluştu</string>
+</resources>
