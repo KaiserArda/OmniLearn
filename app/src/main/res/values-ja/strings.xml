@@ -2,10 +2,69 @@
     <string name="app_name">MedQuiz</string>
     <string name="welcome_message">ようこそ </string>
     <string name="category_list_title">診療科 </string>
+    <string name="empty_category_error">カテゴリが見つかりませんでした。</string>
     <string name="faculty_medicine">医学部 </string>
     <string name="questions_title">問題 </string>
     <string name="no_questions">このカテゴリにはまだ質問がありません。</string>
     <string name="add_question_btn">質問を追加</string>
     <string name="loading">読み込み中...</string>
     <string name="error">エラーが発生しました</string>
+
+    <string name="cat_med">医学部</string>
+    <string name="desc_med">一般的な医学に関する質問</string>
+
+    <string name="cat_anatomy">解剖学</string>
+    <string name="desc_anatomy">身体構造の科学</string>
+    <string name="cat_macro_anatomy">マクロ解剖学</string>
+    <string name="cat_neuroanatomy">神経解剖学</string>
+    <string name="cat_microanatomy">微細解剖学</string>
+    <string name="cat_embryology">胚学（発生学）</string>
+    <string name="cat_topographic_anatomy">局所解剖学</string>
+    <string name="cat_clinical_anatomy">臨床解剖学</string>
+
+    <string name="cat_physiology">生理学</string>
+    <string name="desc_physiology">身体機能の科学</string>
+    <string name="cat_nervous_physiology">神経系の生理学</string>
+    <string name="cat_muscle_physiology">筋生理学</string>
+    <string name="cat_circulatory_physiology">循環系の生理学</string>
+    <string name="cat_respiratory_physiology">呼吸系の生理学</string>
+    <string name="cat_digestive_physiology">消化系の生理学</string>
+    <string name="cat_excretory_physiology">排泄系の生理学</string>
+    <string name="cat_endocrine_physiology">内分泌系の生理学</string>
+    <string name="cat_reproductive_physiology">生殖生理学</string>
+    <string name="cat_hematology">血液学</string>
+    <string name="cat_sensory_physiology">感覚器の生理学</string>
+    <string name="cat_cell_physiology">細胞生理学</string>
+
+    <string name="cat_biochemistry">生化学</string>
+    <string name="cat_metabolism">代謝</string>
+    <string name="cat_enzymes">酵素</string>
+    <string name="cat_vitamins">ビタミンと補酵素</string>
+    <string name="cat_hormone_bio">ホルモン生化学</string>
+    <string name="cat_genetics">遺伝学と分子生物学</string>
+    <string name="cat_cell_signal">細胞内シグナル伝達経路</string>
+    <string name="cat_acid_base">酸塩基平衡</string>
+    <string name="cat_clinical_bio">臨床生化学</string>
+
+    <string name="cat_histology">組織学</string>
+    <string name="cat_epithelial">上皮組織</string>
+    <string name="cat_connective">結合組織</string>
+    <string name="cat_muscle_tissue">筋組織</string>
+    <string name="cat_nervous_tissue">神経組織</string>
+    <string name="cat_blood_tissue">血液・造血組織</string>
+    <string name="cat_cardio_histo">心血管系の組織学</string>
+    <string name="cat_respiratory_histo">呼吸系の組織学</string>
+    <string name="cat_digestive_histo">消化系の組織学</string>
+    <string name="cat_urogenital_histo">泌尿生殖系の組織学</string>
+    <string name="cat_endocrine_histo">内分泌系の組織学</string>
+    <string name="cat_skin_histo">皮膚の組織学</string>
+
+    <string name="cat_microbiology">微生物学</string>
+    <string name="cat_bacteriology">細菌学</string>
+    <string name="cat_virology">ウイルス学</string>
+    <string name="cat_mycology">真菌学</string>
+    <string name="cat_parasitology">寄生虫学</string>
+    <string name="cat_immunology">免疫学</string>
+    <string name="cat_antibiotics">抗生物質</string>
+    <string name="cat_clinical_micro">臨床微生物学</string>
 </resources>

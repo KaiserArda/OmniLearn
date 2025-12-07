@@ -10,22 +10,35 @@ import com.example.medquiz.data.local.dao.QuestionDao
 import com.example.medquiz.data.local.entity.CategoryEntity
 import com.example.medquiz.data.local.entity.QuestionEntity
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
 
 @Database(
     entities = [CategoryEntity::class, QuestionEntity::class],
-    version = 2,
+    version = 6,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
-    // I make DAOs public
+
     abstract fun categoryDao(): CategoryDao
     abstract fun questionDao(): QuestionDao
 
-    companion object {
 
+    private class PrepopulateCallback(private val scope: CoroutineScope) : RoomDatabase.Callback() {
+        override fun onCreate(db: SupportSQLiteDatabase) {
+            super.onCreate(db)
+            INSTANCE?.let { database ->
+                scope.launch(Dispatchers.IO) {
+                    populateDatabase(database.categoryDao(), database.questionDao())
+                }
+            }
+        }
+    }
+
+    companion object {
         @Volatile
-        var INSTANCE: AppDatabase? = null
+        private var INSTANCE: AppDatabase? = null
 
         fun getDatabase(context: Context, scope: CoroutineScope): AppDatabase {
             return INSTANCE ?: synchronized(this) {
@@ -34,8 +47,8 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "medquiz_db"
                 )
-                    .fallbackToDestructiveMigration()
-                    .addCallback(Prepopulate(scope))
+                    .fallbackToDestructiveMigration() // Wipes old DB if version changes
+                    .addCallback(PrepopulateCallback(scope)) // Triggers data loading
                     .build()
                 INSTANCE = instance
                 instance
@@ -45,281 +58,88 @@ abstract class AppDatabase : RoomDatabase() {
 }
 
 
+suspend fun populateDatabase(categoryDao: CategoryDao, questionDao: QuestionDao) {
 
-class Prepopulate(private val scope: CoroutineScope) : RoomDatabase.Callback() {
-    class Prepopulate(private val scope: CoroutineScope) : RoomDatabase.Callback() {
-        override fun onCreate(db: SupportSQLiteDatabase) {
-            super.onCreate(db)
+    categoryDao.deleteAllCategories()
+    questionDao.deleteAllQuestions()
 
-            val database = AppDatabase.INSTANCE ?: return
-            val catDao = database.categoryDao()
-            val qDao = database.questionDao()
+    //============================
+    // Part 1: General (Medicine Faculty)
+    //============================
+    val medId = categoryDao.insert(CategoryEntity(name = "cat_med", description = "desc_med"))
 
-            scope.launch {
+    //============================
+    // Part 2: Anatomy
+    //============================
+    val anatomyId = categoryDao.insert(CategoryEntity(name = "cat_anatomy", description = "desc_anatomy", parentId = medId))
 
-                qDao.deleteAllQuestions()
-                catDao.deleteAllCategories()
-
-                //============================
-                // Part 1:General Lessons
-                //============================
-                val medId = catDao.insert(
-                    CategoryEntity(
-                        name = "Med",
-                        description = "General Medicine Questions"
-                    )
-                )
-
-                //============================
-                // Part 2:Anatomy
-                //============================
-                val anatomyId = catDao.insert(
-                    CategoryEntity(
-                        name = "Anatomy",
-                        description = "Science of Body Structure",
-                        parentId = medId
-                    )
-                )
-
-                val macroAnatomyId =
-                    catDao.insert(CategoryEntity(name = "Macro Anatomy", parentId = anatomyId))
-                val neuroanatomyId =
-                    catDao.insert(CategoryEntity(name = "Neuroanatomy", parentId = anatomyId))
-                val microanatomyId =
-                    catDao.insert(CategoryEntity(name = "Microanatomy", parentId = anatomyId))
-                val embryologyId =
-                    catDao.insert(CategoryEntity(name = "Embryology", parentId = anatomyId))
-                val topographicAnatomyId = catDao.insert(
-                    CategoryEntity(
-                        name = "Topographic Anatomy",
-                        parentId = anatomyId
-                    )
-                )
-                val clinicalAnatomyId =
-                    catDao.insert(CategoryEntity(name = "Clinical Anatomy", parentId = anatomyId))
+    val macroAnatomyId = categoryDao.insert(CategoryEntity(name = "cat_macro_anatomy", parentId = anatomyId))
+    val neuroanatomyId = categoryDao.insert(CategoryEntity(name = "cat_neuroanatomy", parentId = anatomyId))
+    val microanatomyId = categoryDao.insert(CategoryEntity(name = "cat_microanatomy", parentId = anatomyId))
+    val embryologyId = categoryDao.insert(CategoryEntity(name = "cat_embryology", parentId = anatomyId))
+    val topographicAnatomyId = categoryDao.insert(CategoryEntity(name = "cat_topographic_anatomy", parentId = anatomyId))
+    val clinicalAnatomyId = categoryDao.insert(CategoryEntity(name = "cat_clinical_anatomy", parentId = anatomyId))
 
 
-                //============================
-                // Part 3:Physiology
-                //============================
-                val physiologyId = catDao.insert(
-                    CategoryEntity(
-                        name = "Physiology",
-                        description = "Science of Function",
-                        parentId = medId
-                    )
-                )
+    //============================
+    // Part 3: Physiology
+    //============================
+    val physiologyId = categoryDao.insert(CategoryEntity(name = "cat_physiology", description = "desc_physiology", parentId = medId))
 
-                val nervousPhysiologyId = catDao.insert(
-                    CategoryEntity(
-                        name = "Nervous System Physiology",
-                        parentId = physiologyId
-                    )
-                )
-                val musclePhysiologyId = catDao.insert(
-                    CategoryEntity(
-                        name = "Muscle Physiology",
-                        parentId = physiologyId
-                    )
-                )
-                val circulatoryPhysiologyId = catDao.insert(
-                    CategoryEntity(
-                        name = "Circulatory System Physiology",
-                        parentId = physiologyId
-                    )
-                )
-                val respiratoryPhysiologyId = catDao.insert(
-                    CategoryEntity(
-                        name = "Respiratory System Physiology",
-                        parentId = physiologyId
-                    )
-                )
-                val digestivePhysiologyId = catDao.insert(
-                    CategoryEntity(
-                        name = "Digestive System Physiology",
-                        parentId = physiologyId
-                    )
-                )
-                val excretoryPhysiologyId = catDao.insert(
-                    CategoryEntity(
-                        name = "Excretory System Physiology",
-                        parentId = physiologyId
-                    )
-                )
-                val endocrinePhysiologyId = catDao.insert(
-                    CategoryEntity(
-                        name = "Endocrine System Physiology",
-                        parentId = physiologyId
-                    )
-                )
-                val reproductivePhysiologyId = catDao.insert(
-                    CategoryEntity(
-                        name = "Reproductive Physiology",
-                        parentId = physiologyId
-                    )
-                )
-                val hematologyId = catDao.insert(
-                    CategoryEntity(
-                        name = "Hematology (Blood Physiology)",
-                        parentId = physiologyId
-                    )
-                )
-                val sensoryPhysiologyId = catDao.insert(
-                    CategoryEntity(
-                        name = "Sensory Organs Physiology",
-                        parentId = physiologyId
-                    )
-                )
-                val cellPhysiologyId =
-                    catDao.insert(CategoryEntity(name = "Cell Physiology", parentId = physiologyId))
+    val nervousPhysiologyId = categoryDao.insert(CategoryEntity(name = "cat_nervous_physiology", parentId = physiologyId))
+    val musclePhysiologyId = categoryDao.insert(CategoryEntity(name = "cat_muscle_physiology", parentId = physiologyId))
+    val circulatoryPhysiologyId = categoryDao.insert(CategoryEntity(name = "cat_circulatory_physiology", parentId = physiologyId))
+    val respiratoryPhysiologyId = categoryDao.insert(CategoryEntity(name = "cat_respiratory_physiology", parentId = physiologyId))
+    val digestivePhysiologyId = categoryDao.insert(CategoryEntity(name = "cat_digestive_physiology", parentId = physiologyId))
+    val excretoryPhysiologyId = categoryDao.insert(CategoryEntity(name = "cat_excretory_physiology", parentId = physiologyId))
+    val endocrinePhysiologyId = categoryDao.insert(CategoryEntity(name = "cat_endocrine_physiology", parentId = physiologyId))
+    val reproductivePhysiologyId = categoryDao.insert(CategoryEntity(name = "cat_reproductive_physiology", parentId = physiologyId))
+    val hematologyId = categoryDao.insert(CategoryEntity(name = "cat_hematology", parentId = physiologyId))
+    val sensoryPhysiologyId = categoryDao.insert(CategoryEntity(name = "cat_sensory_physiology", parentId = physiologyId))
+    val cellPhysiologyId = categoryDao.insert(CategoryEntity(name = "cat_cell_physiology", parentId = physiologyId))
 
 
-                //============================
-                // Part 4:Biochemistry
-                //============================
-                val biochemistryId =
-                    catDao.insert(CategoryEntity(name = "Biochemistry", parentId = medId))
+    //============================
+    // Part 4: Biochemistry
+    //============================
+    val biochemistryId = categoryDao.insert(CategoryEntity(name = "cat_biochemistry", parentId = medId))
 
-                val metabolismId =
-                    catDao.insert(CategoryEntity(name = "Metabolism", parentId = biochemistryId))
-                val enzymesId =
-                    catDao.insert(CategoryEntity(name = "Enzymes", parentId = biochemistryId))
-                val vitaminsId = catDao.insert(
-                    CategoryEntity(
-                        name = "Vitamins and Coenzymes",
-                        parentId = biochemistryId
-                    )
-                )
-                val hormoneBioId = catDao.insert(
-                    CategoryEntity(
-                        name = "Hormone Biochemistry",
-                        parentId = biochemistryId
-                    )
-                )
-                val geneticBioId = catDao.insert(
-                    CategoryEntity(
-                        name = "Genetics and Molecular Biology",
-                        parentId = biochemistryId
-                    )
-                )
-                val cellSignalId = catDao.insert(
-                    CategoryEntity(
-                        name = "Intracellular Signal Pathways",
-                        parentId = biochemistryId
-                    )
-                )
-                val acidBaseId = catDao.insert(
-                    CategoryEntity(
-                        name = "Acid-Base Balance and Buffer Systems",
-                        parentId = biochemistryId
-                    )
-                )
-                val clinicalBioId = catDao.insert(
-                    CategoryEntity(
-                        name = "Clinical Biochemistry",
-                        parentId = biochemistryId
-                    )
-                )
+    val metabolismId = categoryDao.insert(CategoryEntity(name = "cat_metabolism", parentId = biochemistryId))
+    val enzymesId = categoryDao.insert(CategoryEntity(name = "cat_enzymes", parentId = biochemistryId))
+    val vitaminsId = categoryDao.insert(CategoryEntity(name = "cat_vitamins", parentId = biochemistryId))
+    val hormoneBioId = categoryDao.insert(CategoryEntity(name = "cat_hormone_bio", parentId = biochemistryId))
+    val geneticBioId = categoryDao.insert(CategoryEntity(name = "cat_genetics", parentId = biochemistryId))
+    val cellSignalId = categoryDao.insert(CategoryEntity(name = "cat_cell_signal", parentId = biochemistryId))
+    val acidBaseId = categoryDao.insert(CategoryEntity(name = "cat_acid_base", parentId = biochemistryId))
+    val clinicalBioId = categoryDao.insert(CategoryEntity(name = "cat_clinical_bio", parentId = biochemistryId))
 
-                //============================
-                // Part 5:Histology
-                //============================
-                val histologyId =
-                    catDao.insert(CategoryEntity(name = "Histology", parentId = medId))
+    //============================
+    // Part 5: Histology
+    //============================
+    val histologyId = categoryDao.insert(CategoryEntity(name = "cat_histology", parentId = medId))
 
-                val epithelialTissueId = catDao.insert(
-                    CategoryEntity(
-                        name = "Epithelial Tissue",
-                        parentId = histologyId
-                    )
-                )
-                val connectiveTissueId = catDao.insert(
-                    CategoryEntity(
-                        name = "Connective Tissue",
-                        parentId = histologyId
-                    )
-                )
-                val muscleTissueId =
-                    catDao.insert(CategoryEntity(name = "Muscle Tissue", parentId = histologyId))
-                val nervousTissueId =
-                    catDao.insert(CategoryEntity(name = "Nervous Tissue", parentId = histologyId))
-                val bloodTissueId = catDao.insert(
-                    CategoryEntity(
-                        name = "Blood and Hematopoietic Tissue",
-                        parentId = histologyId
-                    )
-                )
-                val cardiovascularHistoId = catDao.insert(
-                    CategoryEntity(
-                        name = "Cardiovascular System Histology",
-                        parentId = histologyId
-                    )
-                )
-                val respiratoryHistoId = catDao.insert(
-                    CategoryEntity(
-                        name = "Respiratory System Histology",
-                        parentId = histologyId
-                    )
-                )
-                val digestiveHistoId = catDao.insert(
-                    CategoryEntity(
-                        name = "Digestive System Histology",
-                        parentId = histologyId
-                    )
-                )
-                val urogenitalHistoId = catDao.insert(
-                    CategoryEntity(
-                        name = "Urogenital System Histology",
-                        parentId = histologyId
-                    )
-                )
-                val endocrineHistoId = catDao.insert(
-                    CategoryEntity(
-                        name = "Endocrine System Histology",
-                        parentId = histologyId
-                    )
-                )
-                val skinHistoId = catDao.insert(
-                    CategoryEntity(
-                        name = "Skin and Appendages Histology",
-                        parentId = histologyId
-                    )
-                )
+    val epithelialTissueId = categoryDao.insert(CategoryEntity(name = "cat_epithelial", parentId = histologyId))
+    val connectiveTissueId = categoryDao.insert(CategoryEntity(name = "cat_connective", parentId = histologyId))
+    val muscleTissueId = categoryDao.insert(CategoryEntity(name = "cat_muscle_tissue", parentId = histologyId))
+    val nervousTissueId = categoryDao.insert(CategoryEntity(name = "cat_nervous_tissue", parentId = histologyId))
+    val bloodTissueId = categoryDao.insert(CategoryEntity(name = "cat_blood_tissue", parentId = histologyId))
+    val cardiovascularHistoId = categoryDao.insert(CategoryEntity(name = "cat_cardio_histo", parentId = histologyId))
+    val respiratoryHistoId = categoryDao.insert(CategoryEntity(name = "cat_respiratory_histo", parentId = histologyId))
+    val digestiveHistoId = categoryDao.insert(CategoryEntity(name = "cat_digestive_histo", parentId = histologyId))
+    val urogenitalHistoId = categoryDao.insert(CategoryEntity(name = "cat_urogenital_histo", parentId = histologyId))
+    val endocrineHistoId = categoryDao.insert(CategoryEntity(name = "cat_endocrine_histo", parentId = histologyId))
+    val skinHistoId = categoryDao.insert(CategoryEntity(name = "cat_skin_histo", parentId = histologyId))
 
-                //============================
-                // Part 6:Microbiology
-                //============================
-                val microbiologyId =
-                    catDao.insert(CategoryEntity(name = "Microbiology", parentId = medId))
+    //============================
+    // Part 6: Microbiology
+    //============================
+    val microbiologyId = categoryDao.insert(CategoryEntity(name = "cat_microbiology", parentId = medId))
 
-                val bacteriologyId =
-                    catDao.insert(CategoryEntity(name = "Bacteriology", parentId = microbiologyId))
-                val virologyId =
-                    catDao.insert(CategoryEntity(name = "Virology", parentId = microbiologyId))
-                val mycologyId = catDao.insert(
-                    CategoryEntity(
-                        name = "Mycology (Fungi)",
-                        parentId = microbiologyId
-                    )
-                )
-                val parasitologyId =
-                    catDao.insert(CategoryEntity(name = "Parasitology", parentId = microbiologyId))
-                val immunologyId =
-                    catDao.insert(CategoryEntity(name = "Immunology", parentId = microbiologyId))
-                val antibioticsId = catDao.insert(
-                    CategoryEntity(
-                        name = "Antibiotics and Resistance Mechanisms",
-                        parentId = microbiologyId
-                    )
-                )
-                val clinicalMicroId = catDao.insert(
-                    CategoryEntity(
-                        name = "Clinical Microbiology",
-                        parentId = microbiologyId
-                    )
-                )
-
-            }
-        }
-    }
+    val bacteriologyId = categoryDao.insert(CategoryEntity(name = "cat_bacteriology", parentId = microbiologyId))
+    val virologyId = categoryDao.insert(CategoryEntity(name = "cat_virology", parentId = microbiologyId))
+    val mycologyId = categoryDao.insert(CategoryEntity(name = "cat_mycology", parentId = microbiologyId))
+    val parasitologyId = categoryDao.insert(CategoryEntity(name = "cat_parasitology", parentId = microbiologyId))
+    val immunologyId = categoryDao.insert(CategoryEntity(name = "cat_immunology", parentId = microbiologyId))
+    val antibioticsId = categoryDao.insert(CategoryEntity(name = "cat_antibiotics", parentId = microbiologyId))
+    val clinicalMicroId = categoryDao.insert(CategoryEntity(name = "cat_clinical_micro", parentId = microbiologyId))
 }

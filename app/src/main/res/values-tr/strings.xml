@@ -3,6 +3,8 @@
     <string name="welcome_message">Hoşgeldiniz</string>
     <string name="category_list_title">Bölümler</string>
     <string name="faculty_medicine">Tıp</string>
+    <string name="empty_category_error">Kategori bulunamadı.</string>
+
     <string name="questions_title">Sorular</string>
     <string name="no_questions">Bu kategoride henüz soru yok.</string>
     <string name="add_question_btn">Soru Ekle</string>
@@ -10,4 +12,62 @@
     <string name="question_b">B)</string>
     <string name="loading">Yükleniyor...</string>
     <string name="error">Bir hata oluştu</string>
+
+    <string name="cat_med">Tıp Fakültesi</string>
+    <string name="desc_med">Genel Tıp Soruları</string>
+
+    <string name="cat_anatomy">Anatomi</string>
+    <string name="desc_anatomy">Vücut Yapısının Bilimi</string>
+    <string name="cat_macro_anatomy">Makro Anatomi</string>
+    <string name="cat_neuroanatomy">Nöroanatomi</string>
+    <string name="cat_microanatomy">Mikroanatomi</string>
+    <string name="cat_embryology">Embriyoloji</string>
+    <string name="cat_topographic_anatomy">Topografik Anatomi</string>
+    <string name="cat_clinical_anatomy">Klinik Anatomi</string>
+
+    <string name="cat_physiology">Fizyoloji</string>
+    <string name="desc_physiology">Vücut Fonksiyonlarının Bilimi</string>
+    <string name="cat_nervous_physiology">Sinir Sistemi Fizyolojisi</string>
+    <string name="cat_muscle_physiology">Kas Fizyolojisi</string>
+    <string name="cat_circulatory_physiology">Dolaşım Sistemi Fizyolojisi</string>
+    <string name="cat_respiratory_physiology">Solunum Sistemi Fizyolojisi</string>
+    <string name="cat_digestive_physiology">Sindirim Sistemi Fizyolojisi</string>
+    <string name="cat_excretory_physiology">Boşaltım Sistemi Fizyolojisi</string>
+    <string name="cat_endocrine_physiology">Endokrin Sistem Fizyolojisi</string>
+    <string name="cat_reproductive_physiology">Üreme Fizyolojisi</string>
+    <string name="cat_hematology">Hematoloji</string>
+    <string name="cat_sensory_physiology">Duyu Organları Fizyolojisi</string>
+    <string name="cat_cell_physiology">Hücre Fizyolojisi</string>
+
+    <string name="cat_biochemistry">Biyokimya</string>
+    <string name="cat_metabolism">Metabolizma</string>
+    <string name="cat_enzymes">Enzimler</string>
+    <string name="cat_vitamins">Vitaminler ve Koenzimler</string>
+    <string name="cat_hormone_bio">Hormon Biyokimyası</string>
+    <string name="cat_genetics">Genetik ve Moleküler Biyoloji</string>
+    <string name="cat_cell_signal">Hücresel Sinyal Yolları</string>
+    <string name="cat_acid_base">Asit-Baz Dengesi</string>
+    <string name="cat_clinical_bio">Klinik Biyokimya</string>
+
+    <string name="cat_histology">Histoloji</string>
+    <string name="cat_epithelial">Epitel Doku</string>
+    <string name="cat_connective">Bağ Doku</string>
+    <string name="cat_muscle_tissue">Kas Dokusu</string>
+    <string name="cat_nervous_tissue">Sinir Dokusu</string>
+    <string name="cat_blood_tissue">Kan ve Kan Yapıcı Doku</string>
+    <string name="cat_cardio_histo">Kardiyovasküler Histoloji</string>
+    <string name="cat_respiratory_histo">Solunum Histolojisi</string>
+    <string name="cat_digestive_histo">Sindirim Histolojisi</string>
+    <string name="cat_urogenital_histo">Ürogenital Histoloji</string>
+    <string name="cat_endocrine_histo">Endokrin Histoloji</string>
+    <string name="cat_skin_histo">Deri Histolojisi</string>
+
+    <string name="cat_microbiology">Mikrobiyoloji</string>
+    <string name="cat_bacteriology">Bakteriyoloji</string>
+    <string name="cat_virology">Viroloji</string>
+    <string name="cat_mycology">Mikoloji (Mantarlar)</string>
+    <string name="cat_parasitology">Parazitoloji</string>
+    <string name="cat_immunology">İmmünoloji</string>
+    <string name="cat_antibiotics">Antibiyotikler</string>
+    <string name="cat_clinical_micro">Klinik Mikrobiyoloji</string>
 </resources>

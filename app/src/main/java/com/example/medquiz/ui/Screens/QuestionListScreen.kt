@@ -21,6 +21,8 @@ import com.example.medquiz.data.local.AppDatabase
 import com.example.medquiz.data.repository.MedicalRepository
 import com.example.medquiz.R
 import androidx.compose.ui.res.stringResource
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -68,6 +70,7 @@ fun QuestionListScreen(
         } else {
             LazyColumn(modifier = Modifier.padding(padding).padding(16.dp)) {
                 items(questions) { q ->
+                    // Click protection for questions too
                     QuestionCard(question = q, onClick = { onQuestionClick(q.id) })
                 }
             }
@@ -77,13 +80,27 @@ fun QuestionListScreen(
 
 @Composable
 fun QuestionCard(question: QuestionEntity, onClick: () -> Unit) {
+
+    var isClickProcessing by remember { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
+
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
-            .clickable { onClick() }
+            .clickable(enabled = !isClickProcessing) {
+                if (!isClickProcessing) {
+                    isClickProcessing = true // Lock
+                    scope.launch {
+                        delay(100) // Little delay
+                        onClick()
+                        delay(1000) // Wait for lock
+                        isClickProcessing = false
+                    }
+                }
+            }
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
