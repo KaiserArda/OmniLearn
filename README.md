@@ -37,40 +37,48 @@ Most medical question apps available today suffer from excessive ads, poor UI/UX
 ```
 app/
  ├─ src/main/
- │      ├─ AndroidManifest.xml       // ID card for my app
+ │      ├─ AndroidManifest.xml                                  // ID card for my app
  │      │
  │      ├─ java/com/example/medquiz/
  │      │      │
- │      │      ├─ MainActivity.kt
+ │      │      ├─ MainActivity.kt    
  │      │      │
- │      │      ├─ data/              // Data Layer
+ │      │      ├─ data/                                          // Data Layer
  │      │      │      ├─ local/
- │      │      │      │      ├─ AppDatabase.kt
- │      │      │      │      ├─ PrePopulate.kt
  │      │      │      │      ├─ dao/
  │      │      │      │      │      ├─ CategoryDao.kt
  │      │      │      │      │      └─ QuestionDao.kt
- │      │      │      │      └─ entity/
- │      │      │      │             ├─ CategoryEntity.kt
- │      │      │      │             └─ QuestionEntity.kt
+ │      │      │      │      ├─ entity/
+ │      │      │      │      │      ├─ CategoryEntity.kt
+ │      │      │      │      │      └─ QuestionEntity.kt
+ │      │      │      │      └─ AppDatabase.kt
  │      │      │      │
  │      │      │      └─ repository/
  │      │      │             └─ MedicalRepository.kt
  │      │      │
- │      │      ├─ ui/                // UI Layer
- │      │      │      ├─ theme/
- │      │      │      ├─ navigation/
+ │      │      ├─ ui/                                          // UI Layer
+ │      │      │      ├─ Navigation/
  │      │      │      │      └─ NavGraphs.kt
- │      │      │      └─ screens/
- │      │      │             ├─ CategoryListScreen.kt
- │      │      │             ├─ QuestionListScreen.kt
- │      │      │             ├─ QuestionDetailScreen.kt
- │      │      │             └─ AddQuestionScreen.kt
+ │      │      │      ├─ Screens/
+ │      │      │      │      ├─ AddQuestionScreen.kt
+ │      │      │      │      ├─ CategoryListScreen.kt
+ │      │      │      │      ├─ QuestionDetailScreen.kt
+ │      │      │      │      ├─ QuestionListScreen.kt
+ │      │      │      │      └─ WelcomeScreen.kt
+ │      │      │      ├─ theme/
+ │      │      │      │      ├─ Color.kt
+ │      │      │      │      ├─ Theme.kt
+ │      │      │      │      └─ Type.kt
+ │      │      │      ├─ ClickHelper
+ │      │      │      ├─ Extensions.kt
+ │      │      │      └─ UiUtils.kt
  │      │      │
- │      │      └─ vm/                // ViewModels
+ │      │      └─ vm/                                              // ViewModels
+ │      │             ├─ AddQuestionViewModel.kt
  │      │             ├─ CategoryViewModel.kt
+ │      │             ├─ QuestionDetailViewModel.kt
  │      │             ├─ QuestionListViewModel.kt
- │      │             └─ AddQuestionViewModel.kt
+ │      │             └─ ViewModelFactories.kt
  │
  └─ build.gradle (project)
 ```
@@ -135,40 +143,48 @@ Google推奨のモダンアーキテクチャで開発中
 ```
 app/
  ├─ src/main/
- │      ├─ AndroidManifest.xml       // ID card for my app
+ │      ├─ AndroidManifest.xml                                  // ID card for my app
  │      │
  │      ├─ java/com/example/medquiz/
  │      │      │
- │      │      ├─ MainActivity.kt
+ │      │      ├─ MainActivity.kt    
  │      │      │
- │      │      ├─ data/              // Data Layer
+ │      │      ├─ data/                                          // Data Layer
  │      │      │      ├─ local/
- │      │      │      │      ├─ AppDatabase.kt
- │      │      │      │      ├─ PrePopulate.kt
  │      │      │      │      ├─ dao/
  │      │      │      │      │      ├─ CategoryDao.kt
  │      │      │      │      │      └─ QuestionDao.kt
- │      │      │      │      └─ entity/
- │      │      │      │             ├─ CategoryEntity.kt
- │      │      │      │             └─ QuestionEntity.kt
+ │      │      │      │      ├─ entity/
+ │      │      │      │      │      ├─ CategoryEntity.kt
+ │      │      │      │      │      └─ QuestionEntity.kt
+ │      │      │      │      └─ AppDatabase.kt
  │      │      │      │
  │      │      │      └─ repository/
  │      │      │             └─ MedicalRepository.kt
  │      │      │
- │      │      ├─ ui/                // UI Layer
- │      │      │      ├─ theme/
- │      │      │      ├─ navigation/
+ │      │      ├─ ui/                                          // UI Layer
+ │      │      │      ├─ Navigation/
  │      │      │      │      └─ NavGraphs.kt
- │      │      │      └─ screens/
- │      │      │             ├─ CategoryListScreen.kt
- │      │      │             ├─ QuestionListScreen.kt
- │      │      │             ├─ QuestionDetailScreen.kt
- │      │      │             └─ AddQuestionScreen.kt
+ │      │      │      ├─ Screens/
+ │      │      │      │      ├─ AddQuestionScreen.kt
+ │      │      │      │      ├─ CategoryListScreen.kt
+ │      │      │      │      ├─ QuestionDetailScreen.kt
+ │      │      │      │      ├─ QuestionListScreen.kt
+ │      │      │      │      └─ WelcomeScreen.kt
+ │      │      │      ├─ theme/
+ │      │      │      │      ├─ Color.kt
+ │      │      │      │      ├─ Theme.kt
+ │      │      │      │      └─ Type.kt
+ │      │      │      ├─ ClickHelper
+ │      │      │      ├─ Extensions.kt
+ │      │      │      └─ UiUtils.kt
  │      │      │
- │      │      └─ vm/                // ViewModels
+ │      │      └─ vm/                                              // ViewModels
+ │      │             ├─ AddQuestionViewModel.kt
  │      │             ├─ CategoryViewModel.kt
+ │      │             ├─ QuestionDetailViewModel.kt
  │      │             ├─ QuestionListViewModel.kt
- │      │             └─ AddQuestionViewModel.kt
+ │      │             └─ ViewModelFactories.kt
  │
  └─ build.gradle (project)
 ```
