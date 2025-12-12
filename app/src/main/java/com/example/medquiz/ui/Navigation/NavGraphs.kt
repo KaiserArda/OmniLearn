@@ -53,7 +53,7 @@ fun NavGraph(
         // 2. Categories
         composable(Screen.Categories.route) {
             CategoryListScreen(
-                onCategoryClick = { id ->
+                onNavigateToQuestions = { id ->
                     navController.navigate(Screen.Questions.createRoute(id))
                 },
                 onAddQuestion = {

@@ -6,7 +6,8 @@
     <string name="empty_category_error">No categories found.</string>
     <string name="cat_med">Faculty of Medicine</string>
     <string name="desc_med">General Medicine Questions</string>
-
+    <string name="subcategories_title">Alt Kategoriler</string>
+    <string name="no_subcategories">Alt kategori bulunamadı</string>
     <string name="cat_anatomy">Anatomy</string>
     <string name="desc_anatomy">Science of Body Structure</string>
     <string name="cat_macro_anatomy">Macro Anatomy</string>

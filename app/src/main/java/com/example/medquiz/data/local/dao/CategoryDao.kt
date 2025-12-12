@@ -13,6 +13,8 @@ interface CategoryDao {
     @Query("SELECT * FROM categories WHERE parentId IS NULL")
     fun getMainCategories(): Flow<List<CategoryEntity>>
 
+    @Query("SELECT * FROM categories WHERE id = :categoryId")
+    suspend fun getCategoryById(categoryId: Long): CategoryEntity?
 
     @Query("SELECT * FROM categories WHERE parentId = :parentId")
     fun getSubCategories(parentId: Long): Flow<List<CategoryEntity>>
@@ -22,4 +24,6 @@ interface CategoryDao {
 
     @Query("DELETE FROM categories")
     suspend fun deleteAllCategories()
+
+
 }
