@@ -10,7 +10,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.medquiz.data.local.entity.QuestionEntity
 import com.example.medquiz.vm.QuestionListViewModel
 import com.example.medquiz.vm.QuestionListViewModelFactory
@@ -18,7 +17,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import com.example.medquiz.data.local.AppDatabase
-import com.example.medquiz.data.repository.MedicalRepository
+import com.example.medquiz.data.repository.QuizRepository
 import com.example.medquiz.R
 import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.delay
@@ -36,7 +35,7 @@ fun QuestionListScreen(
 
     val viewModel: QuestionListViewModel = remember {
         val database = AppDatabase.getDatabase(context, kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO))
-        val repository = MedicalRepository(database.categoryDao(), database.questionDao())
+        val repository = QuizRepository(database.categoryDao(), database.questionDao())
         val factory = QuestionListViewModelFactory(repository)
         ViewModelProvider(viewModelStoreOwner, factory)[QuestionListViewModel::class.java]
     }

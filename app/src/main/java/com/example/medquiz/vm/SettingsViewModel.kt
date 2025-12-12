@@ -12,14 +12,19 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
 
     private val dataStore = SettingsDataStore(application)
 
-    // expose as Flow; composable will collect it
     val isDark: Flow<Boolean> = dataStore.isDarkTheme
+    val currentLanguage: Flow<String> = dataStore.language // Observe language
 
     fun toggleTheme() {
         viewModelScope.launch {
-            // read current value (suspend) and toggle
             val current = dataStore.isDarkTheme.first()
             dataStore.toggleTheme(current)
+        }
+    }
+
+    fun changeLanguage(langCode: String) {
+        viewModelScope.launch {
+            dataStore.saveLanguage(langCode)
         }
     }
 }

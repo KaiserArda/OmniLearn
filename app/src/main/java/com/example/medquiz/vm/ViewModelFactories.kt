@@ -2,10 +2,10 @@ package com.example.medquiz.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.medquiz.data.repository.MedicalRepository
+import com.example.medquiz.data.repository.QuizRepository
 
 
-class CategoryViewModelFactory(private val repo: MedicalRepository) : ViewModelProvider.Factory {
+class CategoryViewModelFactory(private val repo: QuizRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(CategoryViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
@@ -16,7 +16,7 @@ class CategoryViewModelFactory(private val repo: MedicalRepository) : ViewModelP
 }
 
 
-class QuestionListViewModelFactory(private val repo: MedicalRepository) : ViewModelProvider.Factory {
+class QuestionListViewModelFactory(private val repo: QuizRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(QuestionListViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
@@ -27,7 +27,7 @@ class QuestionListViewModelFactory(private val repo: MedicalRepository) : ViewMo
 }
 
 
-class AddQuestionViewModelFactory(private val repo: MedicalRepository) : ViewModelProvider.Factory {
+class AddQuestionViewModelFactory(private val repo: QuizRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(AddQuestionViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")

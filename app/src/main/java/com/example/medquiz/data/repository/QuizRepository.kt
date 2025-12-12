@@ -6,7 +6,7 @@ import com.example.medquiz.data.local.entity.CategoryEntity
 import com.example.medquiz.data.local.entity.QuestionEntity
 import kotlinx.coroutines.flow.Flow
 
-class MedicalRepository(
+class QuizRepository(
     private val categoryDao: CategoryDao,
     private val questionDao: QuestionDao
 ) {

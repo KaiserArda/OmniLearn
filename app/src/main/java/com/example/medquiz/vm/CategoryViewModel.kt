@@ -3,14 +3,14 @@ package com.example.medquiz.vm
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.medquiz.data.local.entity.CategoryEntity
-import com.example.medquiz.data.repository.MedicalRepository
+import com.example.medquiz.data.repository.QuizRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class CategoryViewModel(private val repository: MedicalRepository) : ViewModel() {
+class CategoryViewModel(private val repository: QuizRepository) : ViewModel() {
 
 
     private val _categories = MutableStateFlow<List<CategoryEntity>>(emptyList())
