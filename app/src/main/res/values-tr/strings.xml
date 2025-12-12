@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MedQuiz</string>
+    <string name="app_name">Omnilearn</string>
     <string name="welcome_message">Hoşgeldiniz</string>
     <string name="category_list_title">Bölümler</string>
     <string name="faculty_medicine">Tıp</string>

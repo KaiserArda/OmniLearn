@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">MedQuiz</string>
+    <string name="app_name">OmniLearn</string>
     <string name="category_list_title">Category List</string>
     <string name="questions_title">Questions</string>
-    <string name="welcome_message">Welcome to MedQuiz!</string>
+    <string name="welcome_message">Welcome to Omnilearn!</string>
     <string name="empty_category_error">No categories found.)</string>
     <string name="cat_med">Faculty of Medicine</string>
     <string name="desc_med">General Medicine Questions</string>

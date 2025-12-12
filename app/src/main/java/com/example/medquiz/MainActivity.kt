@@ -1,41 +1,28 @@
 package com.example.medquiz
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.ui.Modifier
-import com.example.medquiz.data.local.AppDatabase
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.medquiz.ui.navigation.NavGraph
 import com.example.medquiz.ui.theme.MedQuizTheme
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
+import com.example.medquiz.vm.SettingsViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 
-class MainActivity : AppCompatActivity() {
-
-    private val applicationScope = CoroutineScope(SupervisorJob())
+class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Initialize Database
-        // It loads all medical faculties, committees, and questions into the DB.
-        AppDatabase.getDatabase(applicationContext, applicationScope)
-
-        // Set the UI Content
         setContent {
-            MedQuizTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
 
-                    // Start the Navigation Graph
-                    NavGraph()
-                }
+            val settingsViewModel: SettingsViewModel = viewModel()
+            val isDark by settingsViewModel.isDark.collectAsState(initial = false)
+
+            MedQuizTheme(darkTheme = isDark) {
+                NavGraph()
             }
         }
     }

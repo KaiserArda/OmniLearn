@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MedQuiz</string>
+    <string name="app_name">Omnilearn</string>
     <string name="welcome_message">ようこそ </string>
     <string name="category_list_title">診療科 </string>
     <string name="empty_category_error">カテゴリが見つかりませんでした。</string>
