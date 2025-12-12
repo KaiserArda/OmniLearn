@@ -112,10 +112,6 @@ app/
 
  │      │      │      │      └─ Type.kt
 
- │      │      │      ├─ ClickHelper
-
- │      │      │      ├─ Extensions.kt
-
  │      │      │      └─ UiUtils.kt
 
  │      │      │
@@ -265,10 +261,6 @@ app/
  │      │      │      │      ├─ Theme.kt
 
  │      │      │      │      └─ Type.kt
-
- │      │      │      ├─ ClickHelper
-
- │      │      │      ├─ Extensions.kt
 
  │      │      │      └─ UiUtils.kt
 
