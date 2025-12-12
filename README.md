@@ -1,28 +1,29 @@
 # English Version
 
-# MedQuiz – Medical Quiz App for Students
+# OmniLearn – The Ultimate Learning Companion for Students
 
 Hi!  
-I'm a 3rd-year Computer Engineering student currently developing MedQuiz as a serious, production-ready Android application that I plan to publish on Google Play late 2025.
+II'm a 3rd-year Computer Engineering student currently developing **OmniLearn** as a serious, production-ready Android application that I plan to publish on Google Play in late 2025.
 
 ## Purpose
-Most medical question apps available today suffer from excessive ads, poor UI/UX, outdated content, or performance issues. MedQuiz is being built from the ground up to solve these problems: clean design, fast, fully offline-capable, and focused on real learning.
+Most quiz and educational apps available today suffer from excessive ads, poor UI/UX, outdated content, or performance issues. **OmniLearn** is being built from the ground up to solve these problems: clean design, fast, fully offline-capable, and adaptable to any field of study.
 
 ## Current Progress (early development)
 - Kotlin + Jetpack Compose codebase  
 - Clean MVVM architecture (data / ui / vm packages)  
 - Room database schema and DAOs implemented  
 - Navigation Component with basic screen structure  
-
+- Dynamic category system
+- 
 ## Planned Core Features
-- Organized categories (Medical course topics)  
-- Thousands of high-quality questions with detailed explanations  
-- Instant feedback and answer rationales  
-- User-contributed questions (with moderation)  
-- Powerful search and filter system  
-- Bookmark & mistake tracking  
-- Light / Dark theme + Material You support  
-- Completely offline-first 
+- Well-organized categories (Programming, Math, Science, and many more)
+- Smart quiz system with detailed explanations for every question
+- Instant feedback and clear answer rationales
+- User-contributed questions (moderated for quality)
+- Powerful search and filtering tools
+- Bookmarking and mistake tracking with spaced repetition logic
+- Light / Dark theme with full Material You support
+- Completely offline-first design
   
 ## Technical Stack
 - 100% Kotlin  
@@ -30,48 +31,105 @@ Most medical question apps available today suffer from excessive ads, poor UI/UX
 - Room Persistence Library  
 - Navigation Component  
 - Kotlin Coroutines + Flow  
-- Hilt Dependency Injection (will be added soon)  
+- Hilt Dependency Injection 
 - Google’s recommended modern Android architecture
 
 ### Project Structure
 ```
 app/
+
  ├─ src/main/
- │      ├─ AndroidManifest.xml       // ID card for my app
+
+ │      ├─ AndroidManifest.xml                                  // ID card for my app
+
  │      │
- │      ├─ java/com/example/medquiz/
+
+ │      ├─ java/com/example/omnilearn/
+
  │      │      │
- │      │      ├─ MainActivity.kt
+
+ │      │      ├─ MainActivity.kt    
+
  │      │      │
- │      │      ├─ data/              // Data Layer
+
+ │      │      ├─ data/                                          // Data Layer
+
  │      │      │      ├─ local/
- │      │      │      │      ├─ AppDatabase.kt
- │      │      │      │      ├─ PrePopulate.kt
+
  │      │      │      │      ├─ dao/
+
  │      │      │      │      │      ├─ CategoryDao.kt
+
  │      │      │      │      │      └─ QuestionDao.kt
- │      │      │      │      └─ entity/
- │      │      │      │             ├─ CategoryEntity.kt
- │      │      │      │             └─ QuestionEntity.kt
+
+ │      │      │      │      │
+
+ │      │      │      │      ├─ datastore/
+
+ │      │      │      │      │      └─ SettingsDataStore.kt
+
+ │      │      │      │      │     
+
+ │      │      │      │      ├─ entity/
+
+ │      │      │      │      │      ├─ CategoryEntity.kt
+
+ │      │      │      │      │      └─ QuestionEntity.kt
+
+ │      │      │      │      └─ AppDatabase.kt
+
  │      │      │      │
+
  │      │      │      └─ repository/
- │      │      │             └─ MedicalRepository.kt
+
+ │      │      │             └─ QuizRepository.kt
+
  │      │      │
- │      │      ├─ ui/                // UI Layer
- │      │      │      ├─ theme/
- │      │      │      ├─ navigation/
+
+ │      │      ├─ ui/                                          // UI Layer
+
+ │      │      │      ├─ Navigation/
+
  │      │      │      │      └─ NavGraphs.kt
- │      │      │      └─ screens/
- │      │      │             ├─ CategoryListScreen.kt
- │      │      │             ├─ QuestionListScreen.kt
- │      │      │             ├─ QuestionDetailScreen.kt
- │      │      │             └─ AddQuestionScreen.kt
+
+ │      │      │      ├─ Screens/
+
+ │      │      │      │      ├─ AddQuestionScreen.kt
+
+ │      │      │      │      ├─ CategoryListScreen.kt
+
+ │      │      │      │      ├─ QuestionDetailScreen.kt
+
+ │      │      │      │      ├─ QuestionListScreen.kt
+
+ │      │      │      │      └─ WelcomeScreen.kt
+
+ │      │      │      ├─ theme/
+
+ │      │      │      │      ├─ Color.kt
+
+ │      │      │      │      ├─ Theme.kt
+
+ │      │      │      │      └─ Type.kt
+
+ │      │      │      └─ UiUtils.kt
+
  │      │      │
- │      │      └─ vm/                // ViewModels
+
+ │      │      └─ vm/                                              // ViewModels
+
+ │      │             ├─ AddQuestionViewModel.kt
+
  │      │             ├─ CategoryViewModel.kt
+
  │      │             ├─ QuestionListViewModel.kt
- │      │             └─ AddQuestionViewModel.kt
+
+ │      │             ├─ SettingsViewModel.kt
+
+ │      │             └─ ViewModelFactories.kt
+
  │
+
  └─ build.gradle (project)
 ```
 ## How to Build
@@ -84,10 +142,11 @@ app/
 - [ ] Complete quiz flow and UI screens  
 - [ ] Populate initial question bank (500–1000 questions)  
 - [ ] Implement contribution & moderation system  
-- [ ] Closed beta with fellow medical students  
+- [ ] Closed beta with fellow students  
 - [ ] Public release on Google Play (target: late 2025)  
 
-Feedback, bug reports, and especially medical question submissions are very welcome. This project is a work in progress, and I’m happy to collaborate with fellow developers to make this a tool that actual medical students and residents use every day!
+Feedback, bug reports, and especially question submissions are very welcome. This project is a work in progress, and I’m happy to collaborate with fellow developers to make this a tool that students from all disciplines use every day!
+
 Thanks for checking out the project!
 
 ~ Arda  
@@ -95,97 +154,151 @@ Computer Engineering – Osmaniye Korkut Ata University
 
 # 日本語版
 
-MedQuiz – 医学生のための医学クイズアプリ
+## OmniLearn – 学生のための究極の学習コンパニオン
 
-こんにちは！  
-コンピュータ工学科3年のArdaです。  
-2025年末のGoogle Play公開を目指して、医学生向けの本格的なクイズアプリ「MedQuiz」を開発しています。
+こんにちは！
+現在、コンピュータ工学科3年生で、2025年後半にGoogle Playで正式リリース予定の本格的なAndroidアプリケーション **OmniLearn** を開発しています。
 
-■ 作った理由
-既存の医学クイズアプリには、
-・広告が多すぎる
-・動作が重い
-・オフラインで使えない
-・解説が薄い or 古い
-といった不満が多くあります。
+## 開発の目的
+現在の多くのクイズ・教育アプリは、過剰な広告、使いにくいUI/UX、古くなった内容、パフォーマンス問題などに悩まされています。
+**OmniLearn** はこれらの問題を根本から解決するためにゼロから構築されています。クリーンなデザイン、高速動作、完全オフライン対応、そしてあらゆる学問分野に適応可能なアプリを目指しています。
 
-MedQuizは「本当に医学生が毎日使いたくなるアプリ」をコンセプトに、ゼロから作り直しています。  
-広告ゼロ、完全オフライン、軽快な動作、丁寧な解説に徹底的にこだわっています。
+## 現在の進捗（開発初期段階）
 
-■ 現在の進捗（まだ開発初期です）
-- Kotlin + Jetpack Compose
-- クリーンなMVVMアーキテクチャ
-- Roomデータベース構築済み
-- Navigation Componentで画面遷移完成
+- Kotlin + Jetpack Compose で実装
+- クリーンなMVVMアーキテクチャ（data / ui / vm パッケージ構成）
+- RoomデータベースのスキーマとDAOを実装済み
+- Navigation Componentによる基本画面構成
+- 動的なカテゴリシステム
 
-■ これから実装予定の主な機能
-- 講義科目ごとの体系的なカテゴリ分け
-- 数千問の高品質問題＋詳しい解説＆根拠
-- 間違えた問題の自動記録・復習機能
-- ブックマーク＆強力な検索・フィルター
-- ユーザー投稿機能（医学生による審査付き）
-- ライト/ダークテーマ + Material You対応
-- 完全オフラインファースト
+## 予定しているコア機能
 
-■ 使っている技術
-Kotlin 100% / Jetpack Compose / Room / Hilt / Coroutines+Flow  
-Google推奨のモダンアーキテクチャで開発中
+- プログラミング、数学、科学など、整理された豊富なカテゴリ
+- すべての問題に詳細な解説付きのスマートクイズシステム
+- 即時フィードバックとわかりやすい正解の根拠表示
+- ユーザー投稿問題機能（品質管理のためのモデレーション付き）
+- 高機能な検索・フィルタリング
+- お気に入り登録＆間違い追跡＋間隔反復学習（Spaced Repetition）
+- ライト／ダークテーマ対応、Material You完全サポート
+- 完全オフライン優先設計
 
-### プロジェクトの構造
+## 技術スタック
+
+100% Kotlin
+Jetpack Compose
+Room Persistence Library
+Navigation Component
+Kotlin Coroutines + Flow
+Hilt 依存性注入
+Google推奨の最新Androidアーキテクチャ準拠
+
+### プロジェクト構成
 ```
 app/
+
  ├─ src/main/
- │      ├─ AndroidManifest.xml       // ID card for my app
+
+ │      ├─ AndroidManifest.xml                                  // ID card for my app
+
  │      │
- │      ├─ java/com/example/medquiz/
+
+ │      ├─ java/com/example/omnilearn/
+
  │      │      │
- │      │      ├─ MainActivity.kt
+
+ │      │      ├─ MainActivity.kt    
+
  │      │      │
- │      │      ├─ data/              // Data Layer
+
+ │      │      ├─ data/                                          // Data Layer
+
  │      │      │      ├─ local/
- │      │      │      │      ├─ AppDatabase.kt
- │      │      │      │      ├─ PrePopulate.kt
+
  │      │      │      │      ├─ dao/
+
  │      │      │      │      │      ├─ CategoryDao.kt
+
  │      │      │      │      │      └─ QuestionDao.kt
- │      │      │      │      └─ entity/
- │      │      │      │             ├─ CategoryEntity.kt
- │      │      │      │             └─ QuestionEntity.kt
+
+ │      │      │      │      ├─ entity/
+
+ │      │      │      │      │      ├─ CategoryEntity.kt
+
+ │      │      │      │      │      └─ QuestionEntity.kt
+
+ │      │      │      │      └─ AppDatabase.kt
+
  │      │      │      │
+
  │      │      │      └─ repository/
- │      │      │             └─ MedicalRepository.kt
+
+ │      │      │             └─ QuizRepository.kt
+
  │      │      │
- │      │      ├─ ui/                // UI Layer
- │      │      │      ├─ theme/
- │      │      │      ├─ navigation/
+
+ │      │      ├─ ui/                                          // UI Layer
+
+ │      │      │      ├─ Navigation/
+
  │      │      │      │      └─ NavGraphs.kt
- │      │      │      └─ screens/
- │      │      │             ├─ CategoryListScreen.kt
- │      │      │             ├─ QuestionListScreen.kt
- │      │      │             ├─ QuestionDetailScreen.kt
- │      │      │             └─ AddQuestionScreen.kt
+
+ │      │      │      ├─ Screens/
+
+ │      │      │      │      ├─ AddQuestionScreen.kt
+
+ │      │      │      │      ├─ CategoryListScreen.kt
+
+ │      │      │      │      ├─ QuestionDetailScreen.kt
+
+ │      │      │      │      ├─ QuestionListScreen.kt
+
+ │      │      │      │      └─ WelcomeScreen.kt
+
+ │      │      │      ├─ theme/
+
+ │      │      │      │      ├─ Color.kt
+
+ │      │      │      │      ├─ Theme.kt
+
+ │      │      │      │      └─ Type.kt
+
+ │      │      │      └─ UiUtils.kt
+
  │      │      │
- │      │      └─ vm/                // ViewModels
+
+ │      │      └─ vm/                                              // ViewModels
+
+ │      │             ├─ AddQuestionViewModel.kt
+
  │      │             ├─ CategoryViewModel.kt
+
+ │      │             ├─ QuestionDetailViewModel.kt
+
  │      │             ├─ QuestionListViewModel.kt
- │      │             └─ AddQuestionViewModel.kt
+
+ │      │             └─ ViewModelFactories.kt
+
  │
+
  └─ build.gradle (project)
 ```
-■ ビルド方法（すぐ試せます）
-1. リポジトリをクローン
-2. Android Studio Ladybug以降で開く
-3. Gradle同期 → 実機/エミュでそのまま実行OK！
+## すぐに試すには
+1. リポジトリをクローンする
+2. Android Studio Ladybug 以降で開く
+3. Gradleを同期する
+4. デバイスまたはエミュレーターで実行 – 追加の設定は一切不要です
 
-■ ロードマップ
-- [ ] クイズ画面・フローの完成
-- [ ] 初期500～1000問の投入
-- [ ] 投稿・審査システム
-- [ ] 医学生向けクローズドβテスト
-- [ ] 2025年末 Google Play公開
+## ロードマップ
+- [ ] クイズの流れと全UI画面を完成させる
+- [ ] 初期問題集を追加（500～1000問）
+- [ ] 問題投稿＆モデレーションシステムを実装
+- [ ] 同学年の学生たちとクローズドβテスト
+- [ ] Google Playで正式リリース（目標：2025年後半）
 
-医学の問題提供、バグ報告、デザインや機能のフィードバック…なんでも大歓迎です！  
-まだまだ未完成ですが、みなさんと一緒に「医学生の毎日の相棒」になるアプリに育てていきたいです。
+フィードバック、バグ報告はもちろん、特に問題の投稿を大歓迎しています！
+このプロジェクトはまだ開発途中で、他の開発者の方と一緒に協力しながら、全ての学部の学生が毎日使ってくれるツールに育てていきたいと思っています！
 
-見てくれてありがとうございました！  
-～Arda（オスマニエ・コルクト・アタ大学 コンピュータ工学科）
+プロジェクトを見てくれて本当にありがとう！
+
+～ Arda
+コンピュータ工学科 – オスマニエ・コルクト・アタ大学
