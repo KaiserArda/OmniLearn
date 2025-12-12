@@ -37,7 +37,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CategoryListScreen(
-    onNavigateToQuestions: (Long) -> Unit, // İSİM DEĞİŞTİ: onCategoryClick -> onNavigateToQuestions
+    onNavigateToQuestions: (Long) -> Unit,
     onAddQuestion: () -> Unit
 ) {
     val context = LocalContext.current
@@ -55,23 +55,26 @@ fun CategoryListScreen(
     val isDark by settingsViewModel.isDark.collectAsState(initial = false)
     val categories by viewModel.categories.collectAsState()
     val currentParentId by viewModel.currentParentId.collectAsState()
+    val currentCategory by viewModel.currentCategory.collectAsState() // DEĞİŞTİ
     val currentLang by settingsViewModel.currentLanguage.collectAsState(initial = "tr")
 
-    // Debounce için
     var lastClickTime by remember { mutableStateOf(0L) }
 
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(
-                        text = if (currentParentId == null) {
-                            getLocalizedResource(R.string.category_list_title, currentLang)
-                        } else {
-                            getLocalizedResource(R.string.subcategories_title, currentLang)
-                        },
-                        fontWeight = FontWeight.Bold
-                    )
+
+                    if (currentParentId != null && currentCategory != null) {
+
+                        Text(
+                            text = getLocalizedText(currentCategory!!.name, currentLang),
+                            fontWeight = FontWeight.Bold
+                        )
+                    } else {
+
+                        Text("", fontWeight = FontWeight.Bold)
+                    }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
@@ -118,12 +121,9 @@ fun CategoryListScreen(
                                     lastClickTime = currentTime
 
                                     scope.launch {
-                                        // Alt kategori var mı kontrol et
                                         val hasSubs = viewModel.checkHasSubCategories(category.id)
 
-                                        // CategoryListScreen.kt - onClick içinde:
                                         if (hasSubs) {
-                                            // Alt kategori varsa, onları yükle
                                             viewModel.loadSubCategories(category.id)
                                         } else {
                                             onNavigateToQuestions(category.id)

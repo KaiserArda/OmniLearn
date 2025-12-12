@@ -19,6 +19,10 @@ class CategoryViewModel(private val repository: QuizRepository) : ViewModel() {
     private val _currentParentId = MutableStateFlow<Long?>(null)
     val currentParentId: StateFlow<Long?> = _currentParentId.asStateFlow()
 
+
+    private val _currentCategory = MutableStateFlow<CategoryEntity?>(null)
+    val currentCategory: StateFlow<CategoryEntity?> = _currentCategory.asStateFlow()
+
     init {
         loadMainCategories()
     }
@@ -27,7 +31,8 @@ class CategoryViewModel(private val repository: QuizRepository) : ViewModel() {
         viewModelScope.launch {
             repository.getMainCategories().collectLatest { list ->
                 _categories.value = list
-                _currentParentId.value = null  // Ana kategorideyiz
+                _currentParentId.value = null
+                _currentCategory.value = null
             }
         }
     }
@@ -36,38 +41,35 @@ class CategoryViewModel(private val repository: QuizRepository) : ViewModel() {
         viewModelScope.launch {
             repository.getSubCategories(parentId).collectLatest { list ->
                 _categories.value = list
-                _currentParentId.value = parentId  // Bu parent'ın altındayız
+                _currentParentId.value = parentId
+
+
+                val parentCategory = repository.getCategoryById(parentId)
+                _currentCategory.value = parentCategory
             }
         }
     }
 
-    // YENİ EKLENECEK FONKSİYON (EN ALTA EKLEYİN):
-    // CategoryViewModel.kt - goBack fonksiyonu:
     fun goBack() {
         viewModelScope.launch {
             val currentParent = _currentParentId.value
 
             if (currentParent != null) {
-                // Mevcut parent kategoriyi bul
-                val currentCategory = repository.getCategoryById(currentParent)
+                val currentCat = repository.getCategoryById(currentParent)
 
-                if (currentCategory == null || currentCategory.parentId == null) {
-                    // Ana kategoriye dön (ya kategori bulunamadı ya da parent'ı yok)
+                if (currentCat == null || currentCat.parentId == null) {
+
                     loadMainCategories()
-                    _currentParentId.value = null
                 } else {
-                    // Üst kategoriye dön
-                    loadSubCategories(currentCategory.parentId)
-                    _currentParentId.value = currentCategory.parentId
+
+                    loadSubCategories(currentCat.parentId)
                 }
             } else {
-                // Zaten ana kategorideyiz
                 loadMainCategories()
             }
         }
     }
 
-    // YENİ: Alt kategori kontrolü (CategoryListScreen için gerekli)
     suspend fun checkHasSubCategories(categoryId: Long): Boolean {
         return repository.getSubCategories(categoryId).firstOrNull()?.isNotEmpty() ?: false
     }
