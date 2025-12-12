@@ -232,7 +232,7 @@ app/
 
  │      │      │      └─ repository/
 
- │      │      │             └─ MedicalRepository.kt
+ │      │      │             └─ QuizRepository.kt
 
  │      │      │
 
