@@ -11,26 +11,29 @@ class QuizRepository(
     private val categoryDao: CategoryDao,
     private val questionDao: QuestionDao
 ) {
-
-
     fun getMainCategories(): Flow<List<CategoryEntity>> = categoryDao.getMainCategories()
 
     fun getSubCategories(parentId: Long): Flow<List<CategoryEntity>> = categoryDao.getSubCategories(parentId)
 
     suspend fun insertCategory(category: CategoryEntity): Long = categoryDao.insert(category)
 
-
     suspend fun getCategoryById(id: Long): CategoryEntity? {
         return categoryDao.getCategoryById(id)
     }
+
     fun getQuestionsForCategory(categoryId: Long): Flow<List<QuestionEntity>> =
         questionDao.getQuestionsByCategory(categoryId)
+
     suspend fun hasSubCategories(categoryId: Long): Boolean {
         return categoryDao.getSubCategories(categoryId).firstOrNull()?.isNotEmpty() ?: false
     }
 
     suspend fun insertQuestion(question: QuestionEntity): Long = questionDao.insert(question)
 
-
     suspend fun getQuestionById(id: Long): QuestionEntity? = questionDao.getQuestion(id)
+
+    // --- YENİ EKLENDİ: ViewModel buradan sayıyı isteyecek ---
+    suspend fun getQuestionCount(categoryId: Long): Int {
+        return questionDao.getCountByCategory(categoryId)
+    }
 }

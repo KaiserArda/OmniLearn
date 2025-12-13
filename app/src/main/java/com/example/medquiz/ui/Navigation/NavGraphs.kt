@@ -92,16 +92,33 @@ fun NavGraph(
             QuestionDetailScreen(questionId = qId)
         }
 
-        // --- Add Question (KRİTİK DÜZELTME) ---
         composable(
-            route = Screen.AddQuestion.route, // "addQuestion/{categoryId}"
+            route = Screen.AddQuestion.route,
             arguments = listOf(navArgument("categoryId") { type = NavType.LongType })
         ) { backStackEntry ->
-            // ID'yi al, eğer bir sorun olursa -1 varsay
             val catId = backStackEntry.arguments?.getLong("categoryId") ?: -1L
 
+            // --- ViewModel Hazırlığı ---
+            val context = androidx.compose.ui.platform.LocalContext.current
+
+            // 1. Scope'u tanımla (YENİ EKLENDİ)
+            // Bu satır için import eklemelisin: androidx.compose.runtime.rememberCoroutineScope
+            val scope = androidx.compose.runtime.rememberCoroutineScope()
+
+            // 2. Veritabanını çağırırken 'scope' parametresini de ekle (DÜZELTİLDİ)
+            val db = com.example.medquiz.data.local.AppDatabase.getDatabase(context, scope)
+
+            // 3. Repository oluştur
+            val repo = com.example.medquiz.data.repository.QuizRepository(db.categoryDao(), db.questionDao())
+
+            // 4. Fabrika ve ViewModel
+            val factory = com.example.medquiz.vm.AddQuestionViewModelFactory(repo)
+            val myViewModel: com.example.medquiz.vm.AddQuestionViewModel = androidx.lifecycle.viewmodel.compose.viewModel(factory = factory)
+
+            // 5. Ekranı Çiz
             AddQuestionScreen(
                 defaultCategoryId = if (catId != -1L) catId else null,
+                viewModel = myViewModel,
                 onBack = {
                     navController.popBackStack()
                 }

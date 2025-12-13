@@ -9,17 +9,19 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.example.medquiz.data.local.entity.QuestionEntity
-import com.example.medquiz.vm.QuestionListViewModel
-import com.example.medquiz.vm.QuestionListViewModelFactory
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
-import com.example.medquiz.data.local.AppDatabase
-import com.example.medquiz.data.repository.QuizRepository
 import com.example.medquiz.R
-import androidx.compose.ui.res.stringResource
+import com.example.medquiz.data.local.AppDatabase
+import com.example.medquiz.data.local.entity.QuestionEntity
+import com.example.medquiz.data.repository.QuizRepository
+import com.example.medquiz.vm.QuestionListViewModel
+import com.example.medquiz.vm.QuestionListViewModelFactory
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -33,6 +35,7 @@ fun QuestionListScreen(
     val context = LocalContext.current
     val viewModelStoreOwner = LocalViewModelStoreOwner.current!!
 
+    // ViewModel yapını senin koduna sadık kalarak korudum
     val viewModel: QuestionListViewModel = remember {
         val database = AppDatabase.getDatabase(context, kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO))
         val repository = QuizRepository(database.categoryDao(), database.questionDao())
@@ -69,7 +72,6 @@ fun QuestionListScreen(
         } else {
             LazyColumn(modifier = Modifier.padding(padding).padding(16.dp)) {
                 items(questions) { q ->
-                    // Click protection for questions too
                     QuestionCard(question = q, onClick = { onQuestionClick(q.id) })
                 }
             }
@@ -93,23 +95,30 @@ fun QuestionCard(question: QuestionEntity, onClick: () -> Unit) {
                 if (!isClickProcessing) {
                     isClickProcessing = true // Lock
                     scope.launch {
-                        delay(100) // Little delay
+                        delay(100) // Little delay for ripple effect
                         onClick()
-                        delay(1000) // Wait for lock
+                        delay(1000) // Prevent double click
                         isClickProcessing = false
                     }
                 }
             }
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
+
+            val displayTitle = if (question.isUserCreated) {
+                question.questionText.substringBefore(":")
+            } else {
+                if (question.questionText.length > 50) question.questionText.take(50) + "..." else question.questionText
+            }
+
             Text(
-                text = question.questionText,
+                text = displayTitle,
                 style = MaterialTheme.typography.titleMedium,
-                maxLines = 2
+                fontWeight = FontWeight.Bold,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(text = "A) ${question.option1}", style = MaterialTheme.typography.bodySmall)
-            Text(text = "B) ${question.option2}", style = MaterialTheme.typography.bodySmall)
+
         }
     }
 }

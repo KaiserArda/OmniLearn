@@ -16,6 +16,10 @@ interface QuestionDao {
     @Query("SELECT * FROM questions WHERE id = :questionId")
     suspend fun getQuestion(questionId: Long): QuestionEntity?
 
+    // --- YENİ EKLENDİ: Kategorideki toplam soru sayısını verir ---
+    @Query("SELECT COUNT(*) FROM questions WHERE categoryId = :categoryId")
+    suspend fun getCountByCategory(categoryId: Long): Int
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(question: QuestionEntity): Long
 

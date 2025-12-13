@@ -11,11 +11,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.medquiz.R
+import com.example.medquiz.vm.AddQuestionViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddQuestionScreen(
     defaultCategoryId: Long?,
+    viewModel: AddQuestionViewModel, // NavGraph'tan gelecek
     onBack: () -> Unit
 ) {
     val context = LocalContext.current
@@ -27,15 +29,16 @@ fun AddQuestionScreen(
     var optionB by remember { mutableStateOf("") }
     var optionC by remember { mutableStateOf("") }
     var optionD by remember { mutableStateOf("") }
+
+    // Radyo butonu seçimi: 1=A, 2=B, 3=C, 4=D
     var selectedOption by remember { mutableIntStateOf(0) }
     var explanation by remember { mutableStateOf("") }
     var message by remember { mutableStateOf("") }
 
-    // --- KRİTİK DEĞİŞİKLİK BURADA BAŞLIYOR ---
-    // Surface: Sayfanın zemin rengini telefonun temasına (Karanlık/Aydınlık) göre ayarlar.
+    // --- KARANLIK MOD DESTEĞİ (Surface) ---
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background // Telefon siyahsa burası siyah olur
+        color = MaterialTheme.colorScheme.background
     ) {
         Column(
             modifier = Modifier
@@ -48,7 +51,7 @@ fun AddQuestionScreen(
             Text(
                 text = stringResource(id = R.string.title_add_new_question),
                 style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.onBackground // Zemin siyahsa yazı beyaz olur
+                color = MaterialTheme.colorScheme.onBackground
             )
 
             // Soru Alanı
@@ -72,31 +75,44 @@ fun AddQuestionScreen(
                 modifier = Modifier.padding(top = 8.dp)
             )
 
-            // Şıklar (OptionRow fonksiyonunu kullanır)
+            // Şıklar
             OptionRow("A)", optionA, { optionA = it }, selectedOption == 1, { selectedOption = 1 }, R.string.label_option_a)
             OptionRow("B)", optionB, { optionB = it }, selectedOption == 2, { selectedOption = 2 }, R.string.label_option_b)
             OptionRow("C)", optionC, { optionC = it }, selectedOption == 3, { selectedOption = 3 }, R.string.label_option_c)
             OptionRow("D)", optionD, { optionD = it }, selectedOption == 4, { selectedOption = 4 }, R.string.label_option_d)
 
-            // Açıklama (İsteğe Bağlı)
+            // Açıklama
             OutlinedTextField(
                 value = explanation,
                 onValueChange = { explanation = it },
-                label = { Text(stringResource(id = R.string.label_explanation) + " (Optional)") },
+                label = { Text(stringResource(id = R.string.label_explanation)) },
                 modifier = Modifier.fillMaxWidth(),
                 minLines = 3
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Kaydet Butonu
+            // KAYDET BUTONU
             Button(
                 onClick = {
                     if (questionText.isBlank() || optionA.isBlank() || optionB.isBlank() || optionC.isBlank() || optionD.isBlank() || selectedOption == 0) {
                         message = context.getString(R.string.err_empty_fields_or_selection)
                     } else {
-                        // Şimdilik sadece geri dönüyor, veritabanı işini sonra halledeceğiz
-                        onBack()
+                        // Seçilen şıkkı (1-4 arası) indekse (0-3 arası) çeviriyoruz.
+                        // Çünkü veritabanı "correctIndex" istiyor.
+                        val correctIndex = selectedOption - 1
+
+                        // ViewModel'e Gönder
+                        viewModel.saveQuestion(
+                            categoryId = defaultCategoryId ?: -1L,
+                            rawText = questionText,
+                            options = listOf(optionA, optionB, optionC, optionD),
+                            correctIndex = correctIndex, // INT GÖNDERİYORUZ
+                            explanation = explanation,
+                            onSuccess = {
+                                onBack() // Kayıt başarılı, geri dön
+                            }
+                        )
                     }
                 },
                 modifier = Modifier.fillMaxWidth(),
@@ -117,7 +133,7 @@ fun AddQuestionScreen(
     }
 }
 
-// --- YARDIMCI FONKSİYON (Dosyanın en altında dursun) ---
+// Yardımcı Fonksiyon
 @Composable
 fun OptionRow(
     label: String,
@@ -132,21 +148,12 @@ fun OptionRow(
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         modifier = Modifier.fillMaxWidth()
     ) {
-        Text(
-            text = label,
-            style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.onBackground // Temaya uyumlu yazı rengi
-        )
+        Text(text = label, style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onBackground)
         OutlinedTextField(
-            value = text,
-            onValueChange = onTextChange,
+            value = text, onValueChange = onTextChange,
             placeholder = { Text(stringResource(id = placeholderRes)) },
-            modifier = Modifier.weight(1f),
-            singleLine = true
+            modifier = Modifier.weight(1f), singleLine = true
         )
-        RadioButton(
-            selected = isSelected,
-            onClick = onSelect
-        )
+        RadioButton(selected = isSelected, onClick = onSelect)
     }
 }
