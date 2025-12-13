@@ -67,4 +67,25 @@
     <string name="cat_immunology">免疫学</string>
     <string name="cat_antibiotics">抗生物質</string>
     <string name="cat_clinical_micro">臨床微生物学</string>
+
+    <string name="title_add_new_question">新しい問題を作成</string>
+    <string name="label_options">回答の選択肢</string>
+
+    <string name="label_question_text">問題</string>
+    <string name="label_option_a">選択肢 A</string>
+    <string name="label_option_b">選択肢 B</string>
+    <string name="label_option_c">選択肢 C</string>
+    <string name="label_option_d">選択肢 D</string>
+    <string name="label_explanation">解説(任意)</string>
+    <string name="label_correct_answer">正解</string>
+    <string name="label_select_category">カテゴリーを選択</string>
+    <string name="msg_question_added">問題が正常に追加されました</string>
+    <string name="err_empty_fields">すべての項目を入力してください</string>
+    <string name="err_empty_fields_or_selection">すべての項目を入力し、正解を選択してください</string>
+    <string name="btn_save_question">問題を保存</string>
+
+    <string name="err_missing_question">問題を入力してください</string>
+    <string name="err_missing_options">すべての選択肢を入力してください</string>
+    <string name="err_select_correct_opt">正しい選択肢を選んでください</string>
+
 </resources>

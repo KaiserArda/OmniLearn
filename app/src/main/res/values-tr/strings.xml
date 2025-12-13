@@ -70,4 +70,22 @@
     <string name="cat_immunology">İmmünoloji</string>
     <string name="cat_antibiotics">Antibiyotikler</string>
     <string name="cat_clinical_micro">Klinik Mikrobiyoloji</string>
+
+    <string name="title_add_new_question">Yeni Soru Oluştur</string>
+    <string name="label_options">Cevap Seçenekleri</string>
+
+    <string name="label_question_text">Soru</string>
+    <string name="label_option_a">Seçenek A</string>
+    <string name="label_option_b">Seçenek B</string>
+    <string name="label_option_c">Seçenek C</string>
+    <string name="label_option_d">Seçenek D</string>
+    <string name="label_explanation">Açıklama(Opsiyonel)</string>
+    <string name="msg_question_added">Soru başarıyla eklendi</string>
+    <string name="err_empty_fields_or_selection">Lütfen tüm alanları doldurun ve doğru cevabı seçin</string>
+    <string name="btn_save_question">Soruyu Kaydet</string>
+
+    <string name="err_missing_question">Lütfen soruyu girin</string>
+    <string name="err_missing_options">Lütfen tüm seçenekleri doldurun</string>
+    <string name="err_select_correct_opt">Lütfen doğru seçeneği işaretleyin</string>
+
 </resources>

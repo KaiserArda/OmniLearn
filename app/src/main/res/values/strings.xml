@@ -66,4 +66,24 @@
     <string name="add_question_btn">Add Question</string>
     <string name="no_questions">No questions available.</string>
 
+    <string name="title_add_new_question">Create a New Question</string>
+    <string name="label_options">Choices</string>
+
+    <string name="label_question_text">Question Text</string>
+    <string name="label_option_a">Option A</string>
+    <string name="label_option_b">Option B</string>
+    <string name="label_option_c">Option C</string>
+    <string name="label_option_d">Option D</string>
+    <string name="label_explanation">Explanation(Optional)</string>
+    <string name="label_correct_answer">Correct Answer</string>
+    <string name="label_select_category">Select Category</string>
+    <string name="msg_question_added">Question added successfully!</string>
+    <string name="err_empty_fields">Please fill all fields.</string>
+    <string name="err_empty_fields_or_selection">Please fill all fields and select the correct answer.</string>
+    <string name="btn_save_question">Save Question</string>,
+
+    <string name="err_missing_question">Please enter the question text.</string>
+    <string name="err_missing_options">Please fill in all options.</string>
+    <string name="err_select_correct_opt">Please select the correct option.</string>
+
 </resources>
