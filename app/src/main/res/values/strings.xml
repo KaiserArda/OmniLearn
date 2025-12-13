@@ -86,4 +86,11 @@
     <string name="err_missing_options">Please fill in all options.</string>
     <string name="err_select_correct_opt">Please select the correct option.</string>
 
+    <string name="title_question_detail">Question Details</string>
+    <string name="cd_back_button">Go Back</string>
+    <string name="msg_correct">Correct Answer!</string>
+    <string name="msg_wrong">Wrong Answer!</string>
+    <string name="label_explanation_prefix">Explanation:</string>
+
+
 </resources>

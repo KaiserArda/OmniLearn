@@ -88,4 +88,11 @@
     <string name="err_missing_options">すべての選択肢を入力してください</string>
     <string name="err_select_correct_opt">正しい選択肢を選んでください</string>
 
+    <string name="title_question_detail">問題の詳細</string>
+    <string name="cd_back_button">戻る</string>
+    <string name="msg_correct">正解！</string>
+    <string name="msg_wrong">不正解！</string>
+    <string name="label_explanation_prefix">解説：</string>
+
+
 </resources>

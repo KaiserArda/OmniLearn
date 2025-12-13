@@ -88,4 +88,11 @@
     <string name="err_missing_options">Lütfen tüm seçenekleri doldurun</string>
     <string name="err_select_correct_opt">Lütfen doğru seçeneği işaretleyin</string>
 
+    <string name="title_question_detail">Soru Detayı</string>
+    <string name="cd_back_button">Geri Dön</string>
+    <string name="msg_correct">Doğru Cevap!</string>
+    <string name="msg_wrong">Yanlış Cevap!</string>
+    <string name="label_explanation_prefix">Açıklama:</string>
+
+
 </resources>
