@@ -1,48 +1,49 @@
 <resources>
-    <string name="app_name">Omnilearn</string>
-    <string name="welcome_message">ようこそ </string>
-    <string name="category_list_title">診療科 </string>
-    <string name="empty_category_error">カテゴリが見つかりませんでした。</string>
-    <string name="faculty_medicine">医学部 </string>
-    <string name="questions_title">問題 </string>
-    <string name="no_questions">このカテゴリにはまだ質問がありません。</string>
-    <string name="add_question_btn">質問を追加</string>
-    <string name="loading">読み込み中...</string>
-    <string name="error">エラーが発生しました</string>
+    <string name="app_name">OmniLearn</string>
+    <string name="welcome_message">OmniLearnへようこそ！</string>
 
-    <string name="cat_med">医学部</string>
-    <string name="desc_med">一般的な医学に関する質問</string>
+    <string name="category_list_title">カテゴリ一覧</string>
+    <string name="subcategories_title">サブカテゴリ</string>
+    <string name="questions_title">問題</string>
+
+    <string name="empty_category_error">カテゴリが見つかりません。</string>
+    <string name="no_subcategories">サブカテゴリが見つかりません。</string>
+    <string name="no_questions">まだ問題がありません。</string>
+
+    <string name="cat_med">医学</string>
+    <string name="desc_med">総合医学問題</string>
 
     <string name="cat_anatomy">解剖学</string>
-    <string name="desc_anatomy">身体構造の科学</string>
-    <string name="cat_macro_anatomy">マクロ解剖学</string>
+    <string name="desc_anatomy">人体の構造</string>
+    <string name="cat_physiology">生理学</string>
+    <string name="desc_physiology">人体の機能</string>
+
+    <string name="cat_macro_anatomy">肉眼解剖学</string>
     <string name="cat_neuroanatomy">神経解剖学</string>
     <string name="cat_microanatomy">微細解剖学</string>
-    <string name="cat_embryology">胚学（発生学）</string>
+    <string name="cat_embryology">発生学</string>
     <string name="cat_topographic_anatomy">局所解剖学</string>
     <string name="cat_clinical_anatomy">臨床解剖学</string>
 
-    <string name="cat_physiology">生理学</string>
-    <string name="desc_physiology">身体機能の科学</string>
-    <string name="cat_nervous_physiology">神経系の生理学</string>
+    <string name="cat_nervous_physiology">神経生理学</string>
     <string name="cat_muscle_physiology">筋生理学</string>
-    <string name="cat_circulatory_physiology">循環系の生理学</string>
-    <string name="cat_respiratory_physiology">呼吸系の生理学</string>
-    <string name="cat_digestive_physiology">消化系の生理学</string>
-    <string name="cat_excretory_physiology">排泄系の生理学</string>
-    <string name="cat_endocrine_physiology">内分泌系の生理学</string>
+    <string name="cat_circulatory_physiology">循環器生理学</string>
+    <string name="cat_respiratory_physiology">呼吸生理学</string>
+    <string name="cat_digestive_physiology">消化器生理学</string>
+    <string name="cat_excretory_physiology">排泄生理学</string>
+    <string name="cat_endocrine_physiology">内分泌生理学</string>
     <string name="cat_reproductive_physiology">生殖生理学</string>
     <string name="cat_hematology">血液学</string>
-    <string name="cat_sensory_physiology">感覚器の生理学</string>
+    <string name="cat_sensory_physiology">感覚生理学</string>
     <string name="cat_cell_physiology">細胞生理学</string>
 
     <string name="cat_biochemistry">生化学</string>
     <string name="cat_metabolism">代謝</string>
     <string name="cat_enzymes">酵素</string>
-    <string name="cat_vitamins">ビタミンと補酵素</string>
+    <string name="cat_vitamins">ビタミン</string>
     <string name="cat_hormone_bio">ホルモン生化学</string>
-    <string name="cat_genetics">遺伝学と分子生物学</string>
-    <string name="cat_cell_signal">細胞内シグナル伝達経路</string>
+    <string name="cat_genetics">遺伝学</string>
+    <string name="cat_cell_signal">細胞シグナル伝達</string>
     <string name="cat_acid_base">酸塩基平衡</string>
     <string name="cat_clinical_bio">臨床生化学</string>
 
@@ -51,13 +52,13 @@
     <string name="cat_connective">結合組織</string>
     <string name="cat_muscle_tissue">筋組織</string>
     <string name="cat_nervous_tissue">神経組織</string>
-    <string name="cat_blood_tissue">血液・造血組織</string>
-    <string name="cat_cardio_histo">心血管系の組織学</string>
-    <string name="cat_respiratory_histo">呼吸系の組織学</string>
-    <string name="cat_digestive_histo">消化系の組織学</string>
-    <string name="cat_urogenital_histo">泌尿生殖系の組織学</string>
-    <string name="cat_endocrine_histo">内分泌系の組織学</string>
-    <string name="cat_skin_histo">皮膚の組織学</string>
+    <string name="cat_blood_tissue">血液・骨髄</string>
+    <string name="cat_cardio_histo">循環器系組織学</string>
+    <string name="cat_respiratory_histo">呼吸器系組織学</string>
+    <string name="cat_digestive_histo">消化器系組織学</string>
+    <string name="cat_urogenital_histo">泌尿生殖器系組織学</string>
+    <string name="cat_endocrine_histo">内分泌系組織学</string>
+    <string name="cat_skin_histo">外皮系（皮膚）</string>
 
     <string name="cat_microbiology">微生物学</string>
     <string name="cat_bacteriology">細菌学</string>
@@ -65,34 +66,32 @@
     <string name="cat_mycology">真菌学</string>
     <string name="cat_parasitology">寄生虫学</string>
     <string name="cat_immunology">免疫学</string>
-    <string name="cat_antibiotics">抗生物質</string>
+    <string name="cat_antibiotics">抗菌薬・抗生物質</string>
     <string name="cat_clinical_micro">臨床微生物学</string>
 
-    <string name="title_add_new_question">新しい問題を作成</string>
-    <string name="label_options">回答の選択肢</string>
-
-    <string name="label_question_text">問題</string>
+    <string name="title_add_new_question">新しい問題の作成</string>
+    <string name="add_question_btn">問題を追加</string>
+    <string name="btn_save_question">保存</string>
+    <string name="label_select_category">カテゴリ選択</string>
+    <string name="label_question_text">問題文</string>
+    <string name="label_options">選択肢</string>
     <string name="label_option_a">選択肢 A</string>
     <string name="label_option_b">選択肢 B</string>
     <string name="label_option_c">選択肢 C</string>
     <string name="label_option_d">選択肢 D</string>
-    <string name="label_explanation">解説(任意)</string>
     <string name="label_correct_answer">正解</string>
-    <string name="label_select_category">カテゴリーを選択</string>
-    <string name="msg_question_added">問題が正常に追加されました</string>
-    <string name="err_empty_fields">すべての項目を入力してください</string>
-    <string name="err_empty_fields_or_selection">すべての項目を入力し、正解を選択してください</string>
-    <string name="btn_save_question">問題を保存</string>
+    <string name="label_explanation">解説 (任意)</string>
 
-    <string name="err_missing_question">問題を入力してください</string>
-    <string name="err_missing_options">すべての選択肢を入力してください</string>
-    <string name="err_select_correct_opt">正しい選択肢を選んでください</string>
+    <string name="msg_question_added">問題を追加しました！</string>
+    <string name="err_empty_fields">すべての項目を入力してください。</string>
+    <string name="err_empty_fields_or_selection">すべての項目を入力し、正解を選択してください。</string>
+    <string name="err_missing_question">問題文を入力してください。</string>
+    <string name="err_missing_options">すべての選択肢を入力してください。</string>
+    <string name="err_select_correct_opt">正解の選択肢を選んでください。</string>
 
     <string name="title_question_detail">問題の詳細</string>
     <string name="cd_back_button">戻る</string>
-    <string name="msg_correct">正解！</string>
-    <string name="msg_wrong">不正解！</string>
+    <string name="msg_correct">正解です！</string>
+    <string name="msg_wrong">不正解です</string>
     <string name="label_explanation_prefix">解説：</string>
-
-
 </resources>

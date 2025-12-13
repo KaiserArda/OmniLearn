@@ -1,0 +1,97 @@
+<resources>
+    <string name="app_name">OmniLearn</string>
+    <string name="welcome_message">欢迎使用 OmniLearn！</string>
+
+    <string name="category_list_title">分类列表</string>
+    <string name="subcategories_title">子分类</string>
+    <string name="questions_title">试题</string>
+
+    <string name="empty_category_error">未找到分类。</string>
+    <string name="no_subcategories">未找到子分类。</string>
+    <string name="no_questions">暂无试题。</string>
+
+    <string name="cat_med">医学科学</string>
+    <string name="desc_med">综合医学问题</string>
+
+    <string name="cat_anatomy">解剖学</string>
+    <string name="desc_anatomy">人体结构科学</string>
+    <string name="cat_physiology">生理学</string>
+    <string name="desc_physiology">人体功能科学</string>
+
+    <string name="cat_macro_anatomy">大体解剖学</string>
+    <string name="cat_neuroanatomy">神经解剖学</string>
+    <string name="cat_microanatomy">微观解剖学</string>
+    <string name="cat_embryology">胚胎学</string>
+    <string name="cat_topographic_anatomy">局部解剖学</string>
+    <string name="cat_clinical_anatomy">临床解剖学</string>
+
+    <string name="cat_nervous_physiology">神经系统生理学</string>
+    <string name="cat_muscle_physiology">肌肉生理学</string>
+    <string name="cat_circulatory_physiology">心血管生理学</string>
+    <string name="cat_respiratory_physiology">呼吸生理学</string>
+    <string name="cat_digestive_physiology">消化生理学</string>
+    <string name="cat_excretory_physiology">排泄系统生理学</string>
+    <string name="cat_endocrine_physiology">内分泌生理学</string>
+    <string name="cat_reproductive_physiology">生殖生理学</string>
+    <string name="cat_hematology">血液学</string>
+    <string name="cat_sensory_physiology">感觉器官生理学</string>
+    <string name="cat_cell_physiology">细胞生理学</string>
+
+    <string name="cat_biochemistry">生物化学</string>
+    <string name="cat_metabolism">新陈代谢</string>
+    <string name="cat_enzymes">酶学</string>
+    <string name="cat_vitamins">维生素</string>
+    <string name="cat_hormone_bio">激素生物化学</string>
+    <string name="cat_genetics">遗传学</string>
+    <string name="cat_cell_signal">细胞信号转导</string>
+    <string name="cat_acid_base">酸碱平衡</string>
+    <string name="cat_clinical_bio">临床生物化学</string>
+
+    <string name="cat_histology">组织学</string>
+    <string name="cat_epithelial">上皮组织</string>
+    <string name="cat_connective">结缔组织</string>
+    <string name="cat_muscle_tissue">肌肉组织</string>
+    <string name="cat_nervous_tissue">神经组织</string>
+    <string name="cat_blood_tissue">血液与骨髓</string>
+    <string name="cat_cardio_histo">心血管系统组织学</string>
+    <string name="cat_respiratory_histo">呼吸系统组织学</string>
+    <string name="cat_digestive_histo">消化系统组织学</string>
+    <string name="cat_urogenital_histo">泌尿生殖系统组织学</string>
+    <string name="cat_endocrine_histo">内分泌系统组织学</string>
+    <string name="cat_skin_histo">皮肤系统 (被覆系统)</string>
+
+    <string name="cat_microbiology">微生物学</string>
+    <string name="cat_bacteriology">细菌学</string>
+    <string name="cat_virology">病毒学</string>
+    <string name="cat_mycology">真菌学</string>
+    <string name="cat_parasitology">寄生虫学</string>
+    <string name="cat_immunology">免疫学</string>
+    <string name="cat_antibiotics">抗菌药物与抗生素</string>
+    <string name="cat_clinical_micro">临床微生物学</string>
+
+    <string name="title_add_new_question">创建新试题</string>
+    <string name="add_question_btn">添加试题</string>
+    <string name="btn_save_question">保存试题</string>
+    <string name="label_select_category">选择分类</string>
+    <string name="label_question_text">题目内容</string>
+    <string name="label_options">选项</string>
+    <string name="label_option_a">选项 A</string>
+    <string name="label_option_b">选项 B</string>
+    <string name="label_option_c">选项 C</string>
+    <string name="label_option_d">选项 D</string>
+    <string name="label_correct_answer">正确答案</string>
+    <string name="label_explanation">答案解析 (选填)</string>
+
+    <string name="msg_question_added">试题添加成功！</string>
+    <string name="err_empty_fields">所有字段均为必填项。</string>
+    <string name="err_empty_fields_or_selection">请填写所有字段并选择正确答案。</string>
+    <string name="err_missing_question">请输入题目内容。</string>
+    <string name="err_missing_options">请填写所有选项。</string>
+    <string name="err_select_correct_opt">请选择正确的选项。</string>
+
+    <string name="title_question_detail">试题详情</string>
+    <string name="cd_back_button">返回</string>
+    <string name="msg_correct">回答正确！</string>
+    <string name="msg_wrong">回答错误</string>
+    <string name="label_explanation_prefix">解析：</string>
+</resources>

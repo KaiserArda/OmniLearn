@@ -1,34 +1,40 @@
 <resources>
     <string name="app_name">OmniLearn</string>
-    <string name="category_list_title">Category List</string>
+    <string name="welcome_message">Welcome to OmniLearn!</string>
+
+    <string name="category_list_title">Categories</string>
+    <string name="subcategories_title">Subcategories</string>
     <string name="questions_title">Questions</string>
-    <string name="welcome_message">Welcome to Omnilearn!</string>
+
     <string name="empty_category_error">No categories found.</string>
-    <string name="cat_med">Faculty of Medicine</string>
-    <string name="desc_med">General Medicine Questions</string>
-    <string name="subcategories_title">Alt Kategoriler</string>
-    <string name="no_subcategories">Alt kategori bulunamadı</string>
+    <string name="no_subcategories">No subcategories found.</string>
+    <string name="no_questions">No questions available.</string>
+
+    <string name="cat_med">Medical Sciences</string>
+    <string name="desc_med">General Medical Questions</string>
+
     <string name="cat_anatomy">Anatomy</string>
-    <string name="desc_anatomy">Science of Body Structure</string>
-    <string name="cat_macro_anatomy">Macro Anatomy</string>
+    <string name="desc_anatomy">Study of Body Structure</string>
+    <string name="cat_physiology">Physiology</string>
+    <string name="desc_physiology">Study of Body Function</string>
+
+    <string name="cat_macro_anatomy">Gross Anatomy</string>
     <string name="cat_neuroanatomy">Neuroanatomy</string>
     <string name="cat_microanatomy">Microanatomy</string>
     <string name="cat_embryology">Embryology</string>
     <string name="cat_topographic_anatomy">Topographic Anatomy</string>
     <string name="cat_clinical_anatomy">Clinical Anatomy</string>
 
-    <string name="cat_physiology">Physiology</string>
-    <string name="desc_physiology">Science of Function</string>
     <string name="cat_nervous_physiology">Nervous System Physiology</string>
     <string name="cat_muscle_physiology">Muscle Physiology</string>
-    <string name="cat_circulatory_physiology">Circulatory System Physiology</string>
-    <string name="cat_respiratory_physiology">Respiratory System Physiology</string>
-    <string name="cat_digestive_physiology">Digestive System Physiology</string>
+    <string name="cat_circulatory_physiology">Cardiovascular Physiology</string>
+    <string name="cat_respiratory_physiology">Respiratory Physiology</string>
+    <string name="cat_digestive_physiology">Digestive Physiology</string>
     <string name="cat_excretory_physiology">Excretory System Physiology</string>
-    <string name="cat_endocrine_physiology">Endocrine System Physiology</string>
+    <string name="cat_endocrine_physiology">Endocrine Physiology</string>
     <string name="cat_reproductive_physiology">Reproductive Physiology</string>
     <string name="cat_hematology">Hematology</string>
-    <string name="cat_sensory_physiology">Sensory Organs Physiology</string>
+    <string name="cat_sensory_physiology">Sensory Physiology</string>
     <string name="cat_cell_physiology">Cell Physiology</string>
 
     <string name="cat_biochemistry">Biochemistry</string>
@@ -37,7 +43,7 @@
     <string name="cat_vitamins">Vitamins</string>
     <string name="cat_hormone_bio">Hormone Biochemistry</string>
     <string name="cat_genetics">Genetics</string>
-    <string name="cat_cell_signal">Cell Signals</string>
+    <string name="cat_cell_signal">Cell Signaling</string>
     <string name="cat_acid_base">Acid-Base Balance</string>
     <string name="cat_clinical_bio">Clinical Biochemistry</string>
 
@@ -46,13 +52,13 @@
     <string name="cat_connective">Connective Tissue</string>
     <string name="cat_muscle_tissue">Muscle Tissue</string>
     <string name="cat_nervous_tissue">Nervous Tissue</string>
-    <string name="cat_blood_tissue">Blood Tissue</string>
+    <string name="cat_blood_tissue">Blood &amp; Bone Marrow</string>
     <string name="cat_cardio_histo">Cardiovascular Histology</string>
     <string name="cat_respiratory_histo">Respiratory Histology</string>
     <string name="cat_digestive_histo">Digestive Histology</string>
     <string name="cat_urogenital_histo">Urogenital Histology</string>
     <string name="cat_endocrine_histo">Endocrine Histology</string>
-    <string name="cat_skin_histo">Skin Histology</string>
+    <string name="cat_skin_histo">Integumentary System (Skin)</string>
 
     <string name="cat_microbiology">Microbiology</string>
     <string name="cat_bacteriology">Bacteriology</string>
@@ -60,37 +66,32 @@
     <string name="cat_mycology">Mycology</string>
     <string name="cat_parasitology">Parasitology</string>
     <string name="cat_immunology">Immunology</string>
-    <string name="cat_antibiotics">Antibiotics</string>
+    <string name="cat_antibiotics">Antimicrobials &amp; Antibiotics</string>
     <string name="cat_clinical_micro">Clinical Microbiology</string>
 
+    <string name="title_add_new_question">Create New Question</string>
     <string name="add_question_btn">Add Question</string>
-    <string name="no_questions">No questions available.</string>
-
-    <string name="title_add_new_question">Create a New Question</string>
-    <string name="label_options">Choices</string>
-
-    <string name="label_question_text">Question Text</string>
+    <string name="btn_save_question">Save Question</string>
+    <string name="label_select_category">Select Category</string>
+    <string name="label_question_text">Question</string>
+    <string name="label_options">Options</string>
     <string name="label_option_a">Option A</string>
     <string name="label_option_b">Option B</string>
     <string name="label_option_c">Option C</string>
     <string name="label_option_d">Option D</string>
-    <string name="label_explanation">Explanation(Optional)</string>
     <string name="label_correct_answer">Correct Answer</string>
-    <string name="label_select_category">Select Category</string>
-    <string name="msg_question_added">Question added successfully!</string>
-    <string name="err_empty_fields">Please fill all fields.</string>
-    <string name="err_empty_fields_or_selection">Please fill all fields and select the correct answer.</string>
-    <string name="btn_save_question">Save Question</string>,
+    <string name="label_explanation">Explanation (Optional)</string>
 
+    <string name="msg_question_added">Question added successfully!</string>
+    <string name="err_empty_fields">All fields are required.</string>
+    <string name="err_empty_fields_or_selection">Please complete all fields and select the correct answer.</string>
     <string name="err_missing_question">Please enter the question text.</string>
     <string name="err_missing_options">Please fill in all options.</string>
     <string name="err_select_correct_opt">Please select the correct option.</string>
 
     <string name="title_question_detail">Question Details</string>
-    <string name="cd_back_button">Go Back</string>
+    <string name="cd_back_button">Back</string>
     <string name="msg_correct">Correct Answer!</string>
-    <string name="msg_wrong">Wrong Answer!</string>
+    <string name="msg_wrong">Incorrect Answer</string>
     <string name="label_explanation_prefix">Explanation:</string>
-
-
 </resources>

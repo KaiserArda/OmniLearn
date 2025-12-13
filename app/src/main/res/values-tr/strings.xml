@@ -1,23 +1,23 @@
 <resources>
-    <string name="app_name">Omnilearn</string>
-    <string name="welcome_message">Hoşgeldiniz</string>
-    <string name="category_list_title">Bölümler</string>
-    <string name="faculty_medicine">Tıp</string>
-    <string name="empty_category_error">Kategori bulunamadı.</string>
+    <string name="app_name">OmniLearn</string>
+    <string name="welcome_message">OmniLearn\'e Hoş Geldiniz!</string>
 
+    <string name="category_list_title">Kategoriler</string>
+    <string name="subcategories_title">Alt Kategoriler</string>
     <string name="questions_title">Sorular</string>
-    <string name="no_questions">Bu kategoride henüz soru yok.</string>
-    <string name="add_question_btn">Soru Ekle</string>
-    <string name="question_a">A)</string>
-    <string name="question_b">B)</string>
-    <string name="loading">Yükleniyor...</string>
-    <string name="error">Bir hata oluştu</string>
 
-    <string name="cat_med">Tıp Fakültesi</string>
+    <string name="empty_category_error">Kategori bulunamadı.</string>
+    <string name="no_subcategories">Alt kategori bulunamadı.</string>
+    <string name="no_questions">Henüz soru eklenmemiş.</string>
+
+    <string name="cat_med">Tıp Bilimleri</string>
     <string name="desc_med">Genel Tıp Soruları</string>
 
     <string name="cat_anatomy">Anatomi</string>
-    <string name="desc_anatomy">Vücut Yapısının Bilimi</string>
+    <string name="desc_anatomy">Vücut Yapısı Bilimi</string>
+    <string name="cat_physiology">Fizyoloji</string>
+    <string name="desc_physiology">Vücut İşlev Bilimi</string>
+
     <string name="cat_macro_anatomy">Makro Anatomi</string>
     <string name="cat_neuroanatomy">Nöroanatomi</string>
     <string name="cat_microanatomy">Mikroanatomi</string>
@@ -25,8 +25,6 @@
     <string name="cat_topographic_anatomy">Topografik Anatomi</string>
     <string name="cat_clinical_anatomy">Klinik Anatomi</string>
 
-    <string name="cat_physiology">Fizyoloji</string>
-    <string name="desc_physiology">Vücut Fonksiyonlarının Bilimi</string>
     <string name="cat_nervous_physiology">Sinir Sistemi Fizyolojisi</string>
     <string name="cat_muscle_physiology">Kas Fizyolojisi</string>
     <string name="cat_circulatory_physiology">Dolaşım Sistemi Fizyolojisi</string>
@@ -34,65 +32,66 @@
     <string name="cat_digestive_physiology">Sindirim Sistemi Fizyolojisi</string>
     <string name="cat_excretory_physiology">Boşaltım Sistemi Fizyolojisi</string>
     <string name="cat_endocrine_physiology">Endokrin Sistem Fizyolojisi</string>
-    <string name="cat_reproductive_physiology">Üreme Fizyolojisi</string>
-    <string name="cat_hematology">Hematoloji</string>
+    <string name="cat_reproductive_physiology">Üreme Sistemi Fizyolojisi</string>
+    <string name="cat_hematology">Hematoloji (Kan Bilimi)</string>
     <string name="cat_sensory_physiology">Duyu Organları Fizyolojisi</string>
     <string name="cat_cell_physiology">Hücre Fizyolojisi</string>
 
     <string name="cat_biochemistry">Biyokimya</string>
     <string name="cat_metabolism">Metabolizma</string>
     <string name="cat_enzymes">Enzimler</string>
-    <string name="cat_vitamins">Vitaminler ve Koenzimler</string>
+    <string name="cat_vitamins">Vitaminler</string>
     <string name="cat_hormone_bio">Hormon Biyokimyası</string>
-    <string name="cat_genetics">Genetik ve Moleküler Biyoloji</string>
-    <string name="cat_cell_signal">Hücresel Sinyal Yolları</string>
+    <string name="cat_genetics">Genetik</string>
+    <string name="cat_cell_signal">Hücre Sinyalizasyonu</string>
     <string name="cat_acid_base">Asit-Baz Dengesi</string>
     <string name="cat_clinical_bio">Klinik Biyokimya</string>
 
     <string name="cat_histology">Histoloji</string>
     <string name="cat_epithelial">Epitel Doku</string>
-    <string name="cat_connective">Bağ Doku</string>
+    <string name="cat_connective">Bağ ve Destek Doku</string>
     <string name="cat_muscle_tissue">Kas Dokusu</string>
     <string name="cat_nervous_tissue">Sinir Dokusu</string>
-    <string name="cat_blood_tissue">Kan ve Kan Yapıcı Doku</string>
-    <string name="cat_cardio_histo">Kardiyovasküler Histoloji</string>
-    <string name="cat_respiratory_histo">Solunum Histolojisi</string>
-    <string name="cat_digestive_histo">Sindirim Histolojisi</string>
-    <string name="cat_urogenital_histo">Ürogenital Histoloji</string>
-    <string name="cat_endocrine_histo">Endokrin Histoloji</string>
-    <string name="cat_skin_histo">Deri Histolojisi</string>
+    <string name="cat_blood_tissue">Kan ve Kemik İliği</string>
+    <string name="cat_cardio_histo">Kardiyovasküler Sistem Histolojisi</string>
+    <string name="cat_respiratory_histo">Solunum Sistemi Histolojisi</string>
+    <string name="cat_digestive_histo">Sindirim Sistemi Histolojisi</string>
+    <string name="cat_urogenital_histo">Ürogenital Sistem Histolojisi</string>
+    <string name="cat_endocrine_histo">Endokrin Sistem Histolojisi</string>
+    <string name="cat_skin_histo">Deri ve Ekleri (İntegümenter Sistem)</string>
 
     <string name="cat_microbiology">Mikrobiyoloji</string>
     <string name="cat_bacteriology">Bakteriyoloji</string>
     <string name="cat_virology">Viroloji</string>
-    <string name="cat_mycology">Mikoloji (Mantarlar)</string>
+    <string name="cat_mycology">Mikoloji (Mantar Bilimi)</string>
     <string name="cat_parasitology">Parazitoloji</string>
     <string name="cat_immunology">İmmünoloji</string>
-    <string name="cat_antibiotics">Antibiyotikler</string>
+    <string name="cat_antibiotics">Antimikrobiyaller ve Antibiyotikler</string>
     <string name="cat_clinical_micro">Klinik Mikrobiyoloji</string>
 
     <string name="title_add_new_question">Yeni Soru Oluştur</string>
-    <string name="label_options">Cevap Seçenekleri</string>
-
-    <string name="label_question_text">Soru</string>
-    <string name="label_option_a">Seçenek A</string>
-    <string name="label_option_b">Seçenek B</string>
-    <string name="label_option_c">Seçenek C</string>
-    <string name="label_option_d">Seçenek D</string>
-    <string name="label_explanation">Açıklama(Opsiyonel)</string>
-    <string name="msg_question_added">Soru başarıyla eklendi</string>
-    <string name="err_empty_fields_or_selection">Lütfen tüm alanları doldurun ve doğru cevabı seçin</string>
+    <string name="add_question_btn">Soru Ekle</string>
     <string name="btn_save_question">Soruyu Kaydet</string>
+    <string name="label_select_category">Kategori Seçimi</string>
+    <string name="label_question_text">Soru Metni</string>
+    <string name="label_options">Seçenekler</string>
+    <string name="label_option_a">A Seçeneği</string>
+    <string name="label_option_b">B Seçeneği</string>
+    <string name="label_option_c">C Seçeneği</string>
+    <string name="label_option_d">D Seçeneği</string>
+    <string name="label_correct_answer">Doğru Cevap</string>
+    <string name="label_explanation">Açıklama (İsteğe Bağlı)</string>
 
-    <string name="err_missing_question">Lütfen soruyu girin</string>
-    <string name="err_missing_options">Lütfen tüm seçenekleri doldurun</string>
-    <string name="err_select_correct_opt">Lütfen doğru seçeneği işaretleyin</string>
+    <string name="msg_question_added">Soru başarıyla eklendi!</string>
+    <string name="err_empty_fields">Tüm alanların doldurulması zorunludur.</string>
+    <string name="err_empty_fields_or_selection">Lütfen tüm alanları doldurun ve doğru cevabı seçin.</string>
+    <string name="err_missing_question">Lütfen soru metnini giriniz.</string>
+    <string name="err_missing_options">Lütfen tüm seçenekleri doldurunuz.</string>
+    <string name="err_select_correct_opt">Lütfen doğru seçeneği işaretleyiniz.</string>
 
-    <string name="title_question_detail">Soru Detayı</string>
+    <string name="title_question_detail">Soru Detayları</string>
     <string name="cd_back_button">Geri Dön</string>
     <string name="msg_correct">Doğru Cevap!</string>
-    <string name="msg_wrong">Yanlış Cevap!</string>
+    <string name="msg_wrong">Yanlış Cevap</string>
     <string name="label_explanation_prefix">Açıklama:</string>
-
-
 </resources>
