@@ -60,6 +60,8 @@ app/
 
  │      │      │      │      │      ├─ CategoryDao.kt
 
+ │      │      │      │      │      ├─ StatsDao.kt
+
  │      │      │      │      │      └─ QuestionDao.kt
 
  │      │      │      │      │
@@ -73,6 +75,8 @@ app/
  │      │      │      │      ├─ entity/
 
  │      │      │      │      │      ├─ CategoryEntity.kt
+
+ │      │      │      │      │      ├─ DailyStatsEntity.kt
 
  │      │      │      │      │      └─ QuestionEntity.kt
 
@@ -101,6 +105,8 @@ app/
  │      │      │      │      ├─ QuestionDetailScreen.kt
 
  │      │      │      │      ├─ QuestionListScreen.kt
+
+ │      │      │      │      ├─ StatisticsScreen.kt
 
  │      │      │      │      └─ WelcomeScreen.kt
 
@@ -218,11 +224,23 @@ app/
 
  │      │      │      │      │      ├─ CategoryDao.kt
 
+ │      │      │      │      │      ├─ StatsDao.kt
+
  │      │      │      │      │      └─ QuestionDao.kt
+
+ │      │      │      │      │
+
+ │      │      │      │      ├─ datastore/
+
+ │      │      │      │      │      └─ SettingsDataStore.kt
+
+ │      │      │      │      │     
 
  │      │      │      │      ├─ entity/
 
  │      │      │      │      │      ├─ CategoryEntity.kt
+
+ │      │      │      │      │      ├─ DailyStatsEntity.kt
 
  │      │      │      │      │      └─ QuestionEntity.kt
 
@@ -252,6 +270,8 @@ app/
 
  │      │      │      │      ├─ QuestionListScreen.kt
 
+ │      │      │      │      ├─ StatisticsScreen.kt
+
  │      │      │      │      └─ WelcomeScreen.kt
 
  │      │      │      ├─ theme/
@@ -272,9 +292,9 @@ app/
 
  │      │             ├─ CategoryViewModel.kt
 
- │      │             ├─ QuestionDetailViewModel.kt
-
  │      │             ├─ QuestionListViewModel.kt
+
+ │      │             ├─ SettingsViewModel.kt
 
  │      │             └─ ViewModelFactories.kt
 
