@@ -111,4 +111,18 @@
     <string name="btn_next_question">Next Question</string>
     <string name="btn_finish_quiz">Finish</string>
 
+    <string name="dialog_add_title">What to add?</string>
+    <string name="dialog_add_desc">Would you like to add a new sub-folder or a question?</string>
+    <string name="btn_add_question">Add Question</string>
+    <string name="btn_add_folder">Add Folder</string>
+    <string name="dialog_new_main_cat">New Main Category</string>
+    <string name="dialog_new_sub_cat">New Sub-Category</string>
+    <string name="hint_category_name">Category Name</string>
+    <string name="btn_create">Create</string>
+    <string name="btn_cancel">Cancel</string>
+
+    <string name="dialog_delete_title">Delete Category?</string>
+    <string name="dialog_delete_msg">The category \'%1$s\' and everything inside it will be permanently deleted. Are you sure?</string>
+    <string name="btn_delete">Delete</string>
+    <string name="suffix_user_created"> (User Created)</string>
 </resources>

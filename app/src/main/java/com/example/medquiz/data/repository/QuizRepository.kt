@@ -43,6 +43,10 @@ class QuizRepository(
         return questionDao.getCountByCategory(categoryId, lang)
     }
 
+
+    suspend fun deleteCategory(category: CategoryEntity) {
+        categoryDao.deleteCategory(category)
+    }
     suspend fun getTodayStats(): DailyStatsEntity? {
         val today = LocalDate.now().toString()
         return statsDao.getStatsByDate(today)

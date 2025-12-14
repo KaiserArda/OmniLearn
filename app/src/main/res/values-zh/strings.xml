@@ -111,4 +111,19 @@
     <string name="btn_next_question">下一题</string>
     <string name="btn_finish_quiz">完成</string>
 
+    <string name="dialog_add_title">要添加什么？</string>
+    <string name="dialog_add_desc">您想添加新的子文件夹还是试题？</string>
+    <string name="btn_add_question">添加试题</string>
+    <string name="btn_add_folder">添加文件夹</string>
+    <string name="dialog_new_main_cat">新建主分类</string>
+    <string name="dialog_new_sub_cat">新建子分类</string>
+    <string name="hint_category_name">分类名称</string>
+    <string name="btn_create">创建</string>
+    <string name="btn_cancel">取消</string>
+
+    <string name="dialog_delete_title">删除分类吗？</string>
+    <string name="dialog_delete_msg">分类「%1$s」及其所有内容将被永久删除。确定要继续吗？</string>
+    <string name="btn_delete">删除</string>
+    <string name="suffix_user_created">（用户创建）</string>
+
 </resources>

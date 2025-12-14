@@ -1,20 +1,26 @@
 package com.example.medquiz.ui.Screens
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material.icons.filled.LocalFireDepartment // İkon
-import androidx.compose.material.icons.filled.RocketLaunch // İkon
-import androidx.compose.material.icons.filled.Warning // İkon
+import androidx.compose.material.icons.filled.CreateNewFolder
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.HelpOutline
+import androidx.compose.material.icons.filled.LocalFireDepartment
+import androidx.compose.material.icons.filled.QuestionMark
+import androidx.compose.material.icons.filled.RocketLaunch
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.icons.outlined.DarkMode
 import androidx.compose.material.icons.outlined.LightMode
 import androidx.compose.material3.*
@@ -49,23 +55,20 @@ import kotlinx.coroutines.launch
 @Composable
 fun CategoryListScreen(
     onNavigateToQuestions: (Long) -> Unit,
-    onNavigateToStats: () -> Unit, // <-- EKLENDİ: İstatistik sayfasına gitmek için
-    onAddQuestion: () -> Unit
+    onNavigateToStats: () -> Unit,
+    onAddQuestion: (Long) -> Unit
 ) {
     val context = LocalContext.current
     val viewModelStoreOwner = LocalViewModelStoreOwner.current!!
-    val scope = rememberCoroutineScope()
 
+    // ViewModel Setup
     val viewModel: CategoryViewModel = remember {
         val database = AppDatabase.getDatabase(context, kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO))
-
-        // --- GÜNCELLENDİ: Repository artık 3 parametre alıyor ---
         val repository = QuizRepository(
             database.categoryDao(),
             database.questionDao(),
-            database.statsDao() // StatsDao eklendi
+            database.statsDao()
         )
-
         val factory = CategoryViewModelFactory(repository)
         ViewModelProvider(viewModelStoreOwner, factory)[CategoryViewModel::class.java]
     }
@@ -76,13 +79,16 @@ fun CategoryListScreen(
     val currentParentId by viewModel.currentParentId.collectAsState()
     val currentCategory by viewModel.currentCategory.collectAsState()
     val currentLang by settingsViewModel.currentLanguage.collectAsState(initial = "tr")
-
-    // --- İstatistik Verisi ---
     val todayStats by viewModel.todayStats.collectAsState()
 
-    var lastClickTime by remember { mutableStateOf(0L) }
+    // --- DIALOG STATES ---
+    var showTypeSelectionDialog by remember { mutableStateOf(false) }
+    var showNameInputDialog by remember { mutableStateOf(false) }
+    var showDeleteDialog by remember { mutableStateOf(false) } // Silme Diyaloğu
 
-    // Her sayfa açıldığında istatistikleri yenile
+    var newCategoryName by remember { mutableStateOf("") }
+    var categoryToDelete by remember { mutableStateOf<CategoryEntity?>(null) } // Silinecek kategori
+
     LaunchedEffect(Unit) {
         viewModel.refreshStats()
     }
@@ -96,14 +102,16 @@ fun CategoryListScreen(
             TopAppBar(
                 title = {
                     if (currentParentId != null && currentCategory != null) {
-
-                        Text(
-                            text = getLocalizedText(currentCategory!!.name, currentLang),
-                            fontWeight = FontWeight.Bold
-                        )
+                        // Kategori Başlığı
+                        val titleText = if (currentCategory!!.isUserCreated) {
+                            // Dinamik Suffix kullanımı
+                            "${currentCategory!!.name}${stringResource(R.string.suffix_user_created)}"
+                        } else {
+                            getLocalizedText(currentCategory!!.name, currentLang)
+                        }
+                        Text(text = titleText, fontWeight = FontWeight.Bold)
                     } else {
-
-                        StatsStatusBadge(stats = todayStats,currentLang = currentLang, onClick = onNavigateToStats)
+                        StatsStatusBadge(stats = todayStats, currentLang = currentLang, onClick = onNavigateToStats)
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -120,72 +128,178 @@ fun CategoryListScreen(
                 },
                 actions = {
                     IconButton(onClick = { settingsViewModel.toggleTheme() }) {
-                        if (isDark) Icon(Icons.Outlined.DarkMode, "Dark") else Icon(Icons.Outlined.LightMode, "Light")
+                        Icon(if (isDark) Icons.Outlined.DarkMode else Icons.Outlined.LightMode, "Theme")
                     }
-
                     LanguageSelectorDropdown(
                         currentLanguageCode = currentLang,
-                        onLanguageSelected = { newCode ->
-                            settingsViewModel.changeLanguage(newCode)
-                        }
+                        onLanguageSelected = { settingsViewModel.changeLanguage(it) }
                     )
                 }
             )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {
+                    if (currentParentId == null) {
+                        showNameInputDialog = true
+                    } else {
+                        showTypeSelectionDialog = true
+                    }
+                },
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = Color.White
+            ) {
+                Icon(Icons.Default.Add, contentDescription = "Ekle")
+            }
         }
     ) { padding ->
-        Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background).padding(padding).padding(16.dp)) {
-            if (categories.isEmpty()) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text(
-                        text = if (currentParentId == null) {
-                            getLocalizedResource(R.string.empty_category_error, currentLang)
-                        } else {
-                            getLocalizedResource(R.string.no_subcategories, currentLang)
-                        },
-                        color = Color.Gray
-                    )
-                }
-            } else {
-                LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    items(items = categories, key = { it.id }) { category ->
-                        CategoryItem(
-                            category = category,
-                            currentLang = currentLang,
-                            onClick = {
-                                val currentTime = System.currentTimeMillis()
-                                if (currentTime - lastClickTime > 500) {
-                                    lastClickTime = currentTime
-
-                                    scope.launch {
-                                        val hasSubs = viewModel.checkHasSubCategories(category.id)
-
-                                        if (hasSubs) {
-                                            viewModel.loadSubCategories(category.id)
-                                        } else {
-                                            onNavigateToQuestions(category.id)
-                                        }
-                                    }
-                                }
-                            }
+        Box(modifier = Modifier.fillMaxSize().padding(padding)) {
+            Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background).padding(16.dp)) {
+                if (categories.isEmpty()) {
+                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        Text(
+                            text = if (currentParentId == null) getLocalizedResource(R.string.empty_category_error, currentLang)
+                            else getLocalizedResource(R.string.no_subcategories, currentLang),
+                            color = Color.Gray
                         )
                     }
+                } else {
+                    LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        items(items = categories, key = { it.id }) { category ->
+                            CategoryItem(
+                                category = category,
+                                currentLang = currentLang,
+                                onClick = {
+                                    // Güncellenmiş Tıklama Mantığı
+                                    viewModel.handleCategoryClick(category, onNavigateToQuestions)
+                                },
+                                onLongClick = {
+                                    // Sadece kullanıcı kategorileri silinebilir
+                                    if (category.isUserCreated) {
+                                        categoryToDelete = category
+                                        showDeleteDialog = true
+                                    }
+                                }
+                            )
+                        }
+                    }
                 }
+            }
+
+            // --- DIALOGS ---
+
+            // 1. ADD TYPE DIALOG
+            if (showTypeSelectionDialog) {
+                AlertDialog(
+                    onDismissRequest = { showTypeSelectionDialog = false },
+                    icon = { Icon(Icons.Default.HelpOutline, null) },
+                    title = { Text(stringResource(R.string.dialog_add_title)) },
+                    text = { Text(stringResource(R.string.dialog_add_desc)) },
+                    confirmButton = {
+                        TextButton(onClick = {
+                            showTypeSelectionDialog = false
+                            if (currentParentId != null) onAddQuestion(currentParentId!!)
+                        }) {
+                            Text(stringResource(R.string.btn_add_question))
+                        }
+                    },
+                    dismissButton = {
+                        TextButton(onClick = {
+                            showTypeSelectionDialog = false
+                            showNameInputDialog = true
+                        }) {
+                            Text(stringResource(R.string.btn_add_folder))
+                        }
+                    }
+                )
+            }
+
+            // 2. NAME INPUT DIALOG
+            if (showNameInputDialog) {
+                AlertDialog(
+                    onDismissRequest = { showNameInputDialog = false },
+                    title = { Text(stringResource(if (currentParentId == null) R.string.dialog_new_main_cat else R.string.dialog_new_sub_cat)) },
+                    text = {
+                        OutlinedTextField(
+                            value = newCategoryName,
+                            onValueChange = { newCategoryName = it },
+                            label = { Text(stringResource(R.string.hint_category_name)) },
+                            singleLine = true
+                        )
+                    },
+                    confirmButton = {
+                        Button(onClick = {
+                            if (newCategoryName.isNotBlank()) {
+                                viewModel.addUserCategory(newCategoryName, currentParentId)
+                                newCategoryName = ""
+                                showNameInputDialog = false
+                            }
+                        }) {
+                            Text(stringResource(R.string.btn_create))
+                        }
+                    },
+                    dismissButton = {
+                        TextButton(onClick = { showNameInputDialog = false }) {
+                            Text(stringResource(R.string.btn_cancel))
+                        }
+                    }
+                )
+            }
+
+            // 3. DELETE CONFIRMATION DIALOG (GÜNCELLENDİ: Strings Uyumlu)
+            if (showDeleteDialog && categoryToDelete != null) {
+                AlertDialog(
+                    onDismissRequest = { showDeleteDialog = false },
+                    icon = { Icon(Icons.Default.Delete, contentDescription = null, tint = Color.Red) },
+                    title = { Text(stringResource(R.string.dialog_delete_title)) }, // "Silinsin mi?"
+                    text = {
+                        // String içinde parametre kullanımı (%1$s yerine isim gelecek)
+                        Text(stringResource(R.string.dialog_delete_msg, categoryToDelete?.name ?: ""))
+                    },
+                    confirmButton = {
+                        Button(
+                            onClick = {
+                                categoryToDelete?.let { viewModel.deleteCategory(it) }
+                                showDeleteDialog = false
+                                categoryToDelete = null
+                            },
+                            colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
+                        ) {
+                            Text(stringResource(R.string.btn_delete), color = Color.White) // "Sil"
+                        }
+                    },
+                    dismissButton = {
+                        TextButton(onClick = { showDeleteDialog = false }) {
+                            Text(stringResource(R.string.btn_cancel)) // "İptal"
+                        }
+                    }
+                )
             }
         }
     }
 }
 
-// --- Helper Composables ---
+// --- HELPER COMPOSABLES ---
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun CategoryItem(category: CategoryEntity, currentLang: String, onClick: () -> Unit) {
+fun CategoryItem(
+    category: CategoryEntity,
+    currentLang: String,
+    onClick: () -> Unit,
+    onLongClick: () -> Unit
+) {
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         modifier = Modifier
             .fillMaxWidth()
             .height(80.dp)
-            .clickable { onClick() }
+            .clip(RoundedCornerShape(12.dp))
+            .combinedClickable(
+                onClick = onClick,
+                onLongClick = onLongClick
+            )
     ) {
         Row(
             modifier = Modifier.fillMaxSize().padding(16.dp),
@@ -193,18 +307,37 @@ fun CategoryItem(category: CategoryEntity, currentLang: String, onClick: () -> U
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.CenterStart) {
-                Text(
-                    text = getLocalizedText(category.name, currentLang),
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
+
+                // İSİM AYARLAMASI (GÜNCELLENDİ: Strings Uyumlu Suffix)
+                val displayName = if (category.isUserCreated) {
+                    "${category.name}${stringResource(R.string.suffix_user_created)}"
+                } else {
+                    getLocalizedText(category.name, currentLang)
+                }
+
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    if (category.isUserCreated) {
+                        Icon(
+                            Icons.Default.CreateNewFolder,
+                            contentDescription = null,
+                            modifier = Modifier.size(20.dp),
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                    }
+
+                    Text(
+                        text = displayName,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
             }
             Icon(Icons.Default.ArrowForward, null, tint = MaterialTheme.colorScheme.primary)
         }
     }
 }
-
 
 @Composable
 fun StatsStatusBadge(

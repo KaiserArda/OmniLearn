@@ -26,4 +26,8 @@ interface CategoryDao {
     suspend fun deleteAllCategories()
 
 
+    @androidx.room.Delete
+    suspend fun deleteCategory(category: CategoryEntity)
+
+
 }

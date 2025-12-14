@@ -9,5 +9,7 @@ data class CategoryEntity(
     val id: Long = 0,
     val name: String,
     val description: String? = null,
-    val parentId: Long? = null
+    val parentId: Long? = null,
+
+    val isUserCreated: Boolean = false
 )

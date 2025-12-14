@@ -111,4 +111,18 @@
     <string name="btn_next_question">次の問題</string>
     <string name="btn_finish_quiz">終了</string>
 
+    <string name="dialog_add_title">何を追加しますか？</string>
+    <string name="dialog_add_desc">新しいサブフォルダーと問題、どちらを追加しますか？</string>
+    <string name="btn_add_question">問題を追加</string>
+    <string name="btn_add_folder">フォルダーを追加</string>
+    <string name="dialog_new_main_cat">新しいメインカテゴリ</string>
+    <string name="dialog_new_sub_cat">新しいサブカテゴリ</string>
+    <string name="hint_category_name">カテゴリ名</string>
+    <string name="btn_create">作成</string>
+    <string name="btn_cancel">キャンセル</string>
+
+    <string name="dialog_delete_title">カテゴリを削除しますか？</string>
+    <string name="dialog_delete_msg">カテゴリ「%1$s」とその中身すべてが完全に削除されます。本当によろしいですか？</string>
+    <string name="btn_delete">削除</string>
+    <string name="suffix_user_created">（ユーザー作成）</string>
 </resources>

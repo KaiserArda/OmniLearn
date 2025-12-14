@@ -110,4 +110,19 @@
 
     <string name="btn_next_question">Nächste Frage</string>
     <string name="btn_finish_quiz">Beenden</string>
+
+    <string name="dialog_add_title">Was möchtest du hinzufügen?</string>
+    <string name="dialog_add_desc">Möchtest du einen neuen Unterordner oder eine Frage hinzufügen?</string>
+    <string name="btn_add_question">Frage hinzufügen</string>
+    <string name="btn_add_folder">Ordner hinzufügen</string>
+    <string name="dialog_new_main_cat">Neue Hauptkategorie</string>
+    <string name="dialog_new_sub_cat">Neue Unterkategorie</string>
+    <string name="hint_category_name">Kategoriename</string>
+    <string name="btn_create">Erstellen</string>
+    <string name="btn_cancel">Abbrechen</string>
+
+    <string name="dialog_delete_title">Kategorie löschen?</string>
+    <string name="dialog_delete_msg">Die Kategorie „%1$s“ und ihr gesamter Inhalt werden unwiderruflich gelöscht. Sind Sie sicher?</string>
+    <string name="btn_delete">Löschen</string>
+    <string name="suffix_user_created"> (Benutzererstellt)</string>
 </resources>

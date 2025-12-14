@@ -3,7 +3,7 @@ package com.example.medquiz.vm
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.medquiz.data.local.entity.CategoryEntity
-import com.example.medquiz.data.local.entity.DailyStatsEntity // <-- EKLENDİ
+import com.example.medquiz.data.local.entity.DailyStatsEntity
 import com.example.medquiz.data.repository.QuizRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -29,7 +29,7 @@ class CategoryViewModel(private val repository: QuizRepository) : ViewModel() {
 
     init {
         loadMainCategories()
-        refreshStats() // Uygulama açılınca istatistikleri çek
+        refreshStats()
     }
 
     fun refreshStats() {
@@ -77,5 +77,48 @@ class CategoryViewModel(private val repository: QuizRepository) : ViewModel() {
 
     suspend fun checkHasSubCategories(categoryId: Long): Boolean {
         return repository.getSubCategories(categoryId).firstOrNull()?.isNotEmpty() ?: false
+    }
+
+
+    fun addUserCategory(name: String, parentId: Long?) {
+        viewModelScope.launch {
+            val newCategory = CategoryEntity(
+                name = name,
+                description = "User Created",
+                parentId = parentId,
+                isUserCreated = true
+            )
+
+            repository.insertCategory(newCategory)
+        }
+    }
+    fun deleteCategory(category: CategoryEntity) {
+        viewModelScope.launch {
+            repository.deleteCategory(category)
+
+            if (_currentParentId.value == null) {
+                loadMainCategories()
+            } else {
+                loadSubCategories(_currentParentId.value!!)
+            }
+        }
+    }
+
+
+    fun handleCategoryClick(
+        category: CategoryEntity,
+        onNavigateToQuestions: (Long) -> Unit
+    ) {
+        viewModelScope.launch {
+            val hasSubs = checkHasSubCategories(category.id)
+
+
+            if (hasSubs || category.isUserCreated) {
+                loadSubCategories(category.id)
+            } else {
+
+                onNavigateToQuestions(category.id)
+            }
+        }
     }
 }
