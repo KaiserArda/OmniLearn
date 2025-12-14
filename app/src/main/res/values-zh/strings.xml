@@ -18,10 +18,10 @@
     <string name="cat_physiology">生理学</string>
     <string name="desc_physiology">人体功能科学</string>
 
-    <string name="cat_macro_anatomy">大体解剖学</string>
+    <string name="cat_skeletal_anatomy">骨解剖学</string>
+    <string name="cat_muscular_anatomy">肌肉解剖学</string>
     <string name="cat_neuroanatomy">神经解剖学</string>
     <string name="cat_microanatomy">微观解剖学</string>
-    <string name="cat_embryology">胚胎学</string>
     <string name="cat_topographic_anatomy">局部解剖学</string>
     <string name="cat_clinical_anatomy">临床解剖学</string>
 

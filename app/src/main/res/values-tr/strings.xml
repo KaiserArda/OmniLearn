@@ -18,10 +18,10 @@
     <string name="cat_physiology">Fizyoloji</string>
     <string name="desc_physiology">Vücut İşlev Bilimi</string>
 
-    <string name="cat_macro_anatomy">Makro Anatomi</string>
+    <string name="cat_skeletal_anatomy">İskelet Anatomisi</string>
+    <string name="cat_muscular_anatomy">Kas Anatomisi</string>
     <string name="cat_neuroanatomy">Nöroanatomi</string>
     <string name="cat_microanatomy">Mikroanatomi</string>
-    <string name="cat_embryology">Embriyoloji</string>
     <string name="cat_topographic_anatomy">Topografik Anatomi</string>
     <string name="cat_clinical_anatomy">Klinik Anatomi</string>
 

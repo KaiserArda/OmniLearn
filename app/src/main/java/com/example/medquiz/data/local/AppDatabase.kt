@@ -73,12 +73,11 @@ suspend fun populateDatabase(categoryDao: CategoryDao, questionDao: QuestionDao)
     //============================
     val anatomyId = categoryDao.insert(CategoryEntity(name = "cat_anatomy", description = "desc_anatomy", parentId = medId))
 
-    val macroAnatomyId = categoryDao.insert(CategoryEntity(name = "cat_macro_anatomy", parentId = anatomyId))
+    val skeletalAnatomyId = categoryDao.insert(CategoryEntity(name = "cat_skeletal_anatomy", parentId = anatomyId))
     val neuroanatomyId = categoryDao.insert(CategoryEntity(name = "cat_neuroanatomy", parentId = anatomyId))
     val microanatomyId = categoryDao.insert(CategoryEntity(name = "cat_microanatomy", parentId = anatomyId))
-    val embryologyId = categoryDao.insert(CategoryEntity(name = "cat_embryology", parentId = anatomyId))
+    val muscularAnatomyId = categoryDao.insert(CategoryEntity(name = "cat_muscular_anatomy", parentId = anatomyId))
     val topographicAnatomyId = categoryDao.insert(CategoryEntity(name = "cat_topographic_anatomy", parentId = anatomyId))
-    val clinicalAnatomyId = categoryDao.insert(CategoryEntity(name = "cat_clinical_anatomy", parentId = anatomyId))
 
 
     //============================

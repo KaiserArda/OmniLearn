@@ -18,10 +18,10 @@
     <string name="cat_physiology">生理学</string>
     <string name="desc_physiology">人体の機能</string>
 
-    <string name="cat_macro_anatomy">肉眼解剖学</string>
+    <string name="cat_skeletal_anatomy">骨解剖学</string>
+    <string name="cat_muscular_anatomy">筋肉解剖学</string>
     <string name="cat_neuroanatomy">神経解剖学</string>
     <string name="cat_microanatomy">微細解剖学</string>
-    <string name="cat_embryology">発生学</string>
     <string name="cat_topographic_anatomy">局所解剖学</string>
     <string name="cat_clinical_anatomy">臨床解剖学</string>
 

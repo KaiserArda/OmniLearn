@@ -18,10 +18,10 @@
     <string name="cat_physiology">Physiology</string>
     <string name="desc_physiology">Study of Body Function</string>
 
-    <string name="cat_macro_anatomy">Gross Anatomy</string>
+    <string name="cat_skeletal_anatomy">Skeletal Anatomy</string>
+    <string name="cat_muscular_anatomy">Muscular Anatomy</string>
     <string name="cat_neuroanatomy">Neuroanatomy</string>
     <string name="cat_microanatomy">Microanatomy</string>
-    <string name="cat_embryology">Embryology</string>
     <string name="cat_topographic_anatomy">Topographic Anatomy</string>
     <string name="cat_clinical_anatomy">Clinical Anatomy</string>
 
