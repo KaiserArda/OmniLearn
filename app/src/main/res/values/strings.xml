@@ -98,7 +98,7 @@
     <string name="stat_start">Start</string>
     <string name="stat_warming">Warming Up</string>
     <string name="stat_great">Great!</string>
-    <string name="daily_report">Daily Report</string>
+    <string name="daily_report">Daily Stats</string>
     <string name="date_label">Date</string>
     <string name="stat_solved">Questions Solved</string>
     <string name="stat_correct">Correct</string>

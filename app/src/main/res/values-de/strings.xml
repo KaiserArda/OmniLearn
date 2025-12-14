@@ -1,0 +1,113 @@
+<resources>
+    <string name="app_name">OmniLearn</string>
+    <string name="welcome_message">Willkommen bei OmniLearn!</string>
+
+    <string name="category_list_title">Kategorien</string>
+    <string name="subcategories_title">Unterkategorien</string>
+    <string name="questions_title">Fragen</string>
+
+    <string name="empty_category_error">Keine Kategorien gefunden.</string>
+    <string name="no_subcategories">Keine Unterkategorien gefunden.</string>
+    <string name="no_questions">Keine Fragen verfügbar.</string>
+
+    <string name="cat_med">Medizinische Wissenschaften</string>
+    <string name="desc_med">Allgemeine medizinische Fragen</string>
+
+    <string name="cat_anatomy">Anatomie</string>
+    <string name="desc_anatomy">Lehre vom Aufbau des Körpers</string>
+    <string name="cat_physiology">Physiologie</string>
+    <string name="desc_physiology">Lehre von den Körperfunktionen</string>
+
+    <string name="cat_skeletal_anatomy">Skelettanatomie</string>
+    <string name="cat_muscular_anatomy">Muskuläre Anatomie</string>
+    <string name="cat_neuroanatomy">Neuroanatomie</string>
+    <string name="cat_microanatomy">Mikroanatomie</string>
+    <string name="cat_topographic_anatomy">Topographische Anatomie</string>
+    <string name="cat_clinical_anatomy">Klinische Anatomie</string>
+
+    <string name="cat_nervous_physiology">Physiologie des Nervensystems</string>
+    <string name="cat_muscle_physiology">Muskelphysiologie</string>
+    <string name="cat_circulatory_physiology">Kardiovaskuläre Physiologie</string>
+    <string name="cat_respiratory_physiology">Respiratorische Physiologie</string>
+    <string name="cat_digestive_physiology">Verdauungsphysiologie</string>
+    <string name="cat_excretory_physiology">Physiologie des Ausscheidungssystems</string>
+    <string name="cat_endocrine_physiology">Endokrine Physiologie</string>
+    <string name="cat_reproductive_physiology">Reproduktionsphysiologie</string>
+    <string name="cat_hematology">Hämatologie</string>
+    <string name="cat_sensory_physiology">Sensorische Physiologie</string>
+    <string name="cat_cell_physiology">Zellphysiologie</string>
+
+    <string name="cat_biochemistry">Biochemie</string>
+    <string name="cat_metabolism">Stoffwechsel</string>
+    <string name="cat_enzymes">Enzyme</string>
+    <string name="cat_vitamins">Vitamine</string>
+    <string name="cat_hormone_bio">Hormonbiochemie</string>
+    <string name="cat_genetics">Genetik</string>
+    <string name="cat_cell_signal">Zelluläre Signalübertragung</string>
+    <string name="cat_acid_base">Säure-Basen-Haushalt</string>
+    <string name="cat_clinical_bio">Klinische Biochemie</string>
+
+    <string name="cat_histology">Histologie</string>
+    <string name="cat_epithelial">Epithelgewebe</string>
+    <string name="cat_connective">Bindegewebe</string>
+    <string name="cat_muscle_tissue">Muskelgewebe</string>
+    <string name="cat_nervous_tissue">Nervengewebe</string>
+    <string name="cat_blood_tissue">Blut &amp; Knochenmark</string>
+    <string name="cat_cardio_histo">Kardiovaskuläre Histologie</string>
+    <string name="cat_respiratory_histo">Respiratorische Histologie</string>
+    <string name="cat_digestive_histo">Verdauungshistologie</string>
+    <string name="cat_urogenital_histo">Urogenitale Histologie</string>
+    <string name="cat_endocrine_histo">Endokrine Histologie</string>
+    <string name="cat_skin_histo">Integumentsystem (Haut)</string>
+
+    <string name="cat_microbiology">Mikrobiologie</string>
+    <string name="cat_bacteriology">Bakteriologie</string>
+    <string name="cat_virology">Virologie</string>
+    <string name="cat_mycology">Mykologie</string>
+    <string name="cat_parasitology">Parasitologie</string>
+    <string name="cat_immunology">Immunologie</string>
+    <string name="cat_antibiotics">Antimikrobielle Mittel &amp; Antibiotika</string>
+    <string name="cat_clinical_micro">Klinische Mikrobiologie</string>
+
+    <string name="title_add_new_question">Neue Frage erstellen</string>
+    <string name="add_question_btn">Frage hinzufügen</string>
+    <string name="btn_save_question">Frage speichern</string>
+    <string name="label_select_category">Kategorie auswählen</string>
+    <string name="label_question_text">Frage</string>
+    <string name="label_options">Antwortmöglichkeiten</string>
+    <string name="label_option_a">Option A</string>
+    <string name="label_option_b">Option B</string>
+    <string name="label_option_c">Option C</string>
+    <string name="label_option_d">Option D</string>
+    <string name="label_correct_answer">Richtige Antwort</string>
+    <string name="label_explanation">Erklärung (Optional)</string>
+
+    <string name="msg_question_added">Frage erfolgreich hinzugefügt!</string>
+    <string name="err_empty_fields">Alle Felder sind erforderlich.</string>
+    <string name="err_empty_fields_or_selection">Bitte alle Felder ausfüllen und die richtige Antwort auswählen.</string>
+    <string name="err_missing_question">Bitte geben Sie die Frage ein.</string>
+    <string name="err_missing_options">Bitte alle Antwortmöglichkeiten ausfüllen.</string>
+    <string name="err_select_correct_opt">Bitte die richtige Option auswählen.</string>
+
+    <string name="title_question_detail">Fragedetails</string>
+    <string name="cd_back_button">Zurück</string>
+    <string name="msg_correct">Richtige Antwort!</string>
+    <string name="msg_wrong">Falsche Antwort</string>
+    <string name="label_explanation_prefix">Erklärung:</string>
+
+    <string name="stat_start">Start</string>
+    <string name="stat_warming">Aufwärmen</string>
+    <string name="stat_great">Großartig!</string>
+    <string name="daily_report">Tagesstatistik</string>
+    <string name="date_label">Datum</string>
+    <string name="stat_solved">Gelöste Fragen</string>
+    <string name="stat_correct">Richtig</string>
+    <string name="stat_wrong">Falsch</string>
+    <string name="stat_empty">Übersprungen</string>
+    <string name="no_data_today">Heute wurden noch keine Fragen gelöst</string>
+
+    <string name="btn_skip">Frage überspringen</string>
+
+    <string name="btn_next_question">Nächste Frage</string>
+    <string name="btn_finish_quiz">Beenden</string>
+</resources>

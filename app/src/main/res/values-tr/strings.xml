@@ -94,7 +94,6 @@
     <string name="msg_correct">Doğru Cevap!</string>
     <string name="msg_wrong">Yanlış Cevap</string>
     <string name="label_explanation_prefix">Açıklama:</string>
-
     <string name="stat_start">Başla</string>
     <string name="stat_warming">Isınıyorsun</string>
     <string name="stat_great">Harika!</string>

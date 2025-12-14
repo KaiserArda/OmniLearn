@@ -96,14 +96,14 @@ fun CategoryListScreen(
             TopAppBar(
                 title = {
                     if (currentParentId != null && currentCategory != null) {
-                        // Alt kategorideysek başlık göster
+
                         Text(
                             text = getLocalizedText(currentCategory!!.name, currentLang),
                             fontWeight = FontWeight.Bold
                         )
                     } else {
-                        // --- ANA SAYFADAYSAK: İSTATİSTİK ROZETİ GÖSTER ---
-                        StatsStatusBadge(stats = todayStats, onClick = onNavigateToStats)
+
+                        StatsStatusBadge(stats = todayStats,currentLang = currentLang, onClick = onNavigateToStats)
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -205,18 +205,19 @@ fun CategoryItem(category: CategoryEntity, currentLang: String, onClick: () -> U
     }
 }
 
-// --- YENİ EKLENEN ROZET (BADGE) ---
+
 @Composable
-fun StatsStatusBadge(stats: DailyStatsEntity?, onClick: () -> Unit) {
+fun StatsStatusBadge(
+    stats: DailyStatsEntity?,
+    currentLang: String,
+    onClick: () -> Unit
+) {
     val count = stats?.totalSeen ?: 0
-    val txtStart = stringResource(R.string.stat_start)
-    val txtWarm = stringResource(R.string.stat_warming)
-    val txtGreat = stringResource(R.string.stat_great)
 
     val (bgColor, icon, text) = when {
-        count == 0 -> Triple(Color(0xFFE53935), Icons.Default.Warning, "Başla! (0)")
-        count < 10 -> Triple(Color(0xFFFFB300), Icons.Default.LocalFireDepartment, "Isınıyorsun ($count)")
-        else -> Triple(Color(0xFF4CAF50), Icons.Default.RocketLaunch, "Harikasın! ($count)")
+        count < 20 -> Triple(Color(0xFFE53935), Icons.Default.Warning, R.string.stat_start)
+        count < 50 -> Triple(Color(0xFFFFB300), Icons.Default.LocalFireDepartment, R.string.stat_warming)
+        else -> Triple(Color(0xFF4CAF50), Icons.Default.RocketLaunch, R.string.stat_great)
     }
 
     Surface(
@@ -236,8 +237,10 @@ fun StatsStatusBadge(stats: DailyStatsEntity?, onClick: () -> Unit) {
                 modifier = Modifier.size(16.dp)
             )
             Spacer(modifier = Modifier.width(6.dp))
+
+            // 2. Fix: Use stringResource(id) and append the count
             Text(
-                text = text,
+                text = "${getLocalizedResource(text, currentLang)} ($count)",
                 style = MaterialTheme.typography.labelLarge,
                 color = Color.White,
                 fontWeight = FontWeight.Bold
@@ -245,16 +248,16 @@ fun StatsStatusBadge(stats: DailyStatsEntity?, onClick: () -> Unit) {
         }
     }
 }
-
 data class LanguageOption(val code: String, val name: String, val flagRes: Int)
 
 @Composable
 fun LanguageSelectorDropdown(currentLanguageCode: String, onLanguageSelected: (String) -> Unit) {
     val languages = listOf(
         LanguageOption("tr", "Türkçe", R.drawable.flag_tr),
-        LanguageOption("en", "English", R.drawable.flag_en),
         LanguageOption("zh", "中文 (Çince)", R.drawable.flag_cn),
-        LanguageOption("ja", "日本語 (Japonca)", R.drawable.flag_ja)
+        LanguageOption("ja", "日本語 (Japonca)", R.drawable.flag_ja),
+        LanguageOption("en", "English", R.drawable.flag_en),
+        LanguageOption("de", "Deutsch", R.drawable.flag_de)
     )
 
     val selectedLanguage = languages.find { it.code == currentLanguageCode } ?: languages.first()

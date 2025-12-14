@@ -29,7 +29,7 @@ fun StatisticsScreen(
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
-    // Veritabanı bağlantısı
+
     val database = remember { AppDatabase.getDatabase(context, scope) }
     val repository = remember {
         QuizRepository(
@@ -39,20 +39,20 @@ fun StatisticsScreen(
         )
     }
 
-    // Veriler ve Yüklenme Durumu
-    var stats by remember { mutableStateOf<DailyStatsEntity?>(null) }
-    var isLoading by remember { mutableStateOf(true) } // <-- YENİ: Yükleniyor mu kontrolü
 
-    // Sayfa açılınca verileri çek
+    var stats by remember { mutableStateOf<DailyStatsEntity?>(null) }
+    var isLoading by remember { mutableStateOf(true) }
+
+
     LaunchedEffect(Unit) {
         scope.launch(Dispatchers.IO) {
-            // Veriyi arka planda çek
+
             val todayStats = repository.getTodayStats()
 
-            // Arayüzü güncelle
+
             withContext(Dispatchers.Main) {
                 stats = todayStats
-                isLoading = false // Yükleme bitti
+                isLoading = false
             }
         }
     }
@@ -60,7 +60,7 @@ fun StatisticsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Günlük Rapor") },
+                title = { Text(text = stringResource(id = R.string.daily_report)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Geri")
@@ -102,7 +102,7 @@ fun StatisticsScreen(
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                // Toplam Soru Kartı
+
                 StatCard(
                     title = stringResource(R.string.stat_solved),
                     value = s.totalSeen.toString(),
@@ -115,27 +115,27 @@ fun StatisticsScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    // Doğru Sayısı
+
                     Box(modifier = Modifier.weight(1f)) {
                         StatCard(
                             title = stringResource(R.string.stat_correct),
                             value = s.correctCount.toString(),
-                            color = Color(0xFF4CAF50) // Yeşil
+                            color = Color(0xFF4CAF50)
                         )
                     }
-                    // Yanlış Sayısı
+
                     Box(modifier = Modifier.weight(1f)) {
                         StatCard(
                             title = stringResource(R.string.stat_wrong),
                             value = s.wrongCount.toString(),
-                            color = Color(0xFFEF5350) // Kırmızı
+                            color = Color(0xFFEF5350)
                         )
                     }
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Pas Geçilenler
+
                 StatCard(
                     title = stringResource(R.string.stat_empty),
                     value = s.emptyCount.toString(),

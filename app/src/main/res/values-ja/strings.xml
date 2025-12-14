@@ -98,7 +98,7 @@
     <string name="stat_start">開始</string>
     <string name="stat_warming">ウォームアップ中</string>
     <string name="stat_great">素晴らしい！</string>
-    <string name="daily_report">デイリーレポート</string>
+    <string name="daily_report">本日の統計</string>
     <string name="date_label">日付</string>
     <string name="stat_solved">解いた問題数</string>
     <string name="stat_correct">正解</string>
