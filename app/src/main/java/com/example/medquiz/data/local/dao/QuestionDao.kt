@@ -25,4 +25,7 @@ interface QuestionDao {
 
     @Query("DELETE FROM questions")
     suspend fun deleteAllQuestions()
+
+    @Query("SELECT id FROM questions WHERE categoryId = :categoryId AND id > :currentId ORDER BY id ASC LIMIT 1")
+    suspend fun getNextQuestionId(categoryId: Long, currentId: Long): Long?
 }

@@ -5,6 +5,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward // İleri ikonu
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -12,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.medquiz.R
 import com.example.medquiz.data.local.AppDatabase
@@ -21,24 +23,19 @@ import com.example.medquiz.data.repository.QuizRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.util.Date
-import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun QuestionDetailScreen(
     questionId: Long,
-    onBack: () -> Unit = {}
+    onBack: () -> Unit = {},
+    onNavigateToQuestion: (Long) -> Unit // <-- YENİ PARAMETRE
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
-    // Veritabanı bağlantısı
     val database = remember { AppDatabase.getDatabase(context, scope) }
 
-    // --- DÜZELTME: Repository artık 3 parametre (StatsDao dahil) alıyor ---
     val repository = remember {
         QuizRepository(
             database.categoryDao(),
@@ -48,28 +45,38 @@ fun QuestionDetailScreen(
     }
 
     var question by remember { mutableStateOf<QuestionEntity?>(null) }
+    var nextQuestionId by remember { mutableStateOf<Long?>(null) } // Sıradaki sorunun ID'si
+
     var selectedOptionIndex by remember { mutableStateOf<Int?>(null) }
     var showExplanation by remember { mutableStateOf(false) }
     var isCorrect by remember { mutableStateOf(false) }
 
-    // Soruyu Getir
+    // Soruyu ve Sıradaki Soruyu Getir
     LaunchedEffect(questionId) {
         scope.launch(Dispatchers.IO) {
             val fetchedQuestion = repository.getQuestionById(questionId)
             withContext(Dispatchers.Main) {
                 question = fetchedQuestion
             }
+
+            // Eğer soru geldiyse, hemen arkasından "Sırada soru var mı?" diye bak
+            if (fetchedQuestion != null) {
+                val nextId = repository.getNextQuestionId(fetchedQuestion.categoryId, fetchedQuestion.id)
+                withContext(Dispatchers.Main) {
+                    nextQuestionId = nextId
+                }
+            }
         }
     }
 
-    // --- YARDIMCI FONKSİYON: İstatistik Güncelleme ---
+    // İstatistik Güncelleme Fonksiyonu
     fun updateStats(isCorrectAnswer: Boolean, isSkipped: Boolean) {
         scope.launch(Dispatchers.IO) {
-            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            val today = sdf.format(Date())
-            val statsDao = database.statsDao()
+            // Tarih formatı (Tüm Android sürümleri için güvenli)
+            val sdf = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+            val today = sdf.format(java.util.Date())
 
-            // Bugünün kaydını çek, yoksa yeni oluştur
+            val statsDao = database.statsDao()
             val currentStats = statsDao.getStatsByDate(today) ?: DailyStatsEntity(date = today)
 
             val newStats = currentStats.copy(
@@ -82,10 +89,21 @@ fun QuestionDetailScreen(
         }
     }
 
+    // Bir sonraki adıma geçiş mantığı
+    fun proceedToNext() {
+        if (nextQuestionId != null) {
+            // Sırada soru varsa ona git
+            onNavigateToQuestion(nextQuestionId!!)
+        } else {
+            // Yoksa listeye dön
+            onBack()
+        }
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(id = R.string.title_question_detail)) }, // strings.xml'den başlık
+                title = { Text(stringResource(id = R.string.title_question_detail)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
@@ -137,14 +155,11 @@ fun QuestionDetailScreen(
                                 val correct = (idx == q.correctIndex)
                                 isCorrect = correct
                                 showExplanation = true
-
-                                // --- İSTATİSTİK GÜNCELLE (Cevap Verildi) ---
                                 updateStats(isCorrectAnswer = correct, isSkipped = false)
                             }
                         }
                     ) {
                         Row(modifier = Modifier.padding(16.dp)) {
-                            // Şık Harfleri (A, B, C, D)
                             val optionLetter = ('A' + idx)
                             Text(
                                 text = "$optionLetter) $opt",
@@ -157,13 +172,13 @@ fun QuestionDetailScreen(
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                // --- PAS GEÇ BUTONU (Henüz cevaplanmadıysa görünür) ---
+                // --- PAS GEÇ BUTONU ---
+                // Sadece cevaplanmadıysa görünür
                 if (selectedOptionIndex == null) {
                     OutlinedButton(
                         onClick = {
-                            // --- İSTATİSTİK GÜNCELLE (Pas Geçildi) ---
                             updateStats(isCorrectAnswer = false, isSkipped = true)
-                            onBack() // Listeye geri dön
+                            proceedToNext() // Otomatik ilerle
                         },
                         colors = ButtonDefaults.outlinedButtonColors(
                             contentColor = MaterialTheme.colorScheme.secondary
@@ -174,7 +189,7 @@ fun QuestionDetailScreen(
                     }
                 }
 
-                // --- SONUÇ VE AÇIKLAMA ALANI ---
+                // --- SONUÇ VE İLERLEME ALANI ---
                 if (showExplanation && selectedOptionIndex != null) {
                     Text(
                         text = stringResource(id = if (isCorrect) R.string.msg_correct else R.string.msg_wrong),
@@ -189,6 +204,26 @@ fun QuestionDetailScreen(
                             text = "${stringResource(id = R.string.label_explanation_prefix)} ${q.explanation}",
                             style = MaterialTheme.typography.bodyLarge
                         )
+                    }
+
+                    Spacer(modifier = Modifier.height(24.dp))
+
+
+                    Button(
+                        onClick = { proceedToNext() },
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.primary
+                        )
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text(
+                                text = if (nextQuestionId != null) stringResource(R.string.btn_next_question) else stringResource(R.string.btn_finish_quiz),
+                                fontWeight = FontWeight.Bold
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Icon(Icons.Default.ArrowForward, contentDescription = null)
+                        }
                     }
                 }
             }

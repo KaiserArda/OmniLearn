@@ -108,4 +108,7 @@
 
     <string name="btn_skip">Soruyu Geç</string>
 
+    <string name="btn_next_question">Sonraki Soru</string>
+    <string name="btn_finish_quiz">Bitir</string>
+
 </resources>

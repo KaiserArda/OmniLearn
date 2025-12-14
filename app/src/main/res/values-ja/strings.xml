@@ -108,4 +108,7 @@
 
     <string name="btn_skip">問題をスキップ</string>
 
+    <string name="btn_next_question">次の問題</string>
+    <string name="btn_finish_quiz">終了</string>
+
 </resources>

@@ -31,7 +31,9 @@ class QuizRepository(
     suspend fun hasSubCategories(categoryId: Long): Boolean {
         return categoryDao.getSubCategories(categoryId).firstOrNull()?.isNotEmpty() ?: false
     }
-
+    suspend fun getNextQuestionId(categoryId: Long, currentId: Long): Long? {
+        return questionDao.getNextQuestionId(categoryId, currentId)
+    }
     suspend fun insertQuestion(question: QuestionEntity): Long = questionDao.insert(question)
 
     suspend fun getQuestionById(id: Long): QuestionEntity? = questionDao.getQuestion(id)

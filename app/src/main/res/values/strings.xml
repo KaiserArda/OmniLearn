@@ -108,4 +108,7 @@
 
     <string name="btn_skip">Skip Question</string>
 
+    <string name="btn_next_question">Next Question</string>
+    <string name="btn_finish_quiz">Finish</string>
+
 </resources>

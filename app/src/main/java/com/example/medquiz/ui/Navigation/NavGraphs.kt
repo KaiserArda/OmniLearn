@@ -94,14 +94,19 @@ fun NavGraph(
         }
 
         // --- Question Detail ---
+        // --- Question Detail ---
         composable(
             route = Screen.QuestionDetail.route,
             arguments = listOf(navArgument("questionId") { type = NavType.LongType })
         ) { backStackEntry ->
             val qId = backStackEntry.arguments?.getLong("questionId") ?: 0L
+
             QuestionDetailScreen(
                 questionId = qId,
-                onBack = { navController.popBackStack() }
+                onBack = { navController.popBackStack() },
+                onNavigateToQuestion = { nextQuestionId ->
+                    navController.navigate(Screen.QuestionDetail.createRoute(nextQuestionId))
+                }
             )
         }
 
