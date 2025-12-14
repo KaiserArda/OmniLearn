@@ -94,4 +94,18 @@
     <string name="msg_correct">Doğru Cevap!</string>
     <string name="msg_wrong">Yanlış Cevap</string>
     <string name="label_explanation_prefix">Açıklama:</string>
+
+    <string name="stat_start">Başla</string>
+    <string name="stat_warming">Isınıyorsun</string>
+    <string name="stat_great">Harika!</string>
+    <string name="daily_report">Günlük Rapor</string>
+    <string name="date_label">Tarih</string>
+    <string name="stat_solved">Çözülen Sorular</string>
+    <string name="stat_correct">Doğru</string>
+    <string name="stat_wrong">Yanlış</string>
+    <string name="stat_empty">Atlanan</string>
+    <string name="no_data_today">Bugün henüz soru çözmedin</string>
+
+    <string name="btn_skip">Soruyu Geç</string>
+
 </resources>

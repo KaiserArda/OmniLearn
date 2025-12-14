@@ -94,4 +94,18 @@
     <string name="msg_correct">回答正确！</string>
     <string name="msg_wrong">回答错误</string>
     <string name="label_explanation_prefix">解析：</string>
+
+    <string name="stat_start">开始</string>
+    <string name="stat_warming">热身中</string>
+    <string name="stat_great">太棒了！</string>
+    <string name="daily_report">每日报告</string>
+    <string name="date_label">日期</string>
+    <string name="stat_solved">已完成题目</string>
+    <string name="stat_correct">正确</string>
+    <string name="stat_wrong">错误</string>
+    <string name="stat_empty">已跳过</string>
+    <string name="no_data_today">你今天还没有做任何题目</string>
+
+    <string name="btn_skip">跳过题目</string>
+
 </resources>

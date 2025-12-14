@@ -94,4 +94,18 @@
     <string name="msg_correct">Correct Answer!</string>
     <string name="msg_wrong">Incorrect Answer</string>
     <string name="label_explanation_prefix">Explanation:</string>
+
+    <string name="stat_start">Start</string>
+    <string name="stat_warming">Warming Up</string>
+    <string name="stat_great">Great!</string>
+    <string name="daily_report">Daily Report</string>
+    <string name="date_label">Date</string>
+    <string name="stat_solved">Questions Solved</string>
+    <string name="stat_correct">Correct</string>
+    <string name="stat_wrong">Incorrect</string>
+    <string name="stat_empty">Skipped</string>
+    <string name="no_data_today">You haven’t solved any questions today</string>
+
+    <string name="btn_skip">Skip Question</string>
+
 </resources>

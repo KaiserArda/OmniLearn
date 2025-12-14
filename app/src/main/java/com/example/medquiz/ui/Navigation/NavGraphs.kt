@@ -10,12 +10,13 @@ import com.example.medquiz.ui.Screens.AddQuestionScreen
 import com.example.medquiz.ui.Screens.CategoryListScreen
 import com.example.medquiz.ui.Screens.QuestionDetailScreen
 import com.example.medquiz.ui.Screens.QuestionListScreen
+import com.example.medquiz.ui.Screens.StatisticsScreen // <-- Bu import önemli
 import com.example.medquiz.ui.Screens.WelcomeScreen
 
-// 1. ADIM: Screen Sınıfını Basitleştirdik
 sealed class Screen(val route: String) {
     object Welcome : Screen("welcome")
     object Categories : Screen("categories")
+    object Statistics : Screen("statistics") // <-- EKLENDİ
 
     object Questions : Screen("questions/{categoryId}") {
         fun createRoute(categoryId: Long) = "questions/$categoryId"
@@ -25,7 +26,6 @@ sealed class Screen(val route: String) {
         fun createRoute(id: Long) = "question/$id"
     }
 
-    // Değişiklik burada: Soru işareti (?) yok. ID göndermek zorunlu.
     object AddQuestion : Screen("addQuestion/{categoryId}") {
         fun createRoute(categoryId: Long) = "addQuestion/$categoryId"
     }
@@ -58,10 +58,21 @@ fun NavGraph(
                 onNavigateToQuestions = { id ->
                     navController.navigate(Screen.Questions.createRoute(id))
                 },
+                // --- HATAYI ÇÖZEN KISIM BURASI ---
+                onNavigateToStats = {
+                    navController.navigate(Screen.Statistics.route)
+                },
+                // ---------------------------------
                 onAddQuestion = {
-                    // Kategori seçilmediyse -1 gönderiyoruz (ZORUNLU)
                     navController.navigate(Screen.AddQuestion.createRoute(-1L))
                 }
+            )
+        }
+
+        // --- Statistics (İstatistik Ekranı Rotası) ---
+        composable(Screen.Statistics.route) {
+            StatisticsScreen(
+                onBack = { navController.popBackStack() }
             )
         }
 
@@ -77,7 +88,6 @@ fun NavGraph(
                     navController.navigate(Screen.QuestionDetail.createRoute(qId))
                 },
                 onAddQuestion = {
-                    // Mevcut kategori ID'sini gönderiyoruz
                     navController.navigate(Screen.AddQuestion.createRoute(catId))
                 }
             )
@@ -89,33 +99,34 @@ fun NavGraph(
             arguments = listOf(navArgument("questionId") { type = NavType.LongType })
         ) { backStackEntry ->
             val qId = backStackEntry.arguments?.getLong("questionId") ?: 0L
-            QuestionDetailScreen(questionId = qId)
+            QuestionDetailScreen(
+                questionId = qId,
+                onBack = { navController.popBackStack() }
+            )
         }
 
+        // --- Add Question ---
         composable(
             route = Screen.AddQuestion.route,
             arguments = listOf(navArgument("categoryId") { type = NavType.LongType })
         ) { backStackEntry ->
             val catId = backStackEntry.arguments?.getLong("categoryId") ?: -1L
 
-            // --- ViewModel Hazırlığı ---
             val context = androidx.compose.ui.platform.LocalContext.current
-
-            // 1. Scope'u tanımla (YENİ EKLENDİ)
-            // Bu satır için import eklemelisin: androidx.compose.runtime.rememberCoroutineScope
             val scope = androidx.compose.runtime.rememberCoroutineScope()
 
-            // 2. Veritabanını çağırırken 'scope' parametresini de ekle (DÜZELTİLDİ)
             val db = com.example.medquiz.data.local.AppDatabase.getDatabase(context, scope)
 
-            // 3. Repository oluştur
-            val repo = com.example.medquiz.data.repository.QuizRepository(db.categoryDao(), db.questionDao())
+            // DÜZELTME: Repository artık 3 parametre (statsDao dahil) istiyor
+            val repo = com.example.medquiz.data.repository.QuizRepository(
+                db.categoryDao(),
+                db.questionDao(),
+                db.statsDao() // <-- EKLENDİ
+            )
 
-            // 4. Fabrika ve ViewModel
             val factory = com.example.medquiz.vm.AddQuestionViewModelFactory(repo)
             val myViewModel: com.example.medquiz.vm.AddQuestionViewModel = androidx.lifecycle.viewmodel.compose.viewModel(factory = factory)
 
-            // 5. Ekranı Çiz
             AddQuestionScreen(
                 defaultCategoryId = if (catId != -1L) catId else null,
                 viewModel = myViewModel,

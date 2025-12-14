@@ -2,14 +2,18 @@ package com.example.medquiz.data.repository
 
 import com.example.medquiz.data.local.dao.CategoryDao
 import com.example.medquiz.data.local.dao.QuestionDao
+import com.example.medquiz.data.local.dao.StatsDao // <-- EKLENDİ
 import com.example.medquiz.data.local.entity.CategoryEntity
+import com.example.medquiz.data.local.entity.DailyStatsEntity // <-- EKLENDİ
 import com.example.medquiz.data.local.entity.QuestionEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
+import java.time.LocalDate // <-- EKLENDİ
 
 class QuizRepository(
     private val categoryDao: CategoryDao,
-    private val questionDao: QuestionDao
+    private val questionDao: QuestionDao,
+    private val statsDao: StatsDao // <-- 3. Parametre olarak eklendi
 ) {
     fun getMainCategories(): Flow<List<CategoryEntity>> = categoryDao.getMainCategories()
 
@@ -32,8 +36,13 @@ class QuizRepository(
 
     suspend fun getQuestionById(id: Long): QuestionEntity? = questionDao.getQuestion(id)
 
-    // --- YENİ EKLENDİ: ViewModel buradan sayıyı isteyecek ---
     suspend fun getQuestionCount(categoryId: Long): Int {
         return questionDao.getCountByCategory(categoryId)
+    }
+
+    // --- Statistics Functions ---
+    suspend fun getTodayStats(): DailyStatsEntity? {
+        val today = LocalDate.now().toString()
+        return statsDao.getStatsByDate(today)
     }
 }

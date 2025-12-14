@@ -94,4 +94,18 @@
     <string name="msg_correct">正解です！</string>
     <string name="msg_wrong">不正解です</string>
     <string name="label_explanation_prefix">解説：</string>
+
+    <string name="stat_start">開始</string>
+    <string name="stat_warming">ウォームアップ中</string>
+    <string name="stat_great">素晴らしい！</string>
+    <string name="daily_report">デイリーレポート</string>
+    <string name="date_label">日付</string>
+    <string name="stat_solved">解いた問題数</string>
+    <string name="stat_correct">正解</string>
+    <string name="stat_wrong">不正解</string>
+    <string name="stat_empty">スキップ</string>
+    <string name="no_data_today">今日はまだ問題を解いていません</string>
+
+    <string name="btn_skip">問題をスキップ</string>
+
 </resources>

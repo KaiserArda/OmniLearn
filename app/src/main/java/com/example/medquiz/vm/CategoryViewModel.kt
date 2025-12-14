@@ -3,6 +3,7 @@ package com.example.medquiz.vm
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.medquiz.data.local.entity.CategoryEntity
+import com.example.medquiz.data.local.entity.DailyStatsEntity // <-- EKLENDİ
 import com.example.medquiz.data.repository.QuizRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,12 +20,22 @@ class CategoryViewModel(private val repository: QuizRepository) : ViewModel() {
     private val _currentParentId = MutableStateFlow<Long?>(null)
     val currentParentId: StateFlow<Long?> = _currentParentId.asStateFlow()
 
-
     private val _currentCategory = MutableStateFlow<CategoryEntity?>(null)
     val currentCategory: StateFlow<CategoryEntity?> = _currentCategory.asStateFlow()
 
+    // --- Statistics State ---
+    private val _todayStats = MutableStateFlow<DailyStatsEntity?>(null)
+    val todayStats: StateFlow<DailyStatsEntity?> = _todayStats.asStateFlow()
+
     init {
         loadMainCategories()
+        refreshStats() // Uygulama açılınca istatistikleri çek
+    }
+
+    fun refreshStats() {
+        viewModelScope.launch {
+            _todayStats.value = repository.getTodayStats()
+        }
     }
 
     fun loadMainCategories() {
@@ -42,8 +53,6 @@ class CategoryViewModel(private val repository: QuizRepository) : ViewModel() {
             repository.getSubCategories(parentId).collectLatest { list ->
                 _categories.value = list
                 _currentParentId.value = parentId
-
-
                 val parentCategory = repository.getCategoryById(parentId)
                 _currentCategory.value = parentCategory
             }
@@ -53,15 +62,11 @@ class CategoryViewModel(private val repository: QuizRepository) : ViewModel() {
     fun goBack() {
         viewModelScope.launch {
             val currentParent = _currentParentId.value
-
             if (currentParent != null) {
                 val currentCat = repository.getCategoryById(currentParent)
-
                 if (currentCat == null || currentCat.parentId == null) {
-
                     loadMainCategories()
                 } else {
-
                     loadSubCategories(currentCat.parentId)
                 }
             } else {

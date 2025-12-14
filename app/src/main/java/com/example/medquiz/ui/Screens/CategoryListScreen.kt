@@ -1,5 +1,6 @@
 package com.example.medquiz.ui.Screens
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -11,6 +12,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.LocalFireDepartment // İkon
+import androidx.compose.material.icons.filled.RocketLaunch // İkon
+import androidx.compose.material.icons.filled.Warning // İkon
 import androidx.compose.material.icons.outlined.DarkMode
 import androidx.compose.material.icons.outlined.LightMode
 import androidx.compose.material3.*
@@ -22,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -31,6 +36,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.medquiz.R
 import com.example.medquiz.data.local.AppDatabase
 import com.example.medquiz.data.local.entity.CategoryEntity
+import com.example.medquiz.data.local.entity.DailyStatsEntity
 import com.example.medquiz.data.repository.QuizRepository
 import com.example.medquiz.ui.getLocalizedResource
 import com.example.medquiz.ui.getLocalizedText
@@ -43,6 +49,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun CategoryListScreen(
     onNavigateToQuestions: (Long) -> Unit,
+    onNavigateToStats: () -> Unit, // <-- EKLENDİ: İstatistik sayfasına gitmek için
     onAddQuestion: () -> Unit
 ) {
     val context = LocalContext.current
@@ -51,7 +58,14 @@ fun CategoryListScreen(
 
     val viewModel: CategoryViewModel = remember {
         val database = AppDatabase.getDatabase(context, kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO))
-        val repository = QuizRepository(database.categoryDao(), database.questionDao())
+
+        // --- GÜNCELLENDİ: Repository artık 3 parametre alıyor ---
+        val repository = QuizRepository(
+            database.categoryDao(),
+            database.questionDao(),
+            database.statsDao() // StatsDao eklendi
+        )
+
         val factory = CategoryViewModelFactory(repository)
         ViewModelProvider(viewModelStoreOwner, factory)[CategoryViewModel::class.java]
     }
@@ -63,19 +77,33 @@ fun CategoryListScreen(
     val currentCategory by viewModel.currentCategory.collectAsState()
     val currentLang by settingsViewModel.currentLanguage.collectAsState(initial = "tr")
 
+    // --- İstatistik Verisi ---
+    val todayStats by viewModel.todayStats.collectAsState()
+
     var lastClickTime by remember { mutableStateOf(0L) }
+
+    // Her sayfa açıldığında istatistikleri yenile
+    LaunchedEffect(Unit) {
+        viewModel.refreshStats()
+    }
+
+    BackHandler(enabled = currentParentId != null) {
+        viewModel.goBack()
+    }
 
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     if (currentParentId != null && currentCategory != null) {
+                        // Alt kategorideysek başlık göster
                         Text(
                             text = getLocalizedText(currentCategory!!.name, currentLang),
                             fontWeight = FontWeight.Bold
                         )
                     } else {
-                        Text("", fontWeight = FontWeight.Bold)
+                        // --- ANA SAYFADAYSAK: İSTATİSTİK ROZETİ GÖSTER ---
+                        StatsStatusBadge(stats = todayStats, onClick = onNavigateToStats)
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -91,16 +119,13 @@ fun CategoryListScreen(
                     }
                 },
                 actions = {
-                    // Tema Değiştirme Butonu
                     IconButton(onClick = { settingsViewModel.toggleTheme() }) {
                         if (isDark) Icon(Icons.Outlined.DarkMode, "Dark") else Icon(Icons.Outlined.LightMode, "Light")
                     }
 
-                    // --- YENİ BAYRAKLI DİL SEÇİCİ ---
                     LanguageSelectorDropdown(
                         currentLanguageCode = currentLang,
                         onLanguageSelected = { newCode ->
-                            // ViewModel'daki dil değiştirme fonksiyonunu çağırıyoruz
                             settingsViewModel.changeLanguage(newCode)
                         }
                     )
@@ -150,6 +175,8 @@ fun CategoryListScreen(
     }
 }
 
+// --- Helper Composables ---
+
 @Composable
 fun CategoryItem(category: CategoryEntity, currentLang: String, onClick: () -> Unit) {
     Card(
@@ -178,30 +205,62 @@ fun CategoryItem(category: CategoryEntity, currentLang: String, onClick: () -> U
     }
 }
 
-data class LanguageOption(
-    val code: String,
-    val name: String,
-    val flagRes: Int
-)
+// --- YENİ EKLENEN ROZET (BADGE) ---
+@Composable
+fun StatsStatusBadge(stats: DailyStatsEntity?, onClick: () -> Unit) {
+    val count = stats?.totalSeen ?: 0
+    val txtStart = stringResource(R.string.stat_start)
+    val txtWarm = stringResource(R.string.stat_warming)
+    val txtGreat = stringResource(R.string.stat_great)
+
+    val (bgColor, icon, text) = when {
+        count == 0 -> Triple(Color(0xFFE53935), Icons.Default.Warning, "Başla! (0)")
+        count < 10 -> Triple(Color(0xFFFFB300), Icons.Default.LocalFireDepartment, "Isınıyorsun ($count)")
+        else -> Triple(Color(0xFF4CAF50), Icons.Default.RocketLaunch, "Harikasın! ($count)")
+    }
+
+    Surface(
+        onClick = onClick,
+        color = bgColor,
+        shape = RoundedCornerShape(50),
+        modifier = Modifier.wrapContentSize()
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = Color.White,
+                modifier = Modifier.size(16.dp)
+            )
+            Spacer(modifier = Modifier.width(6.dp))
+            Text(
+                text = text,
+                style = MaterialTheme.typography.labelLarge,
+                color = Color.White,
+                fontWeight = FontWeight.Bold
+            )
+        }
+    }
+}
+
+data class LanguageOption(val code: String, val name: String, val flagRes: Int)
 
 @Composable
-fun LanguageSelectorDropdown(
-    currentLanguageCode: String,
-    onLanguageSelected: (String) -> Unit
-) {
+fun LanguageSelectorDropdown(currentLanguageCode: String, onLanguageSelected: (String) -> Unit) {
     val languages = listOf(
         LanguageOption("tr", "Türkçe", R.drawable.flag_tr),
         LanguageOption("en", "English", R.drawable.flag_en),
         LanguageOption("zh", "中文 (Çince)", R.drawable.flag_cn),
-        LanguageOption("ja", "日本語 (Japonca)", R.drawable.flag_ja)// Make sure flag_jp exists
-
+        LanguageOption("ja", "日本語 (Japonca)", R.drawable.flag_ja)
     )
 
     val selectedLanguage = languages.find { it.code == currentLanguageCode } ?: languages.first()
     var expanded by remember { mutableStateOf(false) }
 
     Box {
-
         Button(
             onClick = { expanded = true },
             colors = ButtonDefaults.buttonColors(
@@ -222,7 +281,6 @@ fun LanguageSelectorDropdown(
                 Icon(Icons.Default.ArrowDropDown, contentDescription = null, tint = MaterialTheme.colorScheme.onPrimary)
             }
         }
-
 
         DropdownMenu(
             expanded = expanded,

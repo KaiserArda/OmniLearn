@@ -38,7 +38,7 @@ fun QuestionListScreen(
     // ViewModel yapını senin koduna sadık kalarak korudum
     val viewModel: QuestionListViewModel = remember {
         val database = AppDatabase.getDatabase(context, kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO))
-        val repository = QuizRepository(database.categoryDao(), database.questionDao())
+        val repository = QuizRepository(database.categoryDao(), database.questionDao(), database.statsDao())
         val factory = QuestionListViewModelFactory(repository)
         ViewModelProvider(viewModelStoreOwner, factory)[QuestionListViewModel::class.java]
     }

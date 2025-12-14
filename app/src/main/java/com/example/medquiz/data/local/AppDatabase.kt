@@ -7,7 +7,9 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.medquiz.data.local.dao.CategoryDao
 import com.example.medquiz.data.local.dao.QuestionDao
+import com.example.medquiz.data.local.dao.StatsDao
 import com.example.medquiz.data.local.entity.CategoryEntity
+import com.example.medquiz.data.local.entity.DailyStatsEntity
 import com.example.medquiz.data.local.entity.QuestionEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +17,7 @@ import kotlinx.coroutines.launch
 
 
 @Database(
-    entities = [CategoryEntity::class, QuestionEntity::class],
+    entities = [CategoryEntity::class, QuestionEntity::class, DailyStatsEntity::class],
     version = 6,
     exportSchema = false
 )
@@ -23,7 +25,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun categoryDao(): CategoryDao
     abstract fun questionDao(): QuestionDao
-
+    abstract fun statsDao(): StatsDao
 
     private class PrepopulateCallback(private val scope: CoroutineScope) : RoomDatabase.Callback() {
         override fun onCreate(db: SupportSQLiteDatabase) {

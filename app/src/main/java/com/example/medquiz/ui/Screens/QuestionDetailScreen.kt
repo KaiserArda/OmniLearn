@@ -11,15 +11,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource // <-- Bu import önemli
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.medquiz.R // <-- R dosyasının import edildiğinden emin ol
+import com.example.medquiz.R
 import com.example.medquiz.data.local.AppDatabase
+import com.example.medquiz.data.local.entity.DailyStatsEntity
 import com.example.medquiz.data.local.entity.QuestionEntity
 import com.example.medquiz.data.repository.QuizRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.util.Date
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,15 +35,24 @@ fun QuestionDetailScreen(
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
+    // Veritabanı bağlantısı
     val database = remember { AppDatabase.getDatabase(context, scope) }
-    val repository = remember { QuizRepository(database.categoryDao(), database.questionDao()) }
+
+    // --- DÜZELTME: Repository artık 3 parametre (StatsDao dahil) alıyor ---
+    val repository = remember {
+        QuizRepository(
+            database.categoryDao(),
+            database.questionDao(),
+            database.statsDao()
+        )
+    }
 
     var question by remember { mutableStateOf<QuestionEntity?>(null) }
-
     var selectedOptionIndex by remember { mutableStateOf<Int?>(null) }
     var showExplanation by remember { mutableStateOf(false) }
     var isCorrect by remember { mutableStateOf(false) }
 
+    // Soruyu Getir
     LaunchedEffect(questionId) {
         scope.launch(Dispatchers.IO) {
             val fetchedQuestion = repository.getQuestionById(questionId)
@@ -48,14 +62,32 @@ fun QuestionDetailScreen(
         }
     }
 
+    // --- YARDIMCI FONKSİYON: İstatistik Güncelleme ---
+    fun updateStats(isCorrectAnswer: Boolean, isSkipped: Boolean) {
+        scope.launch(Dispatchers.IO) {
+            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val today = sdf.format(Date())
+            val statsDao = database.statsDao()
+
+            // Bugünün kaydını çek, yoksa yeni oluştur
+            val currentStats = statsDao.getStatsByDate(today) ?: DailyStatsEntity(date = today)
+
+            val newStats = currentStats.copy(
+                totalSeen = currentStats.totalSeen + 1,
+                correctCount = if (isCorrectAnswer) currentStats.correctCount + 1 else currentStats.correctCount,
+                wrongCount = if (!isCorrectAnswer && !isSkipped) currentStats.wrongCount + 1 else currentStats.wrongCount,
+                emptyCount = if (isSkipped) currentStats.emptyCount + 1 else currentStats.emptyCount
+            )
+            statsDao.insertStats(newStats)
+        }
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
-                // String kaynağından başlık
-                title = { Text(stringResource(id = R.string.title_question_detail)) },
+                title = { Text(stringResource(id = R.string.title_question_detail)) }, // strings.xml'den başlık
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        // String kaynağından açıklama
                         Icon(
                             Icons.Default.ArrowBack,
                             contentDescription = stringResource(id = R.string.cd_back_button)
@@ -87,8 +119,8 @@ fun QuestionDetailScreen(
 
                 options.forEachIndexed { idx, opt ->
                     val cardColor = if (showExplanation) {
-                        if (idx == q.correctIndex) Color(0xFF4CAF50)
-                        else if (idx == selectedOptionIndex) Color(0xFFEF5350)
+                        if (idx == q.correctIndex) Color(0xFF4CAF50) // Yeşil
+                        else if (idx == selectedOptionIndex) Color(0xFFEF5350) // Kırmızı
                         else MaterialTheme.colorScheme.surfaceVariant
                     } else {
                         MaterialTheme.colorScheme.surfaceVariant
@@ -102,14 +134,20 @@ fun QuestionDetailScreen(
                         onClick = {
                             if (selectedOptionIndex == null) {
                                 selectedOptionIndex = idx
-                                isCorrect = (idx == q.correctIndex)
+                                val correct = (idx == q.correctIndex)
+                                isCorrect = correct
                                 showExplanation = true
+
+                                // --- İSTATİSTİK GÜNCELLE (Cevap Verildi) ---
+                                updateStats(isCorrectAnswer = correct, isSkipped = false)
                             }
                         }
                     ) {
                         Row(modifier = Modifier.padding(16.dp)) {
+                            // Şık Harfleri (A, B, C, D)
+                            val optionLetter = ('A' + idx)
                             Text(
-                                text = "${'A' + idx}) $opt",
+                                text = "$optionLetter) $opt",
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = if (showExplanation && (idx == q.correctIndex || idx == selectedOptionIndex)) Color.White else Color.Unspecified
                             )
@@ -119,8 +157,25 @@ fun QuestionDetailScreen(
 
                 Spacer(modifier = Modifier.height(24.dp))
 
+                // --- PAS GEÇ BUTONU (Henüz cevaplanmadıysa görünür) ---
+                if (selectedOptionIndex == null) {
+                    OutlinedButton(
+                        onClick = {
+                            // --- İSTATİSTİK GÜNCELLE (Pas Geçildi) ---
+                            updateStats(isCorrectAnswer = false, isSkipped = true)
+                            onBack() // Listeye geri dön
+                        },
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            contentColor = MaterialTheme.colorScheme.secondary
+                        ),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(stringResource(id = R.string.btn_skip))
+                    }
+                }
+
+                // --- SONUÇ VE AÇIKLAMA ALANI ---
                 if (showExplanation && selectedOptionIndex != null) {
-                    // String kaynağından Sonuç Mesajı
                     Text(
                         text = stringResource(id = if (isCorrect) R.string.msg_correct else R.string.msg_wrong),
                         style = MaterialTheme.typography.headlineMedium,
@@ -130,9 +185,8 @@ fun QuestionDetailScreen(
                     Spacer(modifier = Modifier.height(8.dp))
 
                     if (q.explanation.isNotBlank()) {
-                        // String kaynağından "Açıklama:" ön eki
                         Text(
-                            text = stringResource(id = R.string.label_explanation_prefix) + " " + q.explanation,
+                            text = "${stringResource(id = R.string.label_explanation_prefix)} ${q.explanation}",
                             style = MaterialTheme.typography.bodyLarge
                         )
                     }
