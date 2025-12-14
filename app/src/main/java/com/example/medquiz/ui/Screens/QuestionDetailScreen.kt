@@ -51,7 +51,6 @@ fun QuestionDetailScreen(
     var showExplanation by remember { mutableStateOf(false) }
     var isCorrect by remember { mutableStateOf(false) }
 
-    // Soruyu ve Sıradaki Soruyu Getir
     LaunchedEffect(questionId) {
         scope.launch(Dispatchers.IO) {
             val fetchedQuestion = repository.getQuestionById(questionId)
@@ -59,9 +58,11 @@ fun QuestionDetailScreen(
                 question = fetchedQuestion
             }
 
-            // Eğer soru geldiyse, hemen arkasından "Sırada soru var mı?" diye bak
             if (fetchedQuestion != null) {
-                val nextId = repository.getNextQuestionId(fetchedQuestion.categoryId, fetchedQuestion.id)
+
+                val currentLang = java.util.Locale.getDefault().language
+                val nextId = repository.getNextQuestionId(fetchedQuestion.categoryId, fetchedQuestion.id, currentLang)
+
                 withContext(Dispatchers.Main) {
                     nextQuestionId = nextId
                 }

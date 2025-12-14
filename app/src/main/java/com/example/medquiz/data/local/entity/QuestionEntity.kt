@@ -12,10 +12,10 @@ import androidx.room.PrimaryKey
             entity = CategoryEntity::class,
             parentColumns = ["id"],
             childColumns = ["categoryId"],
-            onDelete = ForeignKey.CASCADE
+            onDelete = ForeignKey.CASCADE // Kategori silinirse soruları da siler
         )
     ],
-    indices = [Index(value = ["categoryId"])]
+    indices = [Index(value = ["categoryId"])] // Performans artırır
 )
 data class QuestionEntity(
     @PrimaryKey(autoGenerate = true)
@@ -29,5 +29,8 @@ data class QuestionEntity(
     val option4: String,
     val correctIndex: Int, // 0..3
     val explanation: String,
-    val isUserCreated: Boolean = false
+    val isUserCreated: Boolean = false,
+
+
+    val language: String = "tr"
 )

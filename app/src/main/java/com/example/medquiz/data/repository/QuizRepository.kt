@@ -25,24 +25,24 @@ class QuizRepository(
         return categoryDao.getCategoryById(id)
     }
 
-    fun getQuestionsForCategory(categoryId: Long): Flow<List<QuestionEntity>> =
-        questionDao.getQuestionsByCategory(categoryId)
+    fun getQuestionsForCategory(categoryId: Long, lang: String): Flow<List<QuestionEntity>> =
+        questionDao.getQuestionsByCategory(categoryId, lang)
 
     suspend fun hasSubCategories(categoryId: Long): Boolean {
         return categoryDao.getSubCategories(categoryId).firstOrNull()?.isNotEmpty() ?: false
     }
-    suspend fun getNextQuestionId(categoryId: Long, currentId: Long): Long? {
-        return questionDao.getNextQuestionId(categoryId, currentId)
+    suspend fun getNextQuestionId(categoryId: Long, currentId: Long, lang: String): Long? {
+        return questionDao.getNextQuestionId(categoryId, currentId, lang)
     }
     suspend fun insertQuestion(question: QuestionEntity): Long = questionDao.insert(question)
 
     suspend fun getQuestionById(id: Long): QuestionEntity? = questionDao.getQuestion(id)
 
-    suspend fun getQuestionCount(categoryId: Long): Int {
-        return questionDao.getCountByCategory(categoryId)
+
+    suspend fun getQuestionCount(categoryId: Long, lang: String): Int {
+        return questionDao.getCountByCategory(categoryId, lang)
     }
 
-    // --- Statistics Functions ---
     suspend fun getTodayStats(): DailyStatsEntity? {
         val today = LocalDate.now().toString()
         return statsDao.getStatsByDate(today)

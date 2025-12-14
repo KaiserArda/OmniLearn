@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 
 @Database(
     entities = [CategoryEntity::class, QuestionEntity::class, DailyStatsEntity::class],
-    version = 6,
+    version = 7,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -37,6 +37,7 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
     }
+
 
     companion object {
         @Volatile
@@ -60,10 +61,13 @@ abstract class AppDatabase : RoomDatabase() {
 }
 
 
+
 suspend fun populateDatabase(categoryDao: CategoryDao, questionDao: QuestionDao) {
 
     categoryDao.deleteAllCategories()
     questionDao.deleteAllQuestions()
+
+
 
     //============================
     // Part 1: General (Medicine Faculty)
