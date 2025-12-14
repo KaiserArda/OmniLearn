@@ -10,8 +10,8 @@
     <string name="no_subcategories">No subcategories found.</string>
     <string name="no_questions">No questions available.</string>
 
-    <string name="cat_med">Medical Sciences</string>
-    <string name="desc_med">General Medical Questions</string>
+    <string name="cat_med">Medicine</string>
+    <string name="desc_med">Basic Medical Sciences</string>
 
     <string name="cat_anatomy">Anatomy</string>
     <string name="desc_anatomy">Study of Body Structure</string>
@@ -21,8 +21,8 @@
     <string name="cat_skeletal_anatomy">Skeletal Anatomy</string>
     <string name="cat_muscular_anatomy">Muscular Anatomy</string>
     <string name="cat_neuroanatomy">Neuroanatomy</string>
-    <string name="cat_microanatomy">Microanatomy</string>
-    <string name="cat_topographic_anatomy">Topographic Anatomy</string>
+    <string name="cat_microanatomy">Microscopic Anatomy</string>
+    <string name="cat_topographic_anatomy">Regional Anatomy</string>
     <string name="cat_clinical_anatomy">Clinical Anatomy</string>
 
     <string name="cat_nervous_physiology">Nervous System Physiology</string>
@@ -30,7 +30,7 @@
     <string name="cat_circulatory_physiology">Cardiovascular Physiology</string>
     <string name="cat_respiratory_physiology">Respiratory Physiology</string>
     <string name="cat_digestive_physiology">Digestive Physiology</string>
-    <string name="cat_excretory_physiology">Excretory System Physiology</string>
+    <string name="cat_excretory_physiology">Renal &amp; Urinary System Physiology</string>
     <string name="cat_endocrine_physiology">Endocrine Physiology</string>
     <string name="cat_reproductive_physiology">Reproductive Physiology</string>
     <string name="cat_hematology">Hematology</string>
@@ -58,7 +58,7 @@
     <string name="cat_digestive_histo">Digestive Histology</string>
     <string name="cat_urogenital_histo">Urogenital Histology</string>
     <string name="cat_endocrine_histo">Endocrine Histology</string>
-    <string name="cat_skin_histo">Integumentary System (Skin)</string>
+    <string name="cat_skin_histo">Integumentary System </string>
 
     <string name="cat_microbiology">Microbiology</string>
     <string name="cat_bacteriology">Bacteriology</string>
@@ -104,7 +104,7 @@
     <string name="stat_correct">Correct</string>
     <string name="stat_wrong">Incorrect</string>
     <string name="stat_empty">Skipped</string>
-    <string name="no_data_today">You haven’t solved any questions today</string>
+    <string name="no_data_today">You haven’t solved any questions today yet!</string>
 
     <string name="btn_skip">Skip Question</string>
 

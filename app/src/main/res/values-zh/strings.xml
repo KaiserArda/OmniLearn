@@ -10,8 +10,8 @@
     <string name="no_subcategories">未找到子分类。</string>
     <string name="no_questions">暂无试题。</string>
 
-    <string name="cat_med">医学科学</string>
-    <string name="desc_med">综合医学问题</string>
+    <string name="cat_med">基础医学</string>
+    <string name="desc_med">基础医学试题</string>
 
     <string name="cat_anatomy">解剖学</string>
     <string name="desc_anatomy">人体结构科学</string>
@@ -30,7 +30,7 @@
     <string name="cat_circulatory_physiology">心血管生理学</string>
     <string name="cat_respiratory_physiology">呼吸生理学</string>
     <string name="cat_digestive_physiology">消化生理学</string>
-    <string name="cat_excretory_physiology">排泄系统生理学</string>
+    <string name="cat_excretory_physiology">肾生理学</string>
     <string name="cat_endocrine_physiology">内分泌生理学</string>
     <string name="cat_reproductive_physiology">生殖生理学</string>
     <string name="cat_hematology">血液学</string>
@@ -38,8 +38,8 @@
     <string name="cat_cell_physiology">细胞生理学</string>
 
     <string name="cat_biochemistry">生物化学</string>
-    <string name="cat_metabolism">新陈代谢</string>
-    <string name="cat_enzymes">酶学</string>
+    <string name="cat_metabolism">代谢</string>
+    <string name="cat_enzymes">酶</string>
     <string name="cat_vitamins">维生素</string>
     <string name="cat_hormone_bio">激素生物化学</string>
     <string name="cat_genetics">遗传学</string>
@@ -71,7 +71,7 @@
 
     <string name="title_add_new_question">创建新试题</string>
     <string name="add_question_btn">添加试题</string>
-    <string name="btn_save_question">保存试题</string>
+    <string name="btn_save_question">保存</string>
     <string name="label_select_category">选择分类</string>
     <string name="label_question_text">题目内容</string>
     <string name="label_options">选项</string>

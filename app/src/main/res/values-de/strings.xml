@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">OmniLearn</string>
-    <string name="welcome_message">Willkommen bei OmniLearn!</string>
+    <string name="welcome_message">Herzlich willkommen bei OmniLearn!</string>
 
     <string name="category_list_title">Kategorien</string>
     <string name="subcategories_title">Unterkategorien</string>
@@ -10,8 +10,8 @@
     <string name="no_subcategories">Keine Unterkategorien gefunden.</string>
     <string name="no_questions">Keine Fragen verfügbar.</string>
 
-    <string name="cat_med">Medizinische Wissenschaften</string>
-    <string name="desc_med">Allgemeine medizinische Fragen</string>
+    <string name="cat_med">Medizin</string>
+    <string name="desc_med">Präklinische Medizin</string>
 
     <string name="cat_anatomy">Anatomie</string>
     <string name="desc_anatomy">Lehre vom Aufbau des Körpers</string>
@@ -30,7 +30,7 @@
     <string name="cat_circulatory_physiology">Kardiovaskuläre Physiologie</string>
     <string name="cat_respiratory_physiology">Respiratorische Physiologie</string>
     <string name="cat_digestive_physiology">Verdauungsphysiologie</string>
-    <string name="cat_excretory_physiology">Physiologie des Ausscheidungssystems</string>
+    <string name="cat_excretory_physiology">Renale Physiologie</string>
     <string name="cat_endocrine_physiology">Endokrine Physiologie</string>
     <string name="cat_reproductive_physiology">Reproduktionsphysiologie</string>
     <string name="cat_hematology">Hämatologie</string>
@@ -43,7 +43,7 @@
     <string name="cat_vitamins">Vitamine</string>
     <string name="cat_hormone_bio">Hormonbiochemie</string>
     <string name="cat_genetics">Genetik</string>
-    <string name="cat_cell_signal">Zelluläre Signalübertragung</string>
+    <string name="cat_cell_signal">Zellsignaling</string>
     <string name="cat_acid_base">Säure-Basen-Haushalt</string>
     <string name="cat_clinical_bio">Klinische Biochemie</string>
 
@@ -58,7 +58,7 @@
     <string name="cat_digestive_histo">Verdauungshistologie</string>
     <string name="cat_urogenital_histo">Urogenitale Histologie</string>
     <string name="cat_endocrine_histo">Endokrine Histologie</string>
-    <string name="cat_skin_histo">Integumentsystem (Haut)</string>
+    <string name="cat_skin_histo">Haut</string>
 
     <string name="cat_microbiology">Mikrobiologie</string>
     <string name="cat_bacteriology">Bakteriologie</string>
@@ -74,7 +74,7 @@
     <string name="btn_save_question">Frage speichern</string>
     <string name="label_select_category">Kategorie auswählen</string>
     <string name="label_question_text">Frage</string>
-    <string name="label_options">Antwortmöglichkeiten</string>
+    <string name="label_options">Optionen</string>
     <string name="label_option_a">Option A</string>
     <string name="label_option_b">Option B</string>
     <string name="label_option_c">Option C</string>
@@ -104,7 +104,7 @@
     <string name="stat_correct">Richtig</string>
     <string name="stat_wrong">Falsch</string>
     <string name="stat_empty">Übersprungen</string>
-    <string name="no_data_today">Heute wurden noch keine Fragen gelöst</string>
+    <string name="no_data_today">Du hast heute noch keine Fragen gelöst</string>
 
     <string name="btn_skip">Frage überspringen</string>
 

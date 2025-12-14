@@ -148,3 +148,32 @@ suspend fun populateDatabase(categoryDao: CategoryDao, questionDao: QuestionDao)
     val antibioticsId = categoryDao.insert(CategoryEntity(name = "cat_antibiotics", parentId = microbiologyId))
     val clinicalMicroId = categoryDao.insert(CategoryEntity(name = "cat_clinical_micro", parentId = microbiologyId))
 }
+private suspend fun addMultilingualQuestion(
+    dao: QuestionDao,
+    catId: Long,
+    correctIndex: Int,
+    tr: QData,
+    en: QData,
+    de: QData,
+    ja: QData,
+    zh: QData
+) {
+    // Turkish
+    dao.insert(QuestionEntity(categoryId = catId, questionText = tr.q, option1 = tr.a, option2 = tr.b, option3 = tr.c, option4 = tr.d, correctIndex = correctIndex, explanation = tr.exp, language = "tr"))
+    // English
+    dao.insert(QuestionEntity(categoryId = catId, questionText = en.q, option1 = en.a, option2 = en.b, option3 = en.c, option4 = en.d, correctIndex = correctIndex, explanation = en.exp, language = "en"))
+    // GErman
+    dao.insert(QuestionEntity(categoryId = catId, questionText = de.q, option1 = de.a, option2 = de.b, option3 = de.c, option4 = de.d, correctIndex = correctIndex, explanation = de.exp, language = "de"))
+    // Japanese
+    dao.insert(QuestionEntity(categoryId = catId, questionText = ja.q, option1 = ja.a, option2 = ja.b, option3 = ja.c, option4 = ja.d, correctIndex = correctIndex, explanation = ja.exp, language = "ja"))
+    // Chinese
+    dao.insert(QuestionEntity(categoryId = catId, questionText = zh.q, option1 = zh.a, option2 = zh.b, option3 = zh.c, option4 = zh.d, correctIndex = correctIndex, explanation = zh.exp, language = "zh"))
+}
+data class QData(
+    val q: String,
+    val a: String,
+    val b: String,
+    val c: String,
+    val d: String,
+    val exp: String
+)

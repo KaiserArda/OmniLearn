@@ -8,10 +8,10 @@
 
     <string name="empty_category_error">Kategori bulunamadı.</string>
     <string name="no_subcategories">Alt kategori bulunamadı.</string>
-    <string name="no_questions">Henüz soru eklenmemiş.</string>
+    <string name="no_questions">Henüz soru yok.</string>
 
-    <string name="cat_med">Tıp Bilimleri</string>
-    <string name="desc_med">Genel Tıp Soruları</string>
+    <string name="cat_med">Temel Tıp Bilimleri</string>
+    <string name="desc_med">Temel Tıp Bilimleri Soruları</string>
 
     <string name="cat_anatomy">Anatomi</string>
     <string name="desc_anatomy">Vücut Yapısı Bilimi</string>
@@ -22,7 +22,7 @@
     <string name="cat_muscular_anatomy">Kas Anatomisi</string>
     <string name="cat_neuroanatomy">Nöroanatomi</string>
     <string name="cat_microanatomy">Mikroanatomi</string>
-    <string name="cat_topographic_anatomy">Topografik Anatomi</string>
+    <string name="cat_topographic_anatomy">Bölgesel Anatomi</string>
     <string name="cat_clinical_anatomy">Klinik Anatomi</string>
 
     <string name="cat_nervous_physiology">Sinir Sistemi Fizyolojisi</string>
@@ -30,10 +30,10 @@
     <string name="cat_circulatory_physiology">Dolaşım Sistemi Fizyolojisi</string>
     <string name="cat_respiratory_physiology">Solunum Sistemi Fizyolojisi</string>
     <string name="cat_digestive_physiology">Sindirim Sistemi Fizyolojisi</string>
-    <string name="cat_excretory_physiology">Boşaltım Sistemi Fizyolojisi</string>
+    <string name="cat_excretory_physiology">Renal Fizyoloji</string>
     <string name="cat_endocrine_physiology">Endokrin Sistem Fizyolojisi</string>
     <string name="cat_reproductive_physiology">Üreme Sistemi Fizyolojisi</string>
-    <string name="cat_hematology">Hematoloji (Kan Bilimi)</string>
+    <string name="cat_hematology">Hematoloji</string>
     <string name="cat_sensory_physiology">Duyu Organları Fizyolojisi</string>
     <string name="cat_cell_physiology">Hücre Fizyolojisi</string>
 
@@ -49,7 +49,7 @@
 
     <string name="cat_histology">Histoloji</string>
     <string name="cat_epithelial">Epitel Doku</string>
-    <string name="cat_connective">Bağ ve Destek Doku</string>
+    <string name="cat_connective">Bağ Dokusu</string>
     <string name="cat_muscle_tissue">Kas Dokusu</string>
     <string name="cat_nervous_tissue">Sinir Dokusu</string>
     <string name="cat_blood_tissue">Kan ve Kemik İliği</string>
@@ -58,7 +58,7 @@
     <string name="cat_digestive_histo">Sindirim Sistemi Histolojisi</string>
     <string name="cat_urogenital_histo">Ürogenital Sistem Histolojisi</string>
     <string name="cat_endocrine_histo">Endokrin Sistem Histolojisi</string>
-    <string name="cat_skin_histo">Deri ve Ekleri (İntegümenter Sistem)</string>
+    <string name="cat_skin_histo">Deri Histolojis</string>
 
     <string name="cat_microbiology">Mikrobiyoloji</string>
     <string name="cat_bacteriology">Bakteriyoloji</string>
@@ -71,7 +71,7 @@
 
     <string name="title_add_new_question">Yeni Soru Oluştur</string>
     <string name="add_question_btn">Soru Ekle</string>
-    <string name="btn_save_question">Soruyu Kaydet</string>
+    <string name="btn_save_question">Kaydet</string>
     <string name="label_select_category">Kategori Seçimi</string>
     <string name="label_question_text">Soru Metni</string>
     <string name="label_options">Seçenekler</string>
@@ -95,7 +95,7 @@
     <string name="msg_wrong">Yanlış Cevap</string>
     <string name="label_explanation_prefix">Açıklama:</string>
     <string name="stat_start">Başla</string>
-    <string name="stat_warming">Isınıyorsun</string>
+    <string name="stat_warming">Isınıyorsun!</string>
     <string name="stat_great">Harika!</string>
     <string name="daily_report">Günlük Rapor</string>
     <string name="date_label">Tarih</string>
@@ -103,7 +103,7 @@
     <string name="stat_correct">Doğru</string>
     <string name="stat_wrong">Yanlış</string>
     <string name="stat_empty">Atlanan</string>
-    <string name="no_data_today">Bugün henüz soru çözmedin</string>
+    <string name="no_data_today">Bugün henüz soru çözmedin, hadi başla!</string>
 
     <string name="btn_skip">Soruyu Geç</string>
 
