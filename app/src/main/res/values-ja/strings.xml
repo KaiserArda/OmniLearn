@@ -125,4 +125,7 @@
     <string name="dialog_delete_msg">カテゴリ「%1$s」とその中身すべてが完全に削除されます。本当によろしいですか？</string>
     <string name="btn_delete">削除</string>
     <string name="suffix_user_created">（ユーザー作成）</string>
+
+    <string name="user_q_prefix">質問 %1$d (ユーザー):</string>
+    <string name="msg_saved_success">質問が正常に保存されました！</string>
 </resources>

@@ -63,8 +63,8 @@ fun NavGraph(
                     navController.navigate(Screen.Statistics.route)
                 },
                 // ---------------------------------
-                onAddQuestion = {
-                    navController.navigate(Screen.AddQuestion.createRoute(-1L))
+                onAddQuestion = { categoryId ->
+                    navController.navigate(Screen.AddQuestion.createRoute(categoryId))
                 }
             )
         }
@@ -122,23 +122,23 @@ fun NavGraph(
 
             val db = com.example.medquiz.data.local.AppDatabase.getDatabase(context, scope)
 
-            // DÜZELTME: Repository artık 3 parametre (statsDao dahil) istiyor
             val repo = com.example.medquiz.data.repository.QuizRepository(
                 db.categoryDao(),
                 db.questionDao(),
-                db.statsDao() // <-- EKLENDİ
+                db.statsDao()
             )
 
             val factory = com.example.medquiz.vm.AddQuestionViewModelFactory(repo)
-            val myViewModel: com.example.medquiz.vm.AddQuestionViewModel = androidx.lifecycle.viewmodel.compose.viewModel(factory = factory)
+            val myViewModel: com.example.medquiz.vm.AddQuestionViewModel =
+                androidx.lifecycle.viewmodel.compose.viewModel(factory = factory)
 
             AddQuestionScreen(
-                defaultCategoryId = if (catId != -1L) catId else null,
+                navController = navController,
                 viewModel = myViewModel,
-                onBack = {
-                    navController.popBackStack()
-                }
+                defaultCategoryId = if (catId != -1L) catId else null
+
             )
         }
+
     }
 }

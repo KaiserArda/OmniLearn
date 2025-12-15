@@ -126,4 +126,7 @@
     <string name="btn_delete">删除</string>
     <string name="suffix_user_created">（用户创建）</string>
 
+    <string name="user_q_prefix">Question %1$d (User):</string>
+    <string name="msg_saved_success">Question saved successfully!</string>
+
 </resources>

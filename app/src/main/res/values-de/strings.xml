@@ -125,4 +125,7 @@
     <string name="dialog_delete_msg">Die Kategorie „%1$s“ und ihr gesamter Inhalt werden unwiderruflich gelöscht. Sind Sie sicher?</string>
     <string name="btn_delete">Löschen</string>
     <string name="suffix_user_created"> (Benutzererstellt)</string>
+
+    <string name="user_q_prefix">Frage %1$d (Benutzer):</string>
+    <string name="msg_saved_success">Frage erfolgreich gespeichert!</string>
 </resources>

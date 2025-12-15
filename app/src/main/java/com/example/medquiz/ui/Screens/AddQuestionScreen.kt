@@ -1,5 +1,6 @@
 package com.example.medquiz.ui.Screens
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -12,13 +13,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.medquiz.R
 import com.example.medquiz.vm.AddQuestionViewModel
-
+import androidx.navigation.NavController
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddQuestionScreen(
+    navController: NavController,
     defaultCategoryId: Long?,
-    viewModel: AddQuestionViewModel, // NavGraph'tan gelecek
-    onBack: () -> Unit
+    viewModel: AddQuestionViewModel,
 ) {
     val context = LocalContext.current
     val scrollState = rememberScrollState()
@@ -101,16 +102,19 @@ fun AddQuestionScreen(
                         // Seçilen şıkkı (1-4 arası) indekse (0-3 arası) çeviriyoruz.
                         // Çünkü veritabanı "correctIndex" istiyor.
                         val correctIndex = selectedOption - 1
-
+                        val prefixTemplate = context.getString(R.string.user_q_prefix)
                         // ViewModel'e Gönder
                         viewModel.saveQuestion(
-                            categoryId = defaultCategoryId ?: -1L,
+                            categoryId = defaultCategoryId ?: -1L, // ID kontrolü
                             rawText = questionText,
                             options = listOf(optionA, optionB, optionC, optionD),
-                            correctIndex = correctIndex, // INT GÖNDERİYORUZ
+                            correctIndex = selectedOption - 1,
                             explanation = explanation,
+                            prefixTemplate = prefixTemplate,
                             onSuccess = {
-                                onBack() // Kayıt başarılı, geri dön
+
+                                Toast.makeText(context, context.getString(R.string.msg_saved_success), Toast.LENGTH_SHORT).show()
+                                navController.popBackStack()
                             }
                         )
                     }

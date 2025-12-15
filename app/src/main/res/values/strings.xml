@@ -125,4 +125,7 @@
     <string name="dialog_delete_msg">The category \'%1$s\' and everything inside it will be permanently deleted. Are you sure?</string>
     <string name="btn_delete">Delete</string>
     <string name="suffix_user_created"> (User Created)</string>
+
+    <string name="user_q_prefix">Question %1$d (User):</string>
+    <string name="msg_saved_success">Question saved successfully!</string>
 </resources>

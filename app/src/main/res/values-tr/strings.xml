@@ -124,4 +124,7 @@
     <string name="dialog_delete_msg">\'%1$s\' kategorisi ve içindeki her şey kalıcı olarak silinecek. Emin misiniz?</string>
     <string name="btn_delete">Sil</string>
     <string name="suffix_user_created"> (Kullanıcı Tarafından)</string>
+
+    <string name="user_q_prefix">Soru %1$d (Kullanıcı):</string>
+    <string name="msg_saved_success">Soru başarıyla kaydedildi!</string>
 </resources>
