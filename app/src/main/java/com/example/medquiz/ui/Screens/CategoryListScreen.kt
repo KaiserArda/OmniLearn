@@ -170,15 +170,13 @@ fun CategoryListScreen(
                                 category = category,
                                 currentLang = currentLang,
                                 onClick = {
-                                    // Güncellenmiş Tıklama Mantığı
+
                                     viewModel.handleCategoryClick(category, onNavigateToQuestions)
                                 },
                                 onLongClick = {
-                                    // Sadece kullanıcı kategorileri silinebilir
-                                    if (category.isUserCreated) {
-                                        categoryToDelete = category
-                                        showDeleteDialog = true
-                                    }
+
+                                    categoryToDelete = category
+                                    showDeleteDialog = true
                                 }
                             )
                         }
@@ -270,7 +268,7 @@ fun CategoryListScreen(
                     },
                     dismissButton = {
                         TextButton(onClick = { showDeleteDialog = false }) {
-                            Text(stringResource(R.string.btn_cancel)) // "İptal"
+                            Text(stringResource(R.string.btn_cancel))
                         }
                     }
                 )
@@ -308,7 +306,6 @@ fun CategoryItem(
         ) {
             Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.CenterStart) {
 
-                // İSİM AYARLAMASI (GÜNCELLENDİ: Strings Uyumlu Suffix)
                 val displayName = if (category.isUserCreated) {
                     "${category.name}${stringResource(R.string.suffix_user_created)}"
                 } else {
