@@ -158,6 +158,170 @@ Thanks for checking out the project!
 ~ Arda  
 Computer Engineering – Osmaniye Korkut Ata University
 
+# 中文版本
+
+## OmniLearn – 学生的终极学习伴侣
+
+你好！
+我是一名大三计算机工程专业的学生，目前正在全力开发一款名为 OmniLearn 的严肃、生产级 Android 应用，计划于 2025 年底在 Google Play 上正式发布。
+
+## 项目目的
+目前市面上的大多数测验和教育类 App 都存在广告过多、界面体验差、内容过时或性能不佳等问题。OmniLearn 从头开始设计，就是为了彻底解决这些痛点：界面简洁清爽、运行极速、完全支持离线使用，并且能够灵活适配各种学科领域。
+
+## 当前进度（早期开发阶段）
+
+- 代码库采用 Kotlin + Jetpack Compose 构建
+- 干净的 MVVM 架构（data / ui / vm 包结构清晰）
+- 已完成 Room 数据库的 schema 和 DAO 实现
+- 使用 Navigation Component 搭建基础页面导航结构
+- 动态分类系统已初步就位
+
+## 计划核心功能
+
+- 井然有序的学科分类（编程、数学、科学等多个领域）
+- 智能测验系统，每道题都配有详细解析
+- 即时反馈与清晰的答案解释
+- 支持用户提交题目（经过审核确保质量）
+- 强大的搜索和筛选工具
+- 书签功能 + 错题追踪，结合间隔重复算法帮助巩固记忆
+- 支持明暗主题切换，完整适配 Material You 动态配色
+- 彻底的离线优先设计，所有功能无需网络即可流畅使用
+
+## 技术栈
+
+- 100% Kotlin
+- Jetpack Compose（现代声明式 UI 框架）
+- Room 持久化数据库
+- Navigation Component
+- Kotlin Coroutines + Flow（异步与响应式编程）
+- Hilt 依赖注入
+- 完全遵循 Google 推荐的现代 Android 架构规范
+
+### 项目结构
+```
+app/
+
+ ├─ src/main/
+
+ │      ├─ AndroidManifest.xml                                  // 应用内 ID 卡
+
+ │      │
+
+ │      ├─ java/com/example/omnilearn/
+
+ │      │      │
+
+ │      │      ├─ MainActivity.kt    
+
+ │      │      │
+
+ │      │      ├─ data/                                          // 数据层
+
+ │      │      │      ├─ local/
+
+ │      │      │      │      ├─ dao/
+
+ │      │      │      │      │      ├─ CategoryDao.kt
+
+ │      │      │      │      │      ├─ StatsDao.kt
+
+ │      │      │      │      │      └─ QuestionDao.kt
+
+ │      │      │      │      │
+
+ │      │      │      │      ├─ datastore/
+
+ │      │      │      │      │      └─ SettingsDataStore.kt
+
+ │      │      │      │      │     
+
+ │      │      │      │      ├─ entity/
+
+ │      │      │      │      │      ├─ CategoryEntity.kt
+
+ │      │      │      │      │      ├─ DailyStatsEntity.kt
+
+ │      │      │      │      │      └─ QuestionEntity.kt
+
+ │      │      │      │      └─ AppDatabase.kt
+
+ │      │      │      │
+
+ │      │      │      └─ repository/
+
+ │      │      │             └─ QuizRepository.kt
+
+ │      │      │
+
+ │      │      ├─ ui/                                          // 界面层
+
+ │      │      │      ├─ Navigation/
+
+ │      │      │      │      └─ NavGraphs.kt
+
+ │      │      │      ├─ Screens/
+
+ │      │      │      │      ├─ AddQuestionScreen.kt
+
+ │      │      │      │      ├─ CategoryListScreen.kt
+
+ │      │      │      │      ├─ QuestionDetailScreen.kt
+
+ │      │      │      │      ├─ QuestionListScreen.kt
+
+ │      │      │      │      ├─ StatisticsScreen.kt
+
+ │      │      │      │      └─ WelcomeScreen.kt
+
+ │      │      │      ├─ theme/
+
+ │      │      │      │      ├─ Color.kt
+
+ │      │      │      │      ├─ Theme.kt
+
+ │      │      │      │      └─ Type.kt
+
+ │      │      │      └─ UiUtils.kt
+
+ │      │      │
+
+ │      │      └─ vm/                                              // 视图模型层
+
+ │      │             ├─ AddQuestionViewModel.kt
+
+ │      │             ├─ CategoryViewModel.kt
+
+ │      │             ├─ QuestionListViewModel.kt
+
+ │      │             ├─ SettingsViewModel.kt
+
+ │      │             └─ ViewModelFactories.kt
+
+ │
+
+ └─ build.gradle (project)
+```
+## 如何构建项目
+1. 克隆仓库
+2. 使用 Android Studio Ladybug（或更高版本）打开项目
+3. 同步 Gradle（Android Studio 会自动提示）
+4. 在真实设备或模拟器上直接运行 — 无需任何额外配置！
+   
+## 路线图（Roadmap）
+- [ ] 完成完整的测验流程和所有 UI 界面
+- [ ] 填充初始题库（目标 500–1000 道优质题目）
+- [ ] 实现用户贡献题目与审核系统
+- [ ] 与同学进行小范围封闭测试（Closed Beta）
+- [ ] 正式在 Google Play 上架（目标：2025 年底）
+      
+非常欢迎大家提供反馈、报告 Bug，特别是提交优质题目！这个项目目前仍在积极开发中，我很乐意与各位开发者一起协作，让 OmniLearn 成为各专业学生每天都会用到的学习工具！
+
+感谢你来看这个项目！
+
+~ Arda
+计算机工程专业 – 奥斯曼尼耶科尔库特阿塔大学
+
+
 # 日本語版
 
 ## OmniLearn – 学生のための究極の学習コンパニオン
