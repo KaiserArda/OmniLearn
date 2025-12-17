@@ -149,7 +149,7 @@ app/
 - [ ] Populate initial question bank (500–1000 questions)  
 - [ ] Implement contribution & moderation system  
 - [ ] Closed beta with fellow students  
-- [ ] Public release on Google Play (target: late 2025)  
+- [ ] Public release on Google Play (target: early 2026)  
 
 Feedback, bug reports, and especially question submissions are very welcome. This project is a work in progress, and I’m happy to collaborate with fellow developers to make this a tool that students from all disciplines use every day!
 
@@ -312,7 +312,7 @@ app/
 - [ ] 填充初始题库（目标 500–1000 道优质题目）
 - [ ] 实现用户贡献题目与审核系统
 - [ ] 与同学进行小范围封闭测试（Closed Beta）
-- [ ] 正式在 Google Play 上架（目标：2025 年底）
+- [ ] 计划于 2026年初 在 Google Play (面向全球用户) 正式上架。
       
 非常欢迎大家提供反馈、报告 Bug，特别是提交优质题目！这个项目目前仍在积极开发中，我很乐意与各位开发者一起协作，让 OmniLearn 成为各专业学生每天都会用到的学习工具！
 
@@ -477,7 +477,7 @@ app/
 - [ ] 初期問題集を追加（500～1000問）
 - [ ] 問題投稿＆モデレーションシステムを実装
 - [ ] 同学年の学生たちとクローズドβテスト
-- [ ] Google Playで正式リリース（目標：2025年後半）
+- [ ] Google Playで正式リリース（目標日期：2026年初）
 
 フィードバック、バグ報告はもちろん、特に問題の投稿を大歓迎しています！
 このプロジェクトはまだ開発途中で、他の開発者の方と一緒に協力しながら、全ての学部の学生が毎日使ってくれるツールに育てていきたいと思っています！
