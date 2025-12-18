@@ -3,7 +3,7 @@
 # OmniLearn – The Ultimate Learning Companion for Students
 
 Hi!  
-II'm a 3rd-year Computer Engineering student currently developing **OmniLearn** as a serious, production-ready Android application that I plan to publish on Google Play in late 2025.
+II'm a 3rd-year Computer Engineering student currently developing **OmniLearn** as a serious, production-ready Android application that I plan to publish on Google Play in early 2026.
 
 ## Purpose
 Most quiz and educational apps available today suffer from excessive ads, poor UI/UX, outdated content, or performance issues. **OmniLearn** is being built from the ground up to solve these problems: clean design, fast, fully offline-capable, and adaptable to any field of study.
@@ -163,7 +163,7 @@ Computer Engineering – Osmaniye Korkut Ata University
 ## OmniLearn – 学生的终极学习伴侣
 
 你好！
-我是一名大三计算机工程专业的学生，目前正在全力开发一款名为 OmniLearn 的严肃、生产级 Android 应用，计划于 2025 年底在 Google Play 上正式发布。
+我是一名大三计算机工程专业的学生，目前正在全力开发一款名为 OmniLearn 的严肃、生产级 Android 应用，计划于 2026 初在 Google Play 上正式发布。
 
 ## 项目目的
 目前市面上的大多数测验和教育类 App 都存在广告过多、界面体验差、内容过时或性能不佳等问题。OmniLearn 从头开始设计，就是为了彻底解决这些痛点：界面简洁清爽、运行极速、完全支持离线使用，并且能够灵活适配各种学科领域。
@@ -327,7 +327,7 @@ app/
 ## OmniLearn – 学生のための究極の学習コンパニオン
 
 こんにちは！
-現在、コンピュータ工学科3年生で、2025年後半にGoogle Playで正式リリース予定の本格的なAndroidアプリケーション **OmniLearn** を開発しています。
+現在、コンピュータ工学科3年生で、2026年初頭にGoogle Playで正式リリース予定の本格的なAndroidアプリケーション OmniLearn を開発しています。
 
 ## 開発の目的
 現在の多くのクイズ・教育アプリは、過剰な広告、使いにくいUI/UX、古くなった内容、パフォーマンス問題などに悩まされています。
